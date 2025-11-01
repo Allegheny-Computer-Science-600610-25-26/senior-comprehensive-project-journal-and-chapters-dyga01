@@ -1,0 +1,8 @@
+---
+title: "State and explain the title of your senior comprehensive project"
+date: "2025-11-07"
+---
+
+My senior thesis is titled "Vurze: Cryptographic Versioning for Python Functions and Classes via Automated Decorator Injection." Vurze is a concise play on words derived from "version," because the tool works to version control functions and classes so source code self-verifies integrity and authorship.
+
+The core idea is simple but powerful: what if code could version control itself? Instead of relying solely on external systems like Git to track changes, I developed a system where Python functions and classes carry their own cryptographic signatures directly in the code. When you run vurze on a Python file, it automatically injects decorators containing Ed25519 cryptographic signatures that verify both the authorship and integrity of each function or class. My tool ensures that if anyone modifies even a single character in a signed function, the signature verification fails immediately. This creates a chain of trust where you can instantly detect unauthorized modifications to Python functions and classes. Lastly, the motivation for building this tool came from thinking about Model Context Protocol (MCP)Servers where it's important to version control functions and classes. Rather than just detecting changes after the fact through Git diffs, vurze makes code self-verifying and brings cryptographic integrity directly into the source files themselves.
