@@ -1,0 +1,22 @@
+---
+title: "Provide and justify the outline for Chapter One of your senior thesis"
+date: "2025-11-07"
+---
+
+Below is a polished and complete outline for Chapter One (Introduction). This chapter should outline what vurze does and how it works.
+
+1. Overview
+	- Introduce Vurze at a high level: automated decorator injection that embeds Ed25519 signatures into Python functions and classes so code can self-verify integrity and authorship.
+    - Provide technical background and implementation context: AST-based Python source code manipulation for decorator injection; secure keystorage (e.g., .env); a Typer-based CLI; and cryptographic operations implemented in Rust (PyO3) and packaged with Maturin.
+
+2. Motivation and Significance
+	- Real-world risks: upstream supply-chain attacks and more. These threats alter program behavior after deployment or during runtime, making tampering difficult to detect using repository history alone.
+	- Limitations of repository-level version control: systems like Git record history and integrity at the repository level, but they do not provide object-level cryptographic guarantees at runtime. The repository metadata (for example, the `.git` directory and commit graph) does not prevent or reliably detect modifications to individual functions or classes once code is distributed or dynamically loaded. Vurze complements repository VCS by embedding per-object signatures directly in source, enabling verification where and when code executes.
+
+3. Python decorators
+	- Decorators primer: explain how Python decorators work for functions and classes; how decorators wrap or replace callables and can carry metadata at definition time.
+	- Vurze decorator model: describe the injected decorator’s responsibilities — storing the compact signature.
+
+4. Asymmetric signatures (Ed25519)
+	- Concise primer: public/private key pairs, signing, and verification. The signer holds a private key and produces a compact signature for a representation of the object; verifiers use the public key to validate authenticity and integrity.
+	- Why Ed25519: strong security with fast signing and verification, small signature size, and broad library support (Rust `ed25519-dalek`, Python bindings via PyO3).
