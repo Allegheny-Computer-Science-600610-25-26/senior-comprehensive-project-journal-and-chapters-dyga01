@@ -3,5 +3,52 @@ title: "Provide and justify the outline for Chapter Two of your senior thesis"
 date: "2025-11-07"
 ---
 
-Below is an outline for Chapter Two (Background & Related Works):
+## Related Works
 
+1. Modern Python Development Tooling
+    - Ruff: Rust-based Python tooling innovation
+    - Performance benefits of Rust in Python ecosystem
+    - Cross-language tool development patterns
+    - Successful Rust-Python integration examples
+
+2. Model Context Protocol Security Threats
+    - [Landscape of MCP Security Threats](https://arxiv.org/pdf/2503.23278)
+	- [MCP Middleware Implementation](https://arxiv.org/pdf/2504.12757)
+
+## Background
+
+1. Model Context Protocol (MCP)
+    - History and development of MCP
+    - Core functionality and purpose
+    - Current adoption and implementations
+
+2. Model Context Protocol Vulnerabilities
+    - Upstream Attacks
+    - Tool Poisoning Attack
+	- Tool Shadowing Attack
+    - Verification challenges
+
+3. Git
+    - Git's integrity model
+    - Hash-based commit verification
+
+4. Python Decorators
+    - Decorator syntax and patterns
+    - Function and class decoration
+    - Use cases in metaprogramming
+
+5. Abstract Syntax Trees (AST)
+    - Python's AST module
+    - Parse tree manipulation
+
+6. Asymmetric Signatures
+    - Ed25519 algorithm overview
+    - Public/private key pairs
+    - Digital signature generation
+    - Verification process
+
+7. Maturin, PyO3, and Rust Integration
+    - Maturin build system architecture
+    - PyO3 binding mechanics
+    - Rust-Python interoperability
+    - Performance considerations
