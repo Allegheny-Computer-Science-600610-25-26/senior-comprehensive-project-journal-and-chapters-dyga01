@@ -12,18 +12,18 @@ format:
 natbiboptions: numbers
 # EDIT AT YOUR OWN PERIL #
 
-title: Senior Thesis Title
+title: "Vurze: Cryptographic Versioning for Python Functions and Classes via Automated Decorator Injection"
 
-firstreader: First Reader
-secondreader: Second Reader
+firstreader: Professor Douglas Luman
+secondreader: Dr. Janyl Jumadinova
 
 bibliography: references.bib
 
 author:
-  - name: A. Student
+  - name: Aidan Dyga
     affiliation:
       name: Allegheny College
-      address: 520 N. Main St., Box Q
+      address: 520 N. Main St., Box 985
       city: Meadville
       state: Pennsylvania
       country: USA
