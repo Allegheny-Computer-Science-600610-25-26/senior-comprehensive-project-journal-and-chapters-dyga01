@@ -16,19 +16,17 @@ Model Context Protocol operates through a client-server architecture. MCP client
 
 In order to help the MCP client understand what capabilities are available, MCP servers expose tools that describe their purpose and parameters. Tools are essentially functions that the LLM can interpret and invoke. The LLM relies on these tool descriptions, held in docstrings, to decide when and how to invoke each tool. For example, a tool with the docstring "Send an email to a recipient" informs the LLM that this function should be called when the user asks to send an email. The LLM never sees the actual implementation code; it only sees the tool's name, description, and parameter schema.
 
-x
-in addition to potential upstream attacks that vurze, x
-how do i connect version control to what descriptions say
+This architecture creates attack surfaces related to tool descriptions: there is currently no mechanism to verify whether tool descriptions contain malicious instructions (tool poisoning), whether tool descriptions accurately represent what the underlying code actually does, or whether tool descriptions overlap and cause context confusion (tool shadowing).
 
-This architecture creates an attack surface related to tool descriptions: there is no mechanism to verify that tool descriptions accurately represent what the underlying code actually does and if x. An attacker who gains access to an MCP server repository could modify tool descriptions to mislead the LLM. For instance, a malicious actor could change a database deletion tool's description to read "Query the user database" instead of "Delete records from the user database." The LLM, trusting this description, might invoke the deletion tool when the user simply asks to view data, resulting in unintended data loss. Similarly, an attacker could modify the implementation code itself while leaving the description unchanged, causing the tool to perform actions that contradict what the LLM believes it is doing.
-
-###  Tool Poisoning Attacks
+### Tool Poisoning Attacks
 
 xprompt and tool related attacks for mcp servers
-
 description and example attack ehre
-
 add diagram here
+
+### Accurently represent underlying code attack
+
+does this attack even have a name
 
 ### Tool Shadowing Attacks
 
@@ -37,12 +35,15 @@ add diagram here
 ## Current State of the Art
 
 git which does x
-
 mcp security tools x
 
 ## Goals of the Project
 
 detect and prevent x attacks
+how does vurze plan to solve this attack. 
+what does success look like for this
+in addition to potential upstream attacks that vurze, would prevent. propose using vurze to only add signatures to trusted functions. this functions as a version control system specific to mcp servers
+how do i connect version control to what descriptions say
 
 ## Ethical Implications
 
