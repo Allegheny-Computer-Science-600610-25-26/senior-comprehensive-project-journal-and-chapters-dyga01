@@ -1,22 +1,43 @@
 # Introduction
 
-This chapter describes your completed senior thesis work,
-including the overall aims  and the background motivating your research. Whenever
-possible, you should use one or more concrete examples and technical diagrams.
+This research introduces a tool called Vurze. Vurze, short for “version control,” is a command-line tool that enforces cryptographic integrity for Python functions and classes by automatically injecting decorators. Each decorator is a cryptographic signature that represents the unerlying source code. To generate this signature, Vurze uses a private key along with the function’s source code. If even a single character in the code changes, the resulting signature will differ completely, allowing the detection of any unauthorized modifications.
 
-It is often useful and necessary to separate the introduction into multiple sections.
-Several possible sections are proposed below, you can use these or distribute your
-introductory text into sections in another way.
+At a high level, Vurze introduces a novel approach to source control by enabling code to version control other code. Instead of relying solely on external files that store version histories, Vurze embeds decorators directly within the source code itself. This per-entity approach is in some ways less complex than more advanced version control systems.
 
-The headings below propose _one way_ you might structure this section of the document.
+
+The Vurze tool provides simple command line interface (CLI) commands to initialize keys, add decorators, verify signatures, and remove decorators. by building this tool as a cli, the idea is that it is as flexible as possible.
+
+The tool is intentionally lightweight and workflow-friendly. Its CLI, built with Typer, supports straightforward commands for initializing key pairs, decorating code, validating signatures, and removing decorators when needed. Under the hood, Vurze uses PyO3 and a Rust backend compiled via maturin to sign code using the Ed25519 signature scheme, balancing performance and portable cryptographic guarantees. Signatures are embedded as decorators, making verification possible at import or during static analysis without changing function semantics.
 
 ## Motivation
 
+### Model Context Protocol
+
+xintro to this here
+
+prompt and tool related attacks for mcp servers
+
+###  Tool Poisoning Attacks
+
+x
+
+### Tool Shadowing Attacks
+
+x
+
 ## Current State of the Art
+
+git which does x
+
+mcp security tools x
 
 ## Goals of the Project
 
+detect and prevent x attacks
+
 ## Ethical Implications
+
+mcp servers are being increasingly adopted, so x
 
 This document requires that you discuss the ethical implications of your work -- no
 matter how benign you consider the outcome of your project. As several major studies
