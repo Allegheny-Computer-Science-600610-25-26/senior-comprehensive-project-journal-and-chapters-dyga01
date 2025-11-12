@@ -1,31 +1,30 @@
 # Introduction
 
-This research introduces a tool called Vurze. [@plaat1996research] Vurze, short for “version control,” is a command-line tool that enforces cryptographic integrity for Python functions and classes by automatically injecting decorators. Each decorator is a cryptographic signature that represents the unerlying source code. To generate this signature, Vurze uses a private key along with the function’s source code. If even a single character in the code changes, the resulting signature will differ completely, allowing the detection of any unauthorized modifications.
+This research introduces a tool called Vurze.[@vurze] Vurze, short for “version control,” is a command-line tool that enforces cryptographic integrity for Python functions and classes by automatically injecting decorators. Each decorator is a cryptographic signature that represents the unerlying source code. To generate this signature, Vurze uses a private key along with the function’s source code. If even a single character in the code changes, the resulting signature will differ completely, allowing the detection of any unauthorized modifications.
 
-At a high level, Vurze introduces a novel approach to source control by enabling code to version-control other code. Instead of relying solely on external files that store version histories, Vurze embeds decorators directly within the source code itself. This per-entity approach is, in some ways, less complex than traditional version control systems and is designed to complement them. Traditional version control systems like Git rely on hidden files to record changes across an entire codebase. While this approach is highly effective for large-scale version management and collaboration, it treats code as a collection of files rather than individual, verifiable entities. Vurze complements this model by introducing built-in, function-level verification that provides an additional layer of security against unauthorized modifications.
+At a high level, Vurze introduces a novel approach to source control by enabling code to version-control other code. Instead of relying solely on external files that store version histories, Vurze embeds decorators directly within the source code itself. This per-entity approach is, in some ways, less complex than traditional version control systems and is designed to complement them. Traditional version control systems like Git rely on hidden files to record changes across an entire codebase.[@git] While this approach is highly effective for large-scale version management and collaboration, it treats code as a collection of files rather than individual, verifiable entities. Vurze complements this model by introducing built-in, function-level verification that provides an additional layer of security against unauthorized modifications.
 
 The Vurze tool provides a simple command-line interface (CLI) with commands to initialize keys, add decorators, verify signatures, and remove decorators. The CLI is intentionally minimalist so it can be easily integrated into CI/CD pipelines, invoked as a pre-deployment check, or used within middleware. Vurze is built with both Python and Rust to combine Python’s flexibility with Rust’s performance and safety. Rust also offers robust built-in libraries for cryptography, making it an ideal foundation for secure and efficient code execution.
-
-example figure label here:
-
-![Label](images/IMAGE_NAME.png)
-
-Table: A two-row table demonstrating tables
-
-|Row number | Description |
-|:----------|:------------|
-|1          |Row 1        |
-|2          |Row 2        |
 
 ## Motivation
 
 ### Model Context Protocol
 
-This research is motivated by security concerns surrounding Anthropic's newly released Model Context Protocol (MCP). MCP is a system that provides a standardized interface for managing the context that large language models (LLMs) access. MCP also allows LLMs to connect to external systems such as APIs, databases, and local filesystems. While MCP introduces powerful capabilities for building cusomized AI applications, sometimes known as AI agents, it also creates new attack surfaces.
+This research is motivated by security concerns surrounding Anthropic's newly released Model Context Protocol (MCP).[@modelcontextprotocol] MCP is a system that provides a standardized interface for managing the context that large language models (LLMs) access. MCP also allows LLMs to connect to external systems such as APIs, databases, and local filesystems. While MCP introduces powerful capabilities for building cusomized AI applications, sometimes known as AI agents, it also creates new attack surfaces.
 
 Model Context Protocol operates through a client-server architecture. MCP clients are applications that host LLMs such as Claude Desktop, Integrated Development Enironments, or other custom AI applications. MCP servers are lightweight programs that expose specific capabilities such as database access, file system operations, or API integrations—to these clients through a standardized interface. When a user interacts with an MCP client, the LLM can request the client to invoke functions on connected MCP servers, effectively extending the LLM's capabilities beyond its training data.
 
 In order to help the MCP client understand what capabilities are available, MCP servers expose tools that describe their purpose and parameters. Tools are essentially functions that the LLM can interpret and invoke. The LLM relies on these tool descriptions, held in docstrings, to decide when and how to invoke each tool. For example, a tool with the docstring "Send an email to a recipient" informs the LLM that this function should be called when the user asks to send an email. The LLM never sees the actual implementation code; it only sees the tool's name, description, and parameter schema.
+
+example figure label here:
+![Label](images/IMAGE_NAME.png)
+
+### Tool Poisoning Attacks
+
+x
+
+example figure label here:
+![Label](images/IMAGE_NAME.png)
 
 ### Tool Shadowing Attacks
 
@@ -43,12 +42,22 @@ The impact of successful tool shadowing attacks can be severe. A malicious tool 
 
 is cross server tool shadowing possible
 
+example figure label here:
+![Label](images/IMAGE_NAME.png)
+
 ## Current State of the Art
 
 add sources before starting this
 mcp security from a high level perspective.
 currently no tool exhists that is similar tools
 mcp security tools for preventing tool shadowing attacks
+
+Table: A two-row table demonstrating tables
+
+|Row number | Description |
+|:----------|:------------|
+|1          |Row 1        |
+|2          |Row 2        |
 
 ## Goals of the Project
 
