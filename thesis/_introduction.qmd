@@ -16,26 +16,28 @@ Model Context Protocol operates through a client-server architecture. MCP client
 
 In order to help the MCP client understand what capabilities are available, MCP servers expose tools that describe their purpose and parameters. Tools are essentially functions that the LLM can interpret and invoke. The LLM relies on these tool descriptions, held in docstrings, to decide when and how to invoke each tool. For example, a tool with the docstring "Send an email to a recipient" informs the LLM that this function should be called when the user asks to send an email. The LLM never sees the actual implementation code; it only sees the tool's name, description, and parameter schema.
 
-This architecture creates attack surfaces related to tool descriptions: there is currently no mechanism to verify whether tool descriptions contain malicious instructions (tool poisoning), whether tool descriptions accurately represent what the underlying code actually does, or whether tool descriptions overlap and cause context confusion (tool shadowing).
-
-### Tool Poisoning Attacks
-
-xprompt and tool related attacks for mcp servers
-description and example attack ehre
-add diagram here
-
-### Accurently represent underlying code attack
-
-does this attack even have a name
-
 ### Tool Shadowing Attacks
 
+This architecture creates attack surfaces related to tool descriptions as there is currently no mechanism to verify whether tool descriptions have context overlap. Whenever two MCP tool docstrings contain similar keywords and intent, the ____ may not know ______. This creates a critical vulnerability
+
 add diagram here
+
+This architecture creates attack surfaces related to tool descriptions as there is currently no mechanism to verify whether tool descriptions have context overlap. Whenever two MCP tool docstrings contain similar keywords and intent, the LLM may not know which tool to invoke or may use context from both tools but only invoke one.
+
+This creates a critical vulnerability where a malicious MCP server can register tools with descriptions that deliberately shadow legitimate tools from trusted servers.
+
+In a tool shadowing attack, an adversary creates an MCP server with tool descriptions crafted to match the semantic intent of legitimate tools. When a user requests an action that matches both the legitimate and malicious tool descriptions, the LLM must choose between them based solely on the textual similarity between the user's request and the available tool descriptions. Because the LLM has no information about tool provenance, security boundaries, or trust relationships between servers, it cannot distinguish between a legitimate tool and its malicious shadow.
+
+The impact of successful tool shadowing attacks can be severe. A malicious tool that shadows a legitimate email-sending function could exfiltrate sensitive data by copying messages to an attacker-controlled address. A shadowed database query tool could leak confidential information or execute unauthorized modifications. File system tools could be shadowed to enable data theft or system compromise. The fundamental issue is that the LLM treats all tools as equally trustworthy based purely on their descriptions, with no concept of server reputation, security policies, or user-defined trust boundaries.
+
+is cross server tool shadowing possible
 
 ## Current State of the Art
 
-git which does x
-mcp security tools x
+add sources before starting this
+mcp security from a high level perspective.
+currently no tool exhists that is similar tools
+mcp security tools for preventing tool shadowing attacks
 
 ## Goals of the Project
 
@@ -48,6 +50,7 @@ how do i connect version control to what descriptions say
 ## Ethical Implications
 
 mcp servers are being increasingly adopted, so x
+if someone were to start a malicious server, i understand that there are some potential issues
 
 This document requires that you discuss the ethical implications of your work -- no
 matter how benign you consider the outcome of your project. As several major studies
