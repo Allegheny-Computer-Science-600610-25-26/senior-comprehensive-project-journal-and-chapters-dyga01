@@ -1,5 +1,6 @@
 ---
-title: "Provide and justify the outline for Chapter Two of your senior thesis"
+title: "Chapter Two Outline"
+description: "Provide and justify the outline for Chapter Two of your senior thesis"
 date: "2025-11-07"
 ---
 

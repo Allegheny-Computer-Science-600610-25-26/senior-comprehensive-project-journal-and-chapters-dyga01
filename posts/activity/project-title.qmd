@@ -1,5 +1,6 @@
 ---
-title: "State and explain the title of your senior comprehensive project"
+title: "Project Title"
+description: "State and explain the title of your senior comprehensive project"
 date: "2025-11-07"
 ---
 
