@@ -4,4 +4,8 @@ description: "Reflect on your experiences preparing for and giving your presenta
 date: "2025-11-14"
 ---
 
-x
+After giving my senior thesis presentation, I feel proud of how it turned out. I dedicated about two weeks to preparing, which really helped me feel confident and organized when it was time to present. I also focused on keeping my slides simple and concise, using as few words as possible so my main points would be clear and easy for the audience to follow. I think that this approach seemed to work well, as I noticed people were engaged and able to grasp the core ideas quickly.
+
+I also think I did a strong job introducing the concept of model context protocol, which was central to my thesis. However, I realize I could have explained the tool shadowing attack more clearly. In the moment, I struggled to communicate the technical details in a way that was accessible to everyone, and I wish I had spent a bit more time refining that part of my talk.
+
+Overall, I’m satisfied with my performance and the feedback I received. This experience taught me a lot about effective communication and highlighted areas where I can improve. I’m grateful for the opportunity to share my work and look forward to applying these lessons in future presentations.
