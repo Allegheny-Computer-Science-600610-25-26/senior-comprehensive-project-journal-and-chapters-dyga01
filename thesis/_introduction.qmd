@@ -42,11 +42,11 @@ In order to demonstrate a tool shadowing attack, consider a scenario where a sha
 
 ### MCP Security Landscape
 
-x
+Because MCP was only recently released, much of its attack surfaces have not been fully explored yet. Although research is limited, a small but growing body of work has begun to outline the types of attacks MCP systems may be vulnerable to. Such research finds that MCP systems can be susceptible to attacks during their creation, deployment, operation, and maintenance.[@mcp-landscape-2025] These vulnerabilities can span from both the client and server side of the MCP ecosystem.
 
-https://arxiv.org/pdf/2503.23278 --> Model Context Protocol (MCP): Landscape, Security Threats,
-and Future Research Directions
-https://arxiv.org/pdf/2508.12538  --> Systematic Analysis of MCP Security
+Other studies have further explored these risks by actually implementing different attack methods. In fact, the Systematic Analysis of MCP Security paper systematically categorizes and implements 31 distinct attack methods.[@mcp-systematic-2025] The paper introduces an MCP Attack Library (MCPLIB) which includes attacks that fall under four key classifications: direct tool injection, indirect tool injection, malicious user attacks, and LLM inherent attacks. Through quantitative experiments, the study demonstrates that MCP systems are highly susceptible to blind reliance on tool descriptions. In turn, these findings highlight the urgent need for robust defense strategies in the validation of MCP-based ecosystems.
+
+Overall, the evolving MCP security landscape underscores the urgent need for robust defense strategies accross common attack surfaces. Much of the current research focuses on identifying where MCP is most susceptible, developing benchmarking systems for systematic vulnerability assessment, and designing tools that can detect and mitigate attacks in real time.
 
 ### MCP Security Benchmarks
 
@@ -60,6 +60,8 @@ LLM AGENTS
 https://github.com/invariantlabs-ai/mcp-scan --> invariant labs tool that scans for attacks including tool poisoning
 https://arxiv.org/pdf/2504.12757 --> MCP GUARDIAN: A SECURITY-FIRST LAYER FOR SAFEGUARDING MCP-BASED AI SYSTEM
 Akto.io or some other ones
+ DO NOT GO IN DEPTH HERE 
+ SHOULD I PUT THIS BEFORE MOTIVATION?   
 
 ## Goals of the Project
 
