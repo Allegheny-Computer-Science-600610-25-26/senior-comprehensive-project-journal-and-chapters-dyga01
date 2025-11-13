@@ -60,11 +60,9 @@ The results of MSB reveal an interesting relationship between model performance 
 
 ### MCP Security Tools
 
-https://github.com/invariantlabs-ai/mcp-scan --> invariant labs tool that scans for attacks including tool poisoning
-https://arxiv.org/pdf/2504.12757 --> MCP GUARDIAN: A SECURITY-FIRST LAYER FOR SAFEGUARDING MCP-BASED AI SYSTEM
-Akto.io or some other ones
-DO NOT GO IN DEPTH HERE 
-SHOULD I PUT THIS BEFORE MOTIVATION?   
+One very popular MCP security tool, MCP Scan, is a specialized security tool designed to detect and mitigate vulnerabilities in both local and remote MCP servers.[@mcp-scan] MCP Scan can search for a wide range of security threats by enforcing guardrails that monitor and restrict tool usage, prompt content, and data flows. Despite its popularity and robust feature set, there is limited research evaluating the real-world effectiveness of MCP Scan or exploring its integration with other security mechanisms. Further research is needed to assess its impact and optimize its use within comprehensive MCP security frameworks.
+
+Other MCP security tooling, like MCP Guardian, focuses on securing MCP client to server interactions from the perspective of middleware.[@mcp-guardian-2025] Specifically, MCP Guardian strengthens MCP client-to-server communication with authentication, rate-limiting, logging, tracing, and Web Application Firewall (WAF) scanning. The middleware approach that MCP Guardian takes runs between every client-to-server interaction, providing a centralized point for security enforcement. However, this approach has limitations in identifying specific attack vectors, such as malicious keywords embedded in tool docstrings that could be exploited to trigger attacks.
 
 ## Goals of the Project
 
