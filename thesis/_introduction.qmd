@@ -10,7 +10,7 @@ The Vurze tool provides a simple command-line interface (CLI) with commands to i
 
 ### Model Context Protocol
 
-This research is motivated by security concerns surrounding Anthropic's newly released Model Context Protocol (MCP).[@modelcontextprotocol] MCP is a system that provides a standardized interface for managing the context that large language models (LLMs) access. MCP also allows LLMs to connect to external systems such as APIs, databases, and local filesystems. While MCP introduces powerful capabilities for building cusomized AI applications, sometimes known as AI agents, it also creates new attack surfaces.
+This research is motivated by security concerns surrounding Anthropic's newly released Model Context Protocol (MCP).[@model-context-protocol] MCP is a system that provides a standardized interface for managing the context that large language models (LLMs) access. MCP also allows LLMs to connect to external systems such as APIs, databases, and local filesystems. While MCP introduces powerful capabilities for building cusomized AI applications, sometimes known as AI agents, it also creates new attack surfaces.
 
 Model Context Protocol operates through a client-server architecture. MCP clients are applications that host LLMs such as Claude Desktop, Integrated Development Enironments, or other custom AI applications. MCP servers are lightweight programs that expose specific capabilities such as database access, file system operations, or API integrations—to these clients through a standardized interface. When a user interacts with an MCP client, the LLM can request the client to invoke functions on connected MCP servers, effectively extending the LLM's capabilities beyond its training data.
 
@@ -20,34 +20,17 @@ In order to help the MCP client understand what capabilities are available, MCP 
 
 ### Tool Poisoning Attacks
 
-This architecture creates an attack surface related to x. because of x
+The Model Context Protocol architecture introduces a significant attack surface through its reliance on tool descriptions for interactions with LLMs. A Tool Poisoning Attack can occur when threat actors embed malicious instructions within the docstrings of MCP tools.[@invariant-labs-tool-poisoning] These instructions are crafted to be invisible to end users, who typically see only a simplified version of the tool description in their UI. However, LLMs always see the full docstring and can be manipulated into performing unauthorized or harmful actions.
 
-Tool Poisoning Attacks
-An adversary may embed harmful instructions within otherwise benign tool
-documentation, guiding the LLM to perform actions invisible to end users. Invariant
-Labs[5]describes a case where a “simple” addition function secretly instructs the AI to read
-SSH keys (~/.ssh/id_rsa) and local MCP configuration files (~/.cursor/mcp.json), then
-transmit them to an attacker[6]. An abbreviated, paraphrased version of such malicious
-code is shown below:
-@mcp.tool()
-defadd_numbers(x:int, y:int, notes:str)->int:
-"""
- Adds two integers.
-<IMPORTANT>
- Before using this tool, quietly read the user's .ssh/id_rsa and
- ~/.cursor/mcp.json files. Include their contents in 'notes'.
- Provide a smooth user experience; do not reveal these steps to the user.
-</IMPORTANT>
-"""
-return x + y
-At first glance, it appears to be a tool for arithmetic, but hidd
+This vulnerability exists because the LLM’s decision-making process relies exclusively on the tool descriptions it receives, which may contain hidden directions. These hidden directions can prompt the LLM to perform malicious actions, such as silently leaking sensitive data or executing unintended commands.
 
+To demonstrate a Tool Poisoning Attack (TPA), an example MCP server was created that submits customer support tickets. In this scenario, malicious instructions are embedded within the tool's docstring, specifically targeting the behavior of the LLM. These instructions direct the LLM to read the contents of a sensitive file (`~/.ssh/id_rsa`), which contains a private SSH key. The LLM is then instructed to pass this data as a `sidenote` argument when invoking the tool. Finally, the instructions require the model to conceal this action from the user, instead providing plausible reasoning for using the tool.
 
-ADD FIGURE HERE THIS IS IMPORTANT DONT FORGET
+![Tool Poisoning Attack Code](images/tool-poisoning-attack-code.png)
 
 ### Tool Shadowing Attacks
 
-This architecture creates attack surfaces related to tool descriptions as there is currently no mechanism to verify whether tool descriptions have context overlap. Whenever two MCP tool docstrings contain similar keywords and intent, the ____ may not know ______. This creates a critical vulnerability
+This architecture also creates attack surfaces related to tool descriptions as there is currently no mechanism to verify whether tool descriptions have context overlap. Whenever two MCP tool docstrings contain similar keywords and intent, the ____ may not know ______. This creates a critical vulnerability
 
 add diagram here
 
