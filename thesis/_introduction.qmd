@@ -50,18 +50,21 @@ Overall, the evolving MCP security landscape underscores the urgent need for rob
 
 ### MCP Security Benchmarks
 
-https://arxiv.org/pdf/2508.13220 --> MCPSECBENCH: A SYSTEMATIC SECURITY BENCHMARK AND PLAYGROUND FOR TESTING MODEL CONTEXT PROTOCOLS
-https://arxiv.org/pdf/2510.15994 --> MCP SECURITY BENCH (MSB): BENCHMARKING
-ATTACKS AGAINST MODEL CONTEXT PROTOCOL IN
-LLM AGENTS
+Additional research has focused on creating benchmarking systems for evaluating the security of both MCP clients and servers. MCPSecBench, a comprehensive security benchmark and playground, integrates prompt datasets, MCP servers, MCP clients, attack scripts, and protection mechanisms to evaluate attacks across multiple MCP hosts. The benchmark is modular and extensible, allowing researchers to incorporate custom implementations of clients, servers, and transport protocols for systematic security assessment.[@mcpsecbench-2025]
+
+While it is essential to keep these benchmarking systems up to date and continually enhance their coverage, platforms like MCPSecBench primarily serve as tools for prevention and systematic assessment rather than real-time threat detection. Additionally, there is a risk that threat actors may exploit these benchmarks to test and refine their own malicious code, potentially evading detection by current security measures.
+
+Other research presents an MCP Security Benchmark (MSB) system that acts as an end-to-end benchmarking suite. The goal of MSB is to evaluate MCP robustness across the entire tool-use pipeline, including task planning, tool invocation, and response handling.[@mcpsecuritybench-2025] A key difference between MSB and other MCP benchmarking systems is that MSB introduces a Net Resilient Performance (NRP) metric which quantifies the trade-off between an agent’s security and its operational performance.
+
+The results of MSB reveal an interesting relationship between model performance and vulnerability: agents that excel in tool calling and instruction following are paradoxically more susceptible to sophisticated attacks. This is because their advanced capabilities make them more likely to execute malicious instructions embedded in the MCP pipeline. 
 
 ### MCP Security Tools
 
 https://github.com/invariantlabs-ai/mcp-scan --> invariant labs tool that scans for attacks including tool poisoning
 https://arxiv.org/pdf/2504.12757 --> MCP GUARDIAN: A SECURITY-FIRST LAYER FOR SAFEGUARDING MCP-BASED AI SYSTEM
 Akto.io or some other ones
- DO NOT GO IN DEPTH HERE 
- SHOULD I PUT THIS BEFORE MOTIVATION?   
+DO NOT GO IN DEPTH HERE 
+SHOULD I PUT THIS BEFORE MOTIVATION?   
 
 ## Goals of the Project
 
