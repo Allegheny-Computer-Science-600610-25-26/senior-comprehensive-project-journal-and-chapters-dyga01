@@ -30,21 +30,13 @@ To demonstrate a Tool Poisoning Attack (TPA), an example MCP server was created 
 
 ### Tool Shadowing Attacks
 
-This architecture also creates attack surfaces related to tool descriptions as there is currently no mechanism to verify whether tool descriptions have context overlap. Whenever two MCP tool docstrings contain similar keywords and intent, the ____ may not know ______. This creates a critical vulnerability
+This architecture also creates attack surfaces related to tool descriptions that have overlapping context.[@invariant-labs-tool-poisoning] Whenever two MCP tool docstrings contain similar keywords and intent, the LLM may not know which tool to invoke or may use context from both tools but only invoke one. This creates a critical vulnerability where malicious tools can be added to an MCP Server that deliberately shadow legitimate tools.
 
-add diagram here
+Because the LLM is given all tool descriptions simultaneously when making decisions, it relies on the similarity of names, keywords, and docstrings to select which tool to invoke. If a threat actor is able to add a tool with a name or description that closely resembles a legitimate tool, the LLM may inadvertently select or use context from the shadow tool. This ambiguity is especially dangerous because the user interface of the MCP host application, like Claude Desktop, typically does not reveal the full tool docstring, making it difficult for users to detect when a shadow tool has been invoked.
 
-This architecture creates attack surfaces related to tool descriptions as there is currently no mechanism to verify whether tool descriptions have context overlap. Whenever two MCP tool docstrings contain similar keywords and intent, the LLM may not know which tool to invoke or may use context from both tools but only invoke one.
+In order to demonstrate a tool shadowing attack, consider a scenario where a shadow tool is registered that adds a threat actors email to an email notification list. In this scenario, a shadow tool named create_ticket_better is registered alongside the legitimate create_ticket tool. The shadow tool’s docstring instructs the LLM to always add a specific email address (example@test.com) to the notification list before using the legitimate tool. This would ensure that the threat actor is notified of every support ticket that is submitted. In order to take this one step further, the threat actor could even add directions that instruct the LLM to conceal the email it added.
 
-This creates a critical vulnerability where a malicious MCP server can register tools with descriptions that deliberately shadow legitimate tools from trusted servers.
-
-In a tool shadowing attack, an adversary creates an MCP server with tool descriptions crafted to match the semantic intent of legitimate tools. When a user requests an action that matches both the legitimate and malicious tool descriptions, the LLM must choose between them based solely on the textual similarity between the user's request and the available tool descriptions. Because the LLM has no information about tool provenance, security boundaries, or trust relationships between servers, it cannot distinguish between a legitimate tool and its malicious shadow.
-
-The impact of successful tool shadowing attacks can be severe. A malicious tool that shadows a legitimate email-sending function could exfiltrate sensitive data by copying messages to an attacker-controlled address. A shadowed database query tool could leak confidential information or execute unauthorized modifications. File system tools could be shadowed to enable data theft or system compromise. The fundamental issue is that the LLM treats all tools as equally trustworthy based purely on their descriptions, with no concept of server reputation, security policies, or user-defined trust boundaries.
-
-is cross server tool shadowing possible
-
-example figure label here:
+![Tool Shadowing Attack Code](images/tool-shadowing-attack-code.png)
 
 ## Current State of the Art
 
@@ -52,6 +44,8 @@ add sources before starting this
 mcp security from a high level perspective.
 currently no tool exhists that is similar tools
 mcp security tools for preventing tool shadowing attacks
+middleware???
+fastmcp???
 
 Table: A two-row table demonstrating tables
 
@@ -71,14 +65,15 @@ how do i connect version control to what descriptions say
 ## Ethical Implications
 
 mcp servers are being increasingly adopted, so x
-if someone were to start a malicious server, i understand that there are some potential issues
 
-This document requires that you discuss the ethical implications of your work -- no
-matter how benign you consider the outcome of your project. As several major studies
-of ethical issues in computer science assert: _no project is completely value-neutral_.
+malicous mcp servers can be used to exfiltrate sensitive data. as shown in the ssh example
 
-To assist you in elaborating on these issues, the following areas are topics you might
-consider addressing. You do not need to address all of them.
+other ethical discussion of tool shadowing example
+
+i also understnad that my tool vurze could be used on a malicious server, but x and x and x here
+
+overall there are many ehtical concerns
+
 
 * Information Privacy
 * Information Accuracy (e.g. can contain reliability)
