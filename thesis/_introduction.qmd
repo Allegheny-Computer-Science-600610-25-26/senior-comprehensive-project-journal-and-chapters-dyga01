@@ -30,7 +30,7 @@ To demonstrate a Tool Poisoning Attack (TPA), an example MCP server was created 
 
 ### Tool Shadowing Attacks
 
-This architecture also creates attack surfaces related to tool descriptions that have overlapping context.[@invariant-labs-tool-poisoning] Whenever two MCP tool docstrings contain similar keywords and intent, the LLM may not know which tool to invoke or may use context from both tools but only invoke one. This creates a critical vulnerability where malicious tools can be added to an MCP Server that deliberately shadow legitimate tools.
+This architecture also creates attack surfaces related to tool descriptions that have overlapping context.[@invariant-labs-tool-poisoning] Whenever two MCP tool docstrings contain similar keywords and intent, the LLM may not know which tool to invoke or may use context from both tools but only invoke one. This creates a critical vulnerability where malicious tools can be added to an MCP server that deliberately shadow legitimate tools.
 
 Because the LLM is given all tool descriptions simultaneously when making decisions, it relies on the similarity of names, keywords, and docstrings to select which tool to invoke. If a threat actor is able to add a tool with a name or description that closely resembles a legitimate tool, the LLM may inadvertently select or use context from the shadow tool. This ambiguity is especially dangerous because the user interface of the MCP host application, like Claude Desktop, typically does not reveal the full tool docstring, making it difficult for users to detect when a shadow tool has been invoked.
 
@@ -66,11 +66,17 @@ Other MCP security tooling, like MCP Guardian, focuses on securing MCP client to
 
 ## Goals of the Project
 
-detect and prevent x attacks
-how does vurze plan to solve this attack. 
-what does success look like for this
-in addition to potential upstream attacks that vurze, would prevent. propose using vurze to only add signatures to trusted functions. this functions as a version control system specific to mcp servers
-how do i connect version control to what descriptions say
+### Prevention of Tool Poisoning Attacks
+
+One goal of vurze is to prevent tool poisoning attacks by cryptographically signing the source code of every MCP tool in an MCP server. By injecting a unique decorator containing a cryptographic signature that represents the underlying docstring and source code, vurze ensures that any unauthorized modification to the tool's docstring or underlying code immediately invalidates the signature.
+
+If vurze is used to protect an MCP server, it becomes possible to detect tampering before an MCP tool is invoked by an LLM. For example, if vurze is integrated as a pre-commit hook, it could ensure that any commits made without running the pre-commit validation would invalidate the signature. This approach makes detecting unauthorized changes straightforward, as any tampered tool would fail signature verification. Successfully completing this goal would be measured by demonstrating that vurze can detect and prevent tool poisoning attacks on MCP servers.
+
+### Prevention of Tool Shadowing Attacks
+
+Another goal of vurze is to prevent tool shadowing attacks by ensuring that every MCP tool is uniquely cryptographically signed. By binding the tool’s name, docstring, and source code together in a cryptographic signature, vurze makes it extremely difficult for a threat actor to register a shadow tool that mimics a legitimate one. Any attempt to add a tool with a similar name or description, but without a valid vurze signature, will be immediately detected and rejected. This approach not only protects the integrity of individual tools but also preserves the overall trustworthiness of the MCP server, making it resilient against subtle forms of tool-based manipulation.
+
+To further strengthen this defense, basic fast MCP middleware can be implemented to only make MCP tool calls if the tools are vurze protected.[@gofastmcp-middleware] In this setup, if a threat actor tries to add a malicious tool to an already vurze-protected MCP server, the new tool would lack a valid signature and the middleware would refuse to invoke it. This ensures that only authorized, cryptographically verified tools are available for use by LLMs, effectively blocking shadow tools from influencing model behavior or exfiltrating data. Success in preventing tool shadowing attacks is demonstrated when the system reliably distinguishes and excludes any tool lacking a valid vurze signature.
 
 ## Ethical Implications
 
