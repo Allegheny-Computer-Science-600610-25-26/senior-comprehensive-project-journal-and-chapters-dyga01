@@ -80,23 +80,16 @@ To further strengthen this defense, basic fast MCP middleware can be implemented
 
 ## Ethical Implications
 
-mcp servers are being increasingly adopted, so xhttps://github.com/mcp?utm_source=blog-source&utm_campaign=mcp-registry-server-launch-2025 --> github mcp registry
+The adoption of MCP servers has accelerated rapidly, as evidenced by the growing number of servers available in the official GitHub MCP registry.[@mcp-github-registry] However, as MCP becomes more deeply integrated into critical AI workflows, the ethical concerns associated with MCP attack surfaces become increasingly important. Issues such as information privacy and the potential for misuse must be carefully considered to ensure that MCP-based systems are deployed responsibly and safely.
 
-malicous mcp servers can be used to exfiltrate sensitive data. as shown in the ssh example
+### Information Privacy
 
-other ethical discussion of tool shadowing example
+Malicious MCP tools can be used to exfiltrate sensitive data, as shown in the MCP tool poisoning SSH key example. Beyond direct exfiltration, tool poisoning attacks also pose significant privacy risks. Once information like a private SSH key has been exposed, threat actors can gain unauthorized access to systems, escalate privileges, and potentially compromise additional sensitive resources. 
 
-i also understnad that my tool vurze could be used on a malicious server, but x and x and x here
+The ethical implications extend beyond individual privacy violations to organizational security. When users integrate MCP servers into their AI workflows, they implicitly trust that these tools will handle their data responsibly. A breach of this trust through tool poisoning not only compromises sensitive information but also undermines users confidence in MCP systems more broadly. Furthermore, the responsibility for such breaches raises complex questions about liability. Should the MCP server maintainers, the developers who integrated the tools, or the LLM be liable for such breaches. As MCP adoption grows, establishing clear ethical guidelines and accountability becomes essential to protect users and maintain trust in MCP powered systems.
 
-overall there are many ehtical concerns
+### Potential Misuse
 
+In addition to information privacy concerns that MCP systems pose, vurze itself can present dual-use ethical dilemmas. Like many security tools, vurze could be misused by threat actors in ways that contradict its intended protective purpose. For instance, threat actors could leverage vurze to cryptographically secure their own malicious MCP servers, making it more challenging to determine if code is malicious or not.
 
-* Information Privacy
-* Information Accuracy (e.g. can contain reliability)
-* Potential Misuse (e.g. computer crime, unintended consequences)
-* Second- or Third-Party Risk (e.g. safety)
-* Data Collection Issues (e.g. issues inherent in collecting data)
-* Algorithmic or Data Bias
-* Potential Power Difference / Social Imbalance / Issues in Equity
-
-In addition, reflect on ways that the above harms can be or are mitigated by your work.
+This highlights the ethical responsibility that comes with developing security tools for emerging technologies like MCP. While vurze aims to protect users from tool poisoning and shadowing attacks, its release into the open-source community means it could be studied and potentially weaponized by those with malicious intent. This raises important questions about the balance between transparency for legitimate defenders and operational security against adversaries.
