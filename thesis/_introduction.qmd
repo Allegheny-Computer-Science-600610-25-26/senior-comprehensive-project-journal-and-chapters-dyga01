@@ -20,7 +20,7 @@ Model Context Protocol operates through a client-server architecture. MCP client
 
 In order to help the MCP client understand what capabilities are available, MCP servers expose tools that describe their purpose and parameters. Tools are essentially functions that the LLM can interpret and invoke. The LLM relies on these tool descriptions, held in docstrings, to decide when and how to invoke each tool. For example, a tool with the docstring "Send an email to a recipient" informs the LLM that this function should be called when the user asks to send an email. The LLM never sees the actual implementation code; it only sees the tool's name, description, and parameter schema.
 
-![MCP Architecture Diagram](images/mcp-architecture.png)[@mcp-architecture-diagram]
+![MCP Architecture Diagram](images/mcp-architecture-diagram.png)[@mcp-architecture-diagram]
 
 ### Tool Poisoning Attacks
 
@@ -131,7 +131,7 @@ To further strengthen this defense, basic fast MCP middleware can be implemented
 
 ## Ethical Implications
 
-The adoption of MCP servers has accelerated rapidly, as evidenced by the growing number of servers available in the official GitHub MCP registry.[@mcp-github-registry] However, as MCP becomes more deeply integrated into critical AI workflows, the ethical concerns associated with MCP attack surfaces become increasingly important. Issues such as information privacy and the potential for misuse must be carefully considered to ensure that MCP-based systems are deployed responsibly and safely.
+The adoption of MCP servers has accelerated rapidly, as evidenced by the growing number of servers available in the official GitHub MCP registry.[@github-mcp-registry] However, as MCP becomes more deeply integrated into critical AI workflows, the ethical concerns associated with MCP attack surfaces become increasingly important. Issues such as information privacy and the potential for misuse must be carefully considered to ensure that MCP-based systems are deployed responsibly and safely.
 
 ### Information Privacy
 
