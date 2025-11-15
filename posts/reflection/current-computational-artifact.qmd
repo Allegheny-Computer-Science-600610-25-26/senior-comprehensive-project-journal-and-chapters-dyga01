@@ -1,0 +1,13 @@
+---
+title: "Current Computational Artifact Reflection"
+description: "Reflect on the current version of your computational artifact"
+date: "2025-11-14"
+---
+
+After completing and releasing version 0.1.0 of my computational artifact, Vurze, I feel as though I accomplished a lot. The tool now has its core functionality: it can add signed decorators to functions and check their signatures match their underlying code. I think that getting this base version working was a big milestone for me, and I’m proud of the progress I’ve made so far. However, as I reflect on the current state of Vurze, I realize there are many areas for improvement and further development.
+
+One major area I want to focus on next is tracking changes more effectively. I’m considering using the Git API to track diffs, though another option is to implement my own .vurze metadata file. This would help keep a record of modifications and make the tool more robust.
+
+I’m also questioning whether my current approach—using Python’s AST—offers the best performance and reliability. It might be worth exploring alternative methods to see if I can make the tool faster or more dependable. 
+
+Finally, transitioning to test-driven-development is another priority; I need to ensure Vurze works with very simple code examples. It’s important to verify that code runs the same after decorators are added as well, and to consider edge cases.

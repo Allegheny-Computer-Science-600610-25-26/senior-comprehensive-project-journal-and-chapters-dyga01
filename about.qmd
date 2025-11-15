@@ -6,8 +6,8 @@ about:
   links:
     - icon: github
       text: Github
-      href: https://github.com
+      href: https://github.com/dyga01
 
 ---
 
-About this blog
+Hi, I'm Aidan Dyga, currently a senior at Allegheny College majoring in Computer Science. I have experience with many programming languages including Python, Rust, and C, and I'm professionally interested in Artificial Intelligence, API development, and Software Testing.

@@ -1,0 +1,29 @@
+---
+title: "Chapter One Outline"
+description: "Provide and justify the outline for Chapter One of your senior thesis"
+date: "2025-11-07"
+---
+
+# Introduction
+
+1. Introduction
+	-  Introduce Vurze at a high level: automated decorator injection that embeds signatures into Python functions and classes so code can self-verify integrity and authorship
+    - Introduce Model Context Protocol (MCP) servers and their role in modern development
+    - Brief introduction to security challenges in MCP server environments
+
+2. Current State of the Art
+	- Git for version control systems
+    - Gap identification: lack of specialized MCP server security tools
+    - Comparison with traditional API security approaches
+    - Limitations of current solutions when applied to MCP servers
+
+3. Motivation
+    - Growing adoption of MCP servers in development workflows
+    - Unique security challenges posed by MCP architecture
+    - Need for specialized security tooling
+
+4. Ethical Implications
+    - Privacy considerations in MCP server interactions
+    - Responsibility in securing developer-AI communications
+    - Balancing security with accessibility and usability
+    - Ethical considerations for AI-assisted development
