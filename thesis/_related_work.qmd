@@ -1,12 +1,27 @@
 # Related work
 
-This chapter includes a broad and detailed review of relevant existing work.
-The literature review should provide background and context for the thesis work.
-The subsections may be organized in whatever manner seems best suited to the material--
-chronological, or by topic, or according to some other criteria
-(e.g., primary versus secondary resources).
+give like a high level summary here
+mcp security is so new.
+because mcp servers rely so heavily on docstrings
+this presents an opportunity to use docstrings for version control as well.
+this would clump mcp logic together
 
-If ethical issues are central to this work, you should also address historical and
-contemporary issues or efforts made to address them.
+## History of contextual internet security -__________not certain about section title_______
 
-fast mcp library too?
+(credit card fraud ai) (ai for security) uses things that look like what might be fraudulent. but how do we know for sure?
+
+## Rise of Agentic AI
+
+Development and release of agentic ai → anthropic responds with mcp
+
+## Creation of MCP  
+
+Explores the origins, growth, and current state of MCP, including its adoption by major organizations.
+
+## MCP Scan Security Tooling  
+
+summary of mcp scan and how it detects attacks. talk about popularity of tool. also talk about its shortcomings.
+
+## Fast MCP
+
+easy to implement but dont offer additional security features. talk about the shortcomings of fast mcp
