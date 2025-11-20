@@ -1,12 +1,8 @@
 # Related work
 
-give like a high level summary here
-mcp security is so new.
-because mcp servers rely so heavily on docstrings
-this presents an opportunity to use docstrings for version control as well.
-this would clump mcp logic together
+Since Model Context Protocol (MCP) was recently introduced in November of 2024 [@model-context-protocol], there has been limited research focused on its security implications. This gap presents a valuable opportunity for new research and innovation in MCP security. Most current security approaches for MCP are still in early development, leaving vulnerabilities that could be exploited by attackers. As MCP adoption grows rapidly across organizations, the need for robust security measures becomes increasingly critical. Understanding the current landscape of MCP security tools and their limitations provides important context for how Vurze addresses unmet needs in the ecosystem.
 
-## History of contextual internet security -__________not certain about section title_______
+## History of Contextual Security
 
 (credit card fraud ai) (ai for security) uses things that look like what might be fraudulent. but how do we know for sure?
 
