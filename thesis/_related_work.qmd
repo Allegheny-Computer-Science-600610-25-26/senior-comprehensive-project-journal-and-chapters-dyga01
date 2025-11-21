@@ -2,22 +2,50 @@
 
 Since Model Context Protocol (MCP) was recently introduced in November of 2024 [@model-context-protocol], there has been limited research focused on its security implications. This gap presents a valuable opportunity for new research and innovation in MCP security. Most current security approaches for MCP are still in early development, leaving vulnerabilities that could be exploited by attackers. As MCP adoption grows rapidly across organizations, the need for robust security measures becomes increasingly critical. Understanding the current landscape of MCP security tools and their limitations provides important context for how Vurze addresses unmet needs in the ecosystem.
 
-## History of Contextual Security
-
-(credit card fraud ai) (ai for security) uses things that look like what might be fraudulent. but how do we know for sure?
-
 ## Rise of Agentic AI
 
-Development and release of agentic ai → anthropic responds with mcp
+summarize what agentic ai is. 
+https://www.sciencedirect.com/science/article/pii/S2949855425000516
+https://www.jaai.net/vol3/JAAI-V3N2-41.pdf 
+
+### LangChain
+
+then give examples of systems that are popular that are agentic ai
+- langchain
+diagram
+
+### Agent2Agent Protocol
+
+agent2agent
+so so so many other tools as well...
+diagram
 
 ## Creation of MCP  
 
+### Need for Standardization
+
+many ai tools that work on top of llms. but no standardization
+Development and release of agentic ai → anthropic responds with mcp
 Explores the origins, growth, and current state of MCP, including its adoption by major organizations.
+
+### Technical Innovation of MCP
+
+x
+
+### Rapid Adoption and Impact
+
+x
+
+## Fast MCP
+
+talk about what fast mcp is. and what it allows you to do. 
+
+### Security Limitations
+
+easy to implement but dont offer additional security features. talk about the shortcomings of fast mcp
 
 ## MCP Scan Security Tooling  
 
 summary of mcp scan and how it detects attacks. talk about popularity of tool. also talk about its shortcomings.
-
-## Fast MCP
-
-easy to implement but dont offer additional security features. talk about the shortcomings of fast mcp
+History of Contextual Security???
+(credit card fraud ai) (ai for security) uses things that look like what might be fraudulent. but how do we know for sure?
