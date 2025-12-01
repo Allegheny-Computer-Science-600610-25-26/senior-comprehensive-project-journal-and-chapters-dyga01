@@ -22,11 +22,15 @@ Similar to MCP, which uses Python decorators to define tools in a standardized f
 
 ![Langchain Architecture Diagram](images/langchain-architecture-diagram.png)[@langchain-quickstart]
 
-### Agent2Agent Protocol or microsofts autogen???
+### AutoGen
 
-agent2agent
-so so so many other tools as well...
-diagram
+AutoGen, introduced by Microsoft Research in 2023, represents another significant advancement in building multi-agent conversational systems [@autogen-2023]. Unlike both MCP and LangChain's focus on providing a general-purpose framework for LLM applications, AutoGen specifically emphasizes multi-agent collaboration where multiple AI agents work together to solve complex tasks. The Autogen framework enables developers to create agents that can autonomously communicate with each other, execute code, use tools, and iteratively refine solutions through dialogue. Overall, Autogen expands beyond MCP and LangChain to explore how agents can communicate with each other.
+
+AutoGen achieves multi-agent collaboration through a conversational pattern where agents are assigned distinct roles and capabilities. Developers can configure agents with specific responsibilities and then allow them to communicate autonomously through structured dialogues. For instance, a research assistant application might deploy a PlannerAgent to break down complex queries into subtasks, a ResearcherAgent to gather information from various sources, and a SummarizerAgent to synthesize findings into coherent reports. Once these agents are defined, they can engage in a conversation and request information from each other.
+
+The fundamental difference between AutoGen and MCP lies in their scope. MCP is a protocol designed to standardize how AI applications connect to external tools and data sources through a client–server architecture. It defines the communication layer between a host application (such as Claude Desktop) and tool servers. In contrast, AutoGen is an application framework for orchestrating conversations between multiple AI agents within a single application environment. It does this by defining agent classes with specific roles, conversation patterns, and code execution capabilities, then managing the message flow between these agents according to predefined rules [@autogen-2023].
+
+![AutoGen Architecture Diagram](images/autogen-architecture-diagram.png)[@autogen-2023]
 
 ## Creation of MCP  
 
