@@ -6,7 +6,6 @@ Since Model Context Protocol (MCP) was recently introduced in November of 2024 [
 
 summarize what agentic ai is. 
 https://www.sciencedirect.com/science/article/pii/S2949855425000516
-https://www.jaai.net/vol3/JAAI-V3N2-41.pdf 
 
 ### LangChain
 
@@ -14,7 +13,7 @@ then give examples of systems that are popular that are agentic ai
 - langchain
 diagram
 
-### Agent2Agent Protocol
+### Agent2Agent Protocol or microsofts autogen???
 
 agent2agent
 so so so many other tools as well...
