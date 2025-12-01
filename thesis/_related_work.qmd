@@ -14,9 +14,13 @@ While much of the research surrounding agentic AI is currently underway, underst
 
 ### LangChain
 
-then give examples of systems that are popular that are agentic ai
-- langchain
-diagram
+LangChain, introduced in late 2022, is one of the most prominent frameworks for building agentic AI applications. The framework provides developers with a comprehensive toolkit for creating AI agents and applications powered by LLMs from providers like OpenAI, Anthropic, and Google [@langchain-quickstart]. LangChain allows developers to define system prompts, create tools, select different LLMs, specify response formats, and add memory capabilities to their agents.
+
+LangChain has also been widely adopted for many applications with the package receiving millions of downloads monthly from the Python Package Index (PyPI) [@langchain]. Despite its popularity, LangChain faces several documented limitations. The framework's complexity creates a steep learning curve for new developers, particularly when customizing agent behavior. Additionally, concerns have been raised about the transparency of agent decision-making processes and the difficulty in ensuring predictable behavior in production environments. While the framework provides many layers of abstraction, these same layers can sometimes obscure underlying operations and make it challenging to optimize performance or troubleshoot failures in complex agent workflows.
+
+Similar to MCP, which uses Python decorators to define tools in a standardized format, LangChain also relies on a `@tool` decorator pattern [@langchain-quickstart]. While these two systems may appear nearly identical on the surface, they differ fundamentally in their architectural approaches. One key distinction is that MCP establishes a client-server protocol with clear boundaries between the host application and tool providers. In contrast, LangChain integrates tools more tightly within the agent's execution environment, allowing functions to directly access runtime context and agent memory without the intermediary protocol layer that MCP provides.
+
+![Langchain Architecture Diagram](images/langchain-architecture-diagram.png)[@langchain-quickstart]
 
 ### Agent2Agent Protocol or microsofts autogen???
 
