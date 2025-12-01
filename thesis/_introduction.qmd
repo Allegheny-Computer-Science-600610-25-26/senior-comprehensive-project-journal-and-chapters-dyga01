@@ -97,6 +97,14 @@ def create_ticket(
 )
 ```
 
+### Vurze as an MCP Defense Mechanism
+
+Vurze addresses both the tool poisoning and tool shadowing vulnerabilities described above through cryptographic verification at the source code level. By automatically adding cryptographic decorators to each function, Vurze creates an immutable fingerprint of each MCP tool's code and docstring. This approach makes unauthorized modifications detectable, as any change to a tool's code or docstring will cause signature verification to fail. 
+
+For tool poisoning attacks, Vurze provides protection by ensuring that tool docstrings cannot be modified without breaking the cryptographic signature. When a developer signs their MCP tools with Vurze, any attempt to inject malicious instructions would invalidate the signature. For example, adding the SSH key exfiltration commands shown earlier would cause signature verification to fail.
+
+For tool shadowing attacks, Vurze makes it significantly harder for attackers to create convincing shadow tools. Since legitimate tools carry valid cryptographic signatures from trusted developers, unauthorized tools will lack these signatures. Vurze can detect these unsigned shadow tools and flag them as potentially malicious. By verifying signatures before tool registration, MCP servers can reject shadow tools and only invoke trusted tools.
+
 ## Current State of the Art
 
 ### MCP Security Landscape
