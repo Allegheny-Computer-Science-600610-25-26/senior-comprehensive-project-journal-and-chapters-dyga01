@@ -4,8 +4,6 @@ Since Model Context Protocol (MCP) was recently introduced in November of 2024 [
 
 ## Rise of Agentic AI
 
-### Overview
-
 Since large language models (LLMs) like OpenAI's ChatGPT became widely available in November 2022 [@walsh2025chatgpt], there has been rapid progress toward more autonomous AI systems. Early versions of many LLMs demonstrated impressive natural language understanding and generation capabilities, but they were primarily limited to responding to user prompts. This limitation spurred significant research aimed at transforming these powerful language models into agentic systems capable of reasoning about complex problems and taking autonomous actions to achieve specific goals.
 
 Agentic AI refers to AI systems designed to act autonomously, going beyond the reactive nature of traditional LLMs by independently planning and executing multi-step tasks [@agentic-ai-review-2025]. Unlike standard LLMs that simply generate text responses, agentic AI systems can interact with external tools, maintain persistent goals, and adapt their strategies based on environmental feedback. The goal of agentic AI systems is to mimic human decision-making behavior. However, one of the largest problems with agentic AI is the lack of a standardized and universally accepted definition. There are questions as to what behavior is considered agentic in the first place. Despite this definitional ambiguity, the core characteristics of autonomy, goal-orientation, and interaction with external systems distinguish agentic AI from traditional LLMs.
@@ -34,6 +32,12 @@ The fundamental difference between AutoGen and MCP lies in their scope. MCP is a
 
 ## Creation of MCP  
 
+### Rapid Adoption and Impact
+
+after being intially released in late 2024, model context protocl (mcp). quickly became popoular.[@model-context-protocol] the model context protcol The popularity of Model Context Protocol (MCP) has surged since its release, as evidenced by the rapid growth of the official GitHub MCP registry [@github-mcp-registry]
+
+what sort of impact has mcp had???
+
 ### Need for Standardization
 
 many ai tools that work on top of llms. but no standardization
@@ -44,10 +48,6 @@ Explores the origins, growth, and current state of MCP, including its adoption b
 
 x
 in depth diagram here
-
-### Rapid Adoption and Impact
-
-x
 diagram here?
 
 ## Fast MCP
