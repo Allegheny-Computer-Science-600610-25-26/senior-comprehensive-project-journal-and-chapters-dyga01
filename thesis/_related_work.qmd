@@ -1,11 +1,16 @@
 # Related work
 
-Since Model Context Protocol (MCP) was recently introduced in November of 2024 [@model-context-protocol], there has been limited research focused on its security implications. This gap presents a valuable opportunity for new research and innovation in MCP security. Most current security approaches for MCP are still in early development, leaving vulnerabilities that could be exploited by attackers. As MCP adoption grows rapidly across organizations, the need for robust security measures becomes increasingly critical. Understanding the current landscape of MCP security tools and their limitations provides important context for how Vurze addresses unmet needs in the ecosystem.
+Since Model Context Protocol (MCP) was recently introduced in November of 2024 [@model-context-protocol], there has been limited research focused on its security implications. This gap presents a valuable opportunity for new research and innovation in MCP security. Most current security approaches for MCP are still in early development, leaving vulnerabilities that could be exploited by attackers. As MCP adoption grows rapidly across organizations, the need for robust security measures becomes increasingly critical. Additionally, understanding the current landscape of MCP security tools and their limitations provides important context for how Vurze addresses unmet needs in the ecosystem.
 
 ## Rise of Agentic AI
 
-summarize what agentic ai is. 
-https://www.sciencedirect.com/science/article/pii/S2949855425000516
+### Overview
+
+Since large language models (LLMs) like OpenAI's ChatGPT became widely available in November 2022 [@walsh2025chatgpt], there has been rapid progress toward more autonomous AI systems. Early versions of many LLMs demonstrated impressive natural language understanding and generation capabilities, but they were primarily limited to responding to user prompts. This limitation spurred significant research aimed at transforming these powerful language models into agentic systems capable of reasoning about complex problems and taking autonomous actions to achieve specific goals.
+
+Agentic AI refers to AI systems designed to act autonomously, going beyond the reactive nature of traditional LLMs by independently planning and executing multi-step tasks [@agentic-ai-review-2025]. Unlike standard LLMs that simply generate text responses, agentic AI systems can interact with external tools, maintain persistent goals, and adapt their strategies based on environmental feedback. The goal of agentic AI systems is to mimic human decision-making behavior. However, one of the largest problems with agentic AI is the lack of a standardized and universally accepted definition. There are questions as to what behavior is considered agentic in the first place. Despite this definitional ambiguity, the core characteristics of autonomy, goal-orientation, and interaction with external systems distinguish agentic AI from traditional LLMs.
+
+While much of the research surrounding agentic AI is currently underway, understanding its evolution provides important context. The Agentic AI field emerged from foundational work in reinforcement learning, where systems learn through trial and error by receiving rewards for successful actions. It also built upon neural networks, which are computational models inspired by the human brain's structure [@agentic-ai-review-2025]. From these building blocks, more complex LLMs like GPT-3.5 were created that demonstrated the ability to reason and generate human-like responses across many tasks. Currently there are many systems that utilize LLM's to create more specialized AI agents.
 
 ### LangChain
 
@@ -30,14 +35,17 @@ Explores the origins, growth, and current state of MCP, including its adoption b
 ### Technical Innovation of MCP
 
 x
+in depth diagram here
 
 ### Rapid Adoption and Impact
 
 x
+diagram here?
 
 ## Fast MCP
 
 talk about what fast mcp is. and what it allows you to do. 
+diagram here?
 
 ### Security Limitations
 
