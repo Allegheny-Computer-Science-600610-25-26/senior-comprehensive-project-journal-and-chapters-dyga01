@@ -12,7 +12,7 @@ format:
 natbiboptions: numbers
 # EDIT AT YOUR OWN PERIL #
 
-title: "Vurze: Cryptographic Versioning for Python Functions and Classes via Automated Decorator Injection"
+title: "Vurze: Cryptographic Signing of Python Functions for MCP Security"
 
 firstreader: Professor Douglas Luman
 secondreader: Dr. Janyl Jumadinova
