@@ -1,4 +1,4 @@
-# Related work
+# Related Work
 
 Since Model Context Protocol (MCP) was recently introduced in November of 2024 [@model-context-protocol], there has been limited research focused on its security implications. This gap presents a valuable opportunity for new research and innovation in MCP security. Most current security approaches for MCP are still in early development, leaving vulnerabilities that could be exploited by attackers. As MCP adoption grows rapidly across organizations, the need for robust security measures becomes increasingly critical. Additionally, understanding the current landscape of MCP security tools and their limitations provides important context for how Vurze addresses unmet needs in the ecosystem.
 
@@ -18,7 +18,7 @@ LangChain has also been widely adopted for many applications with the package re
 
 Similar to MCP, which uses Python decorators to define tools in a standardized format, LangChain also relies on a `@tool` decorator pattern [@langchain-quickstart]. While these two systems may appear nearly identical on the surface, they differ fundamentally in their architectural approaches. One key distinction is that MCP establishes a client-server protocol with clear boundaries between the host application and tool providers. In contrast, LangChain integrates tools more tightly within the agent's execution environment, allowing functions to directly access runtime context and agent memory without the intermediary protocol layer that MCP provides.
 
-![Langchain Architecture Diagram](images/langchain-architecture-diagram.png)[@langchain-quickstart]
+![Langchain Architecture Diagram [@langchain-quickstart]](images/langchain-architecture-diagram.png)
 
 ### AutoGen
 
@@ -28,7 +28,7 @@ AutoGen achieves multi-agent collaboration through a conversational pattern wher
 
 The fundamental difference between AutoGen and MCP lies in their scope. MCP is a protocol designed to standardize how AI applications connect to external tools and data sources through a client–server architecture. It defines the communication layer between a host application (such as Claude Desktop) and tool servers. In contrast, AutoGen is an application framework for orchestrating conversations between multiple AI agents within a single application environment. Autogen also features different conversational patterns for agents such as allowing for multi-agent conversations in formats like joint and heirarchical chats [@autogen-2023].
 
-![AutoGen Architecture Diagram](images/autogen-architecture-diagram.png)[@autogen-2023]
+![AutoGen Architecture Diagram [@autogen-2023]](images/autogen-architecture-diagram.png)
 
 ## Creation of MCP  
 
@@ -52,16 +52,21 @@ One of the most effective ways to understand MCP's emergence is by comparing it 
 
 MCP addresses the limitations of REST APIs specifically for AI systems by introducing what can be thought of as "an API framework for LLMs." The key distinction lies in their architectural approaches: REST APIs use a two-tier client-to-server architecture, while MCP implements a three-tier system consisting of host application, MCP client, and MCP server. Because of this key architectural difference, MCP can maintain stateful sessions with persistent context across interactions, whereas REST APIs treat each request independently [@mcp-vs-api-roocode]. This fundamental difference allows MCP powered systems to maintain awareness of previous actions throughout complex multi-step workflows. Overall, MCP does not replace REST APIs. Instead, it extends them by adding persistent context, runtime tool discovery, and stateful sessions that are crucial for modern AI agents. Here is a high level diagram of how MCP Servers and REST APIs relate:
 
-![MCP and REST APIs Relationship](images/mcp-api-relationship.png)[@mcp-vs-api-codecademy]
+![MCP and REST APIs Relationship [@mcp-vs-api-codecademy]](images/mcp-api-relationship.png)
 
 ## Fast MCP
 
-talk about what fast mcp is. and what it allows you to do. 
-diagram here?
+FastMCP is a high-level Python framework designed to simplify the development of MCP servers and clients [@fastmcp-getting-started]. While the official MCP software development kit provides core protocol functionality, FastMCP extends this foundation by offering a comprehensive suite of production-ready features. The framework's primary goal is to handle the complex protocol details automatically, allowing developers to focus on building tools and exposing data rather than managing low-level protocol implementations.
+
+The FastMCP framework achieves this simplicity by using decorators for defining tools. At its core, FastMCP allows developers to transform ordinary Python functions into MCP tools with minimal code. For example, a simple function can be converted into an MCP tool by applying the `@mcp.tool` decorator, and FastMCP automatically handles all protocol-level operations. Because of FastMCP's simplistic design, it makes it easier to transform exhisting Python code into MCP tools.
+
+____converting apis to mcp section____
 
 ### Security Limitations
 
 easy to implement but dont offer additional security features. talk about the shortcomings of fast mcp
+
+this is where vurze comes in!!!!!
 
 ## MCP Scan Security Tooling  
 
