@@ -26,29 +26,34 @@ AutoGen, introduced by Microsoft Research in 2023, represents another significan
 
 AutoGen achieves multi-agent collaboration through a conversational pattern where agents are assigned distinct roles and capabilities. Developers can configure agents with specific responsibilities and then allow them to communicate autonomously through structured dialogues. For instance, a research assistant application might deploy a PlannerAgent to break down complex queries into subtasks, a ResearcherAgent to gather information from various sources, and a SummarizerAgent to synthesize findings into coherent reports. Once these agents are defined, they can engage in a conversation and request information from each other.
 
-The fundamental difference between AutoGen and MCP lies in their scope. MCP is a protocol designed to standardize how AI applications connect to external tools and data sources through a client–server architecture. It defines the communication layer between a host application (such as Claude Desktop) and tool servers. In contrast, AutoGen is an application framework for orchestrating conversations between multiple AI agents within a single application environment. It does this by defining agent classes with specific roles, conversation patterns, and code execution capabilities, then managing the message flow between these agents according to predefined rules [@autogen-2023].
+The fundamental difference between AutoGen and MCP lies in their scope. MCP is a protocol designed to standardize how AI applications connect to external tools and data sources through a client–server architecture. It defines the communication layer between a host application (such as Claude Desktop) and tool servers. In contrast, AutoGen is an application framework for orchestrating conversations between multiple AI agents within a single application environment. Autogen also features different conversational patterns for agents such as allowing for multi-agent conversations in formats like joint and heirarchical chats [@autogen-2023].
 
 ![AutoGen Architecture Diagram](images/autogen-architecture-diagram.png)[@autogen-2023]
 
 ## Creation of MCP  
 
-### Rapid Adoption and Impact
-
 after being intially released in late 2024, model context protocl (mcp). quickly became popoular.[@model-context-protocol] the model context protcol The popularity of Model Context Protocol (MCP) has surged since its release, as evidenced by the rapid growth of the official GitHub MCP registry [@github-mcp-registry]
 
-what sort of impact has mcp had???
+what sort of impact has mcp had???https://towardsdatascience.com/mcp-in-practice/
+https://www.pulsemcp.com/ --> by looking at dat a from here pulse mcp registry
+On GitHub, stars are similar to Facebook “likes,” and developers use them to show appreciation, bookmark projects, or indicate usage.
+MCP use (tools and data being accessed) is dominated by just three categories: Database & Search (RAG), Computer & Web Automation, and Software Engineering. Together, they received nearly three-quarters (72.6%) of all stars on GitHub (which we proxy for usage).
 
 ### Need for Standardization
 
-many ai tools that work on top of llms. but no standardization
-Development and release of agentic ai → anthropic responds with mcp
-Explores the origins, growth, and current state of MCP, including its adoption by major organizations.
+there have been many ai tools that work on top of llms.
+but many of them lack standardization that mcp provides
+as a response to many of these tools , anthropic, the popular llm company, responds with mcp
+
+____specifically how langchain lacks mcp standardization here______
 
 ### Technical Innovation of MCP
 
-x
-in depth diagram here
-diagram here?
+explain how mcp is techincal innovatoin. 1. Client-Server Architecture and standarzised protocol json rpc
+
+_______talk about decorators here___________
+
+diagram here
 
 ## Fast MCP
 
@@ -64,3 +69,4 @@ easy to implement but dont offer additional security features. talk about the sh
 summary of mcp scan and how it detects attacks. talk about popularity of tool. also talk about its shortcomings.
 History of Contextual Security???
 (credit card fraud ai) (ai for security) uses things that look like what might be fraudulent. but how do we know for sure?
+I should make this section very long and good. this is important for the comp. also how cna i talk more about security and less about ai. i need to keep this about decorators for security
