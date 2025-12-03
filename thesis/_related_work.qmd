@@ -46,7 +46,7 @@ One notable study systematically categorizes and implements 31 distinct attack m
 
 Addressing these vulnerabilities requires security mechanisms that operate at the source code level rather than relying solely on runtime monitoring or middleware-based solutions. This is where Vurze's decorator-based cryptographic verification approach becomes relevant. Vurze implements a defense-in-depth strategy for MCP server tools, where only developers with access to the Vurze private key can cryptographically protect their tools. This approach specifically targets the blind reliance on tool descriptions that the MCP Attack Library (MCPLIB) research mentions by ensuring that any modifications to tool descriptions or implementations will break cryptographic verification. 
 
-### MCP v.s. REST API's
+### MCP and REST API's
 
 One of the most effective ways to understand MCP's emergence is by comparing it to traditional REST APIs. A REST API (Representational State Transfer Application Programming Interface) is a standardized communication pattern that enables software programs to exchange data over HTTP (Hypertext Transfer Protocol). REST APIs operate through a request-response model where a client application sends a message to a server requesting specific data [@mcp-vs-api-codecademy]. This straightforward pattern has become extremely popular and is commonly used as the foundation of many modern web services. However, REST APIs come with several limitations. Because they are stateless, each request is isolated, and the client must keep track of context manually. Communication is also limited to one-way HTTP calls, which prevents the kind of persistent and ongoing interaction many Agentic AI tools need [@mcp-vs-api-roocode].
 
@@ -60,13 +60,13 @@ FastMCP is a high-level Python framework designed to simplify the development of
 
 The FastMCP framework achieves this simplicity by using decorators for defining tools. At its core, FastMCP allows developers to transform ordinary Python functions into MCP tools with minimal code. For example, a simple function can be converted into an MCP tool by applying the `@mcp.tool` decorator, and FastMCP automatically handles all protocol-level operations. Because of FastMCP's simplistic design, it makes it easier to transform exhisting Python code into MCP tools.
 
-____converting apis to mcp section____
-
 ### Security Limitations
 
-easy to implement but dont offer additional security features. talk about the shortcomings of fast mcp
+While FastMCP successfully simplifies MCP server development through its decorator-based approach, this ease of implementation comes at a significant security cost. The framework's design prioritizes developer convenience over security, leading to potentially dangerous default configurations that can expose organizations to serious vulnerabilities. According to research from CardinalOps, FastMCP's default HTTP transport implementation lacks both authentication and encryption [@cardinalops-mcp-defaults]. When developers follow the official FastMCP documentation to deploy remote servers using `transport="http"` and `host="0.0.0.0"`, they inadvertently create publicly accessible endpoints with no security controls. This clearly shows that FastMCP’s design does not have many of the built-in protections that many modern AI agents require.
 
-this is where vurze comes in!!!!!
+There are many practical implications of these security shortcomings. Without authentication, an attacker connecting to a publicly accessible MCP server could execute arbitrary system commands simply by sending natural language queries [@mcp-landscape-2025]. This attack is known as a prompt injection, where malicious instructions are embedded in queries to manipulate the AI agent's behavior and access underlying system tools. While the official MCP transport documentation mentions security considerations, these warnings are not enforced by FastMCP's implementation, leaving developers responsible for manually adding security functionality.
+
+This security gap in FastMCP's design reveals a critical need for defense-in-depth security mechanisms. Unlike middleware-based solutions or runtime monitoring approaches that attempt to secure MCP servers after deployment, Vurze addresses vulnerabilities at their origin by preventing upstream attacks. Vurze's decorator-based approach ensures that only developers with access to the Vurze private key can cryptographically protect their tools, and any unauthorized modifications to tool descriptions or source code will break verification. This defense-in-depth security model complements existing security practices by establishing trust at the code level before tools are ever exposed to FastMCP.
 
 ## MCP Scan Security Tooling  
 
