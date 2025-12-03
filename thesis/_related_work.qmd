@@ -36,13 +36,11 @@ Model Context Protocol (MCP) was officially released by Anthropic in November 20
 
 The impact of MCP adoption can be observed through usage patterns in the field. According to data from Pulse MCP, a registry platform tracking various MCP servers, the protocol's use cases are heavily concentrated in Database & Search, Computer & Web Automation, and Software Engineering [@pulse-mcp]. Together, these three categories account for approximately 72.6% of all GitHub stars across the MCP servers that Pulse MCP tracks. This concentration suggests that developers are primarily using MCP for tasks like for data retrieval, automated task execution, and code-related operations [@mcp-in-practice]. Because of MCP's main developer use cases, its early growth has been shaped by tools that can increase developer productivity in multiple ways.
 
-### Need for Standardization
+### MCP v.s. REST API's
 
-there have been many ai tools that work on top of llms.
-but many of them lack standardization that mcp provides
-as a response to many of these tools , anthropic, the popular llm company, responds with mcp
+One of the most effective ways to understand MCP's emergence is by comparing it to traditional REST APIs. A REST API (Representational State Transfer Application Programming Interface) is a standardized communication pattern that enables software programs to exchange data over HTTP (Hypertext Transfer Protocol). REST APIs operate through a request-response model where a client application sends a message to a server requesting specific data [@mcp-vs-api-codecademy]. This straightforward pattern has become extremely popular and is commonly used as the foundation of many modern web services. However, REST APIs come with several limitations. Because they are stateless, each request is isolated, and the client must keep track of context manually. Communication is also limited to one-way HTTP calls, which prevents the kind of persistent and ongoing interaction many Agentic AI tools need [@mcp-vs-api-roocode].
 
-____specifically how langchain lacks mcp standardization here______
+MCP addresses the limitations of REST APIs specifically for AI systems by introducing what can be thought of as "an API framework for LLMs." The key distinction lies in their architectural approaches: REST APIs use a two-tier client-to-server architecture, while MCP implements a three-tier system consisting of host application, MCP client, and MCP server. Because of this key architectural difference, MCP can maintain stateful sessions with persistent context across interactions, whereas REST APIs treat each request independently [@mcp-vs-api-roocode]. This fundamental difference allows MCP powered systems to maintain awareness of previous actions throughout complex multi-step workflows. Overall, MCP does not replace REST APIs. Instead, it extends them by adding persistent context, runtime tool discovery, and stateful sessions that are crucial for modern AI agents.
 
 ### Technical Innovation of MCP
 
