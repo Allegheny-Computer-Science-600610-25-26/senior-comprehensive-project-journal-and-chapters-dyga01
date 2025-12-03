@@ -34,13 +34,17 @@ The fundamental difference between AutoGen and MCP lies in their scope. MCP is a
 
 Model Context Protocol (MCP) was officially released by Anthropic in November 2024 as an open standard for connecting AI applications to external data sources and tools [@model-context-protocol]. The protocol emerged in response to the fragmented landscape of agentic AI frameworks, where different systems like LangChain implemented different approaches to tool integration. MCP's introduction addressed a critical need for standardization by establishing a universal protocol that could enable LLMs to communicate with external systems such as APIs, databases, and local filesystems.
 
-x
-
 ### Early Adoption Patterns
 
 The impact of MCP adoption can be observed through usage patterns in the field. According to data from Pulse MCP, a registry platform tracking various MCP servers, the protocol's use cases are heavily concentrated in Database & Search, Computer & Web Automation, and Software Engineering [@pulse-mcp]. Together, these three categories account for approximately 72.6% of all GitHub stars across the MCP servers that Pulse MCP tracks. This concentration suggests that developers are primarily using MCP for tasks like for data retrieval, automated task execution, and code-related operations [@mcp-in-practice]. Because of MCP's main developer use cases, its early growth has been shaped by tools that can increase developer productivity in multiple ways.
 
-x
+### Security Challenges in MCP's Design
+
+While MCP provides a standardized approach to tool integration, its architecture introduces several security considerations that were not fully addressed in the initial specification. The protocol's design prioritizes developer ease-of-use and rapid adoption, which has led to a lack of built-in security features. Because MCP was only recently released, there is also currently limited research focusing on these security implications.
+
+One notable study systematically categorizes and implements 31 distinct attack methods against MCP systems [@mcp-systematic-2025]. This research introduces an MCP Attack Library (MCPLIB) that organizes attacks into four key classifications: direct tool injection, indirect tool injection, malicious user attacks, and LLM inherent attacks. The study reveals that MCP systems are highly susceptible to blind reliance on tool descriptions, a vulnerability that stems from MCP's fundamental dependence on docstring descriptions for explaining tool use. Because the protocol trusts these descriptions implicitly, threat actors can exploit this reliance to manipulate system behavior.
+
+Addressing these vulnerabilities requires security mechanisms that operate at the source code level rather than relying solely on runtime monitoring or middleware-based solutions. This is where Vurze's decorator-based cryptographic verification approach becomes relevant. Vurze implements a defense-in-depth strategy for MCP server tools, where only developers with access to the Vurze private key can cryptographically protect their tools. This approach specifically targets the blind reliance on tool descriptions that the MCP Attack Library (MCPLIB) research mentions by ensuring that any modifications to tool descriptions or implementations will break cryptographic verification. 
 
 ### MCP v.s. REST API's
 
