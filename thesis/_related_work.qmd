@@ -32,12 +32,9 @@ The fundamental difference between AutoGen and MCP lies in their scope. MCP is a
 
 ## Creation of MCP  
 
-after being intially released in late 2024, model context protocl (mcp). quickly became popoular.[@model-context-protocol] the model context protcol The popularity of Model Context Protocol (MCP) has surged since its release, as evidenced by the rapid growth of the official GitHub MCP registry [@github-mcp-registry]
+Model Context Protocol (MCP) was officially released by Anthropic in November 2024 as an open standard for connecting AI applications to external data sources and tools [@model-context-protocol]. The protocol emerged in response to the fragmented landscape of agentic AI frameworks, where different systems like LangChain implemented different approaches to tool integration. MCP's introduction addressed a critical need for standardization by establishing a universal protocol that could enable LLMs to communicate with external systems such as APIs, databases, and local filesystems.
 
-what sort of impact has mcp had???https://towardsdatascience.com/mcp-in-practice/
-https://www.pulsemcp.com/ --> by looking at dat a from here pulse mcp registry
-On GitHub, stars are similar to Facebook “likes,” and developers use them to show appreciation, bookmark projects, or indicate usage.
-MCP use (tools and data being accessed) is dominated by just three categories: Database & Search (RAG), Computer & Web Automation, and Software Engineering. Together, they received nearly three-quarters (72.6%) of all stars on GitHub (which we proxy for usage).
+The impact of MCP adoption can be observed through usage patterns in the field. According to data from Pulse MCP, a registry platform tracking various MCP servers, the protocol's use cases are heavily concentrated in Database & Search, Computer & Web Automation, and Software Engineering [@pulse-mcp]. Together, these three categories account for approximately 72.6% of all GitHub stars across the MCP servers that Pulse MCP tracks. This concentration suggests that developers are primarily using MCP for tasks like for data retrieval, automated task execution, and code-related operations [@mcp-in-practice]. Because of MCP's main developer use cases, its early growth has been shaped by tools that can increase developer productivity in multiple ways.
 
 ### Need for Standardization
 
