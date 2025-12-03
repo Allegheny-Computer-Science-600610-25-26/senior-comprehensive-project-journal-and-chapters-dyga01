@@ -34,21 +34,21 @@ The fundamental difference between AutoGen and MCP lies in their scope. MCP is a
 
 Model Context Protocol (MCP) was officially released by Anthropic in November 2024 as an open standard for connecting AI applications to external data sources and tools [@model-context-protocol]. The protocol emerged in response to the fragmented landscape of agentic AI frameworks, where different systems like LangChain implemented different approaches to tool integration. MCP's introduction addressed a critical need for standardization by establishing a universal protocol that could enable LLMs to communicate with external systems such as APIs, databases, and local filesystems.
 
+x
+
+### Early Adoption Patterns
+
 The impact of MCP adoption can be observed through usage patterns in the field. According to data from Pulse MCP, a registry platform tracking various MCP servers, the protocol's use cases are heavily concentrated in Database & Search, Computer & Web Automation, and Software Engineering [@pulse-mcp]. Together, these three categories account for approximately 72.6% of all GitHub stars across the MCP servers that Pulse MCP tracks. This concentration suggests that developers are primarily using MCP for tasks like for data retrieval, automated task execution, and code-related operations [@mcp-in-practice]. Because of MCP's main developer use cases, its early growth has been shaped by tools that can increase developer productivity in multiple ways.
+
+x
 
 ### MCP v.s. REST API's
 
 One of the most effective ways to understand MCP's emergence is by comparing it to traditional REST APIs. A REST API (Representational State Transfer Application Programming Interface) is a standardized communication pattern that enables software programs to exchange data over HTTP (Hypertext Transfer Protocol). REST APIs operate through a request-response model where a client application sends a message to a server requesting specific data [@mcp-vs-api-codecademy]. This straightforward pattern has become extremely popular and is commonly used as the foundation of many modern web services. However, REST APIs come with several limitations. Because they are stateless, each request is isolated, and the client must keep track of context manually. Communication is also limited to one-way HTTP calls, which prevents the kind of persistent and ongoing interaction many Agentic AI tools need [@mcp-vs-api-roocode].
 
-MCP addresses the limitations of REST APIs specifically for AI systems by introducing what can be thought of as "an API framework for LLMs." The key distinction lies in their architectural approaches: REST APIs use a two-tier client-to-server architecture, while MCP implements a three-tier system consisting of host application, MCP client, and MCP server. Because of this key architectural difference, MCP can maintain stateful sessions with persistent context across interactions, whereas REST APIs treat each request independently [@mcp-vs-api-roocode]. This fundamental difference allows MCP powered systems to maintain awareness of previous actions throughout complex multi-step workflows. Overall, MCP does not replace REST APIs. Instead, it extends them by adding persistent context, runtime tool discovery, and stateful sessions that are crucial for modern AI agents.
+MCP addresses the limitations of REST APIs specifically for AI systems by introducing what can be thought of as "an API framework for LLMs." The key distinction lies in their architectural approaches: REST APIs use a two-tier client-to-server architecture, while MCP implements a three-tier system consisting of host application, MCP client, and MCP server. Because of this key architectural difference, MCP can maintain stateful sessions with persistent context across interactions, whereas REST APIs treat each request independently [@mcp-vs-api-roocode]. This fundamental difference allows MCP powered systems to maintain awareness of previous actions throughout complex multi-step workflows. Overall, MCP does not replace REST APIs. Instead, it extends them by adding persistent context, runtime tool discovery, and stateful sessions that are crucial for modern AI agents. Here is a high level diagram of how MCP Servers and REST APIs relate:
 
-### Technical Innovation of MCP
-
-explain how mcp is techincal innovatoin. 1. Client-Server Architecture and standarzised protocol json rpc
-
-_______talk about decorators here___________
-
-diagram here
+![MCP and REST APIs Relationship](images/mcp-api-relationship.png)[@mcp-vs-api-codecademy]
 
 ## Fast MCP
 
