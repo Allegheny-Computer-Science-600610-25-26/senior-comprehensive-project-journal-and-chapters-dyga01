@@ -68,9 +68,26 @@ There are many practical implications of these security shortcomings. Without au
 
 This security gap in FastMCP's design reveals a critical need for defense-in-depth security mechanisms. Unlike middleware-based solutions or runtime monitoring approaches that attempt to secure MCP servers after deployment, Vurze addresses vulnerabilities at their origin by preventing upstream attacks. Vurze's decorator-based approach ensures that only developers with access to the Vurze private key can cryptographically protect their tools, and any unauthorized modifications to tool descriptions or source code will break verification. This defense-in-depth security model complements existing security practices by establishing trust at the code level before tools are ever exposed to FastMCP.
 
-## MCP Scan Security Tooling  
+## MCP Security Tooling
 
+### Runtime Protection with MCP Guardian
+
+MCP Guardian is one type of runtime protection that can be used to secure MCP client-to-server interactions. MCP Guardian operates as middleware, sitting between the MCP client and server to perform authentication, rate-limiting, logging, tracing, and Web Application Firewall (WAF) scanning [@mcp-guardian-2025]. This is considered a type of runtime protection because MCP Guardian can be used to enforce security controls at execution time rather than relying on static configurations. By intercepting every client-to-server interaction, MCP Guardian provides a centralized runtime security option that does not require additional security modifications to individual MCP tools or servers.
+
+However, the middleware approach has fundamental limitations in addressing certain attack vectors. Because MCP Guardian operates during the execution of MCP systems, it cannot detect threats embedded at the source code level such as malicious keywords or instructions hidden in tool docstrings. If an attacker gains access to a codebase and poisons a tool's description with malicious instructions, MCP Guardian would have no visibility into these modifications since they exist in the tool's definition rather than in runtime requests. Additionally, MCP Guardian may introduce latency to every request-response cycle. This is an important concern because LLMs can already take a long amount of time to process requests. Lastly, this approach has the potential to create a single point of failure if the middleware crashes.
+
+### Behavioral Analysis via MCP Scan
+
+behavrioral analysis for mcp security invvolves pattern-based detection methodology (similar to fraud detection systems). 
 summary of mcp scan and how it detects attacks. talk about popularity of tool. also talk about its shortcomings.
 History of Contextual Security???
 (credit card fraud ai) (ai for security) uses things that look like what might be fraudulent. but how do we know for sure?
-I should make this section very long and good. this is important for the comp. also how cna i talk more about security and less about ai. i need to keep this about decorators for security
+I should make this section very long and good. this is important for the comp. also how cna i talk more about security and less about ai. i need to keep this about decorators for security [@mcp-scan]
+
+______shortcomings of this approach here___
+
+### Defense-In-Depth with Vurze
+
+talk about vurze tool here______general description_____
+
+______potential of vurze to prevent upstream attacks___
