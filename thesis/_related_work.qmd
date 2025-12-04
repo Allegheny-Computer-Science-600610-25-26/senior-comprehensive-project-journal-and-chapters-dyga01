@@ -78,13 +78,11 @@ However, the middleware approach has fundamental limitations in addressing certa
 
 ### Behavioral Analysis via MCP Scan
 
-behavrioral analysis for mcp security invvolves pattern-based detection methodology (similar to fraud detection systems). 
-summary of mcp scan and how it detects attacks. talk about popularity of tool. also talk about its shortcomings.
-History of Contextual Security???
-(credit card fraud ai) (ai for security) uses things that look like what might be fraudulent. but how do we know for sure?
-I should make this section very long and good. this is important for the comp. also how cna i talk more about security and less about ai. i need to keep this about decorators for security [@mcp-scan]
+MCP Scan is a behavioral analysis tool that employs pattern-based detection to discover potential vulnerabilities. This approach, known as contextual security, analyzes behavior patterns in order to detect anomalies that may indicate security threats. For example, many credit card fraud detection systems rely on pattern matching and recognition to flag transactions as potentially fraudulent. If there are sudden large transactions in foreign countries or multiple purchases in geographically distant locations, then those transactions could potentially be fraudulent. In the context of MCP, monitoring tool descriptions, tool invocation patterns, and parameter values could all be used to identify potentially malicious activities that deviate from established norms.
 
-______shortcomings of this approach here___
+MCP Scan, developed by Invariant Labs, applies this behavioral analysis approach to MCP security by providing both static and dynamic scanning capabilities for MCP connections [@mcp-scan]. The tool operates in two primary modes: static scanning and runtime proxying. In scanning mode, MCP Scan searches through configuration files to locate MCP server configurations, connects to these servers, and retrieves tool descriptions for analysis. It then evaluates tool descriptions using both local checks and Invariant Labs' cloud-based guardrailing API to detect prompt injection attacks, tool poisoning attacks, and toxic flows. For runtime monitoring, MCP Scan can also act as a proxy that sits between the client and server. As a proxy, MCP Scan can intercept traffic and enforce security policies such as detecting sensitive information (PII), preventing secrets exposure, and restricting certain tools. Overall, MCP Scan is a very flexible and popular tool in MCP security community.
+
+MCP Scan is a unique tool because it can function as a behavioral analysis tool in static mode, but it can also be considered a runtime tool when operating in proxy mode. Despite its dual nature, MCP Scan faces inherent limitations that restrict its effectiveness against sophisticated attacks. Most critically, MCP Scan lacks defense-in-depth at the source code level. If MCP Scan's static mode does not detect malicious code, then it could cause serious problems. This gap highlights the need for complementary security mechanisms that establish trust and verification before tools enter the MCP ecosystem.
 
 ### Defense-In-Depth with Vurze
 
