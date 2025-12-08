@@ -1,0 +1,29 @@
+---
+date: "2025-12-05"
+"Thesis Version": 1.0.0
+"Artifact Version": 1.0.0
+---
+
+### Reaching v1.0.0 on Vurze
+
+#### Artifact Development
+
+In order to reach this v1.0.0 release of the Vurze tool, I had to carefully plan out the basics of how the tool would work and what specific goals it would aim to solve. During the planning process, I explored existing attack vectors and security approaches for MCP servers and identified a gap that my tool could address. I spent time exploring both tool shadowing and tool poisoning attacks and demonstrated the attacks myself. After this, I determined that my skills would be suited to build a defense-in-depth tool (Vurze) for source control that would help prevent upstream attacks by detecting code and docstring modifications. This approach is important because no single security measure can address every possible vulnerability; if one layer fails, others can still provide protection. As I reflect upon my artifict development, I believe I have come a long way since the start of the semester and have exciting plans for new artifact functionality. 
+
+#### Chapter One: Introduction
+
+While building Vurze, I simultaneously worked on the academic foundation of the project. I drafted the introduction, which provides a comprehensive overview of the Vurze tool and its role in securing Python source code through cryptographic verification. I wanted to start the introduction with a high-level overview that explains version control concepts and how Vurze offers a novel per-entity approach that complements traditional systems like Git. I then explored the primary motivation behind Vurze: addressing security vulnerabilities in Anthropic's Model Context Protocol (MCP), specifically tool poisoning and tool shadowing attacks. After this, I spoke about the current state of MCP security research, including existing benchmarking systems and security tools. Towards the end of this chapter, I clearly outlined Vurze's three core goals: detecting version control changes, preventing upstream attacks, and enabling defense-in-depth strategies. Finally, I addressed the ethical implications of both MCP vulnerabilities and Vurze itself, discussing information privacy concerns and the potential for dual-use of security tools.
+
+#### Chapter Two: Related Works
+
+After completing the introduction section, I developed the related works chapter, which examines the broader landscape of agentic AI systems and MCP security research. I began this chapter by tracing through the evolution of agentic AI from early LLMs to more autonomous systems, exploring frameworks like LangChain and AutoGen that preceded MCP's standardized approach. I then analyzed MCP's creation and early adoption patterns, revealing common use cases for the protocol. Once I gave relevant background on MCP, I compared and contrasted MCP's three-tier architecture to traditional REST APIs. After this, I spoke about FastMCP which is a specific library for building MCP servers. I highlighted how its developer-friendly approach creates dangerous default configurations lacking authentication and encryption. I ended the chapter by analyzing existing MCP security tools like MCP Guardian's runtime middleware protection and MCP Scan's behavioral analysis capabilities.
+
+**Links:**
+
+**Primary Project:**
+- [Project Repository](https://github.com/MCP-Security-Research/vurze)
+- [Thesis Repository](https://github.com/Allegheny-Computer-Science-600610-25-26/senior-comprehensive-project-journal-and-chapters-dyga01)
+
+**Related Work:**
+- [MCP Exploration](https://github.com/MCP-Security-Research/customer-service-mcp)
+- [PyPI Release](https://pypi.org/project/vurze/)
