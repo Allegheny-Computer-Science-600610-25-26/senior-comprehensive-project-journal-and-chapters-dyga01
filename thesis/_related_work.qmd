@@ -30,6 +30,12 @@ The fundamental difference between AutoGen and MCP lies in their scope. MCP is a
 
 ![AutoGen Architecture Diagram [@autogen-2023]](images/autogen-architecture-diagram.png)
 
+### AgentKit
+
+OpenAI's AgentKit framework, introduced through the Assistants API in 2023, represents OpenAI's official approach to building autonomous AI systems that can use tools, execute code, and access files [@openai-agents-guide]. Unlike third-party frameworks like LangChain or AutoGen, OpenAI Agents is tightly integrated with OpenAI's models and infrastructure, providing developers with a managed service for building agentic applications. The framework enables developers to create persistent agents with long-term memory through threads, where conversations and context are maintained across multiple interactions. Agents can be equipped with built-in tools such as Code Interpreter for executing Python code, File Search for retrieving information from uploaded documents, and Function Calling for integrating custom external tools. 
+
+The relationship between AgentKit and MCP highlights a fundamental architectural difference in how tool integration is approached. AgentKit is a fully managed, OpenAI-specific system where tools are defined using OpenAI’s own function calling format and run inside OpenAI’s infrastructure. However, MCP is an open and vendor-neutral protocol meant to let any LLM connect to any tool. While AgentKit requires tools to follow OpenAI’s JSON schema, MCP uses a standard client-server design that lets the same tool work across different models and applications. This creates a trade-off: AgentKit offers centralized control and built-in security but locks developers into OpenAI’s ecosystem. Whereas MCP provides more flexibility and control, but puts more responsibility on developers to secure their integrations.
+
 ## Creation of MCP  
 
 Model Context Protocol (MCP) was officially released by Anthropic in November 2024 as an open standard for connecting AI applications to external data sources and tools [@model-context-protocol]. The protocol emerged in response to the fragmented landscape of agentic AI frameworks, where different systems like LangChain implemented different approaches to tool integration. MCP's introduction addressed a critical need for standardization by establishing a universal protocol that could enable LLMs to communicate with external systems such as APIs, databases, and local filesystems.
