@@ -7,7 +7,7 @@ date: "2025-11-07"
 # Introduction
 
 1. Introduction
-	-  Introduce Vurze at a high level: automated decorator injection that embeds signatures into Python functions and classes so code can self-verify integrity and authorship
+	-  Introduce Pysealer at a high level: automated decorator injection that embeds signatures into Python functions and classes so code can self-verify integrity and authorship
     - Introduce Model Context Protocol (MCP) servers and their role in modern development
     - Brief introduction to security challenges in MCP server environments
 
