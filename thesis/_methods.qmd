@@ -1,18 +1,47 @@
 # Method of approach
 
-This chapter answers the "how" question - how did you complete your project,
-including the overall design of your study, details of the algorithms and tools you
-have used, etc.  Use technical diagrams, equations, algorithms, and paragraphs of text
-to describe the research that you have completed. Be sure to number all figures and
-tables and to explicitly refer to them in your text.
+## System Architecture
+High architectural detail systems diagram
+defense-in-depth with pysealer
 
-This should contain:
+## Technical Implementation
+- maturin build system
+- python for ... subsections
+- rust for x
+- tests
+- released to pypi
+- Systems diagram
+environment variables
+git, ruff, ast, github secrets --> new section. what technical details go with what
+And code block fence that just has decorator copy and past
 
-* lists
-* with points
-* and more points
-  * possibly subpoints
+## Command Line Interface (CLI) Functionality
+- Initializing Pysealer
+- Locking with Pysealer
+- Checking with Pysealer
+- removing
+deployed to pypi
 
-For those projects whose implications address social or moral issues (i.e. ethical
-standards, causes, effects), you will want to use this section to describe how you
-actively mitigated or considered these issues.
+## VS Code Extension Functionality
+pysealer vs code extension
+- in order to provide better visual medium
+- implemented vs code extension
+- Systems diagram
+visual pictures of extension
+deployed on vs code extension marketplace
+
+## Cryptographic Utilities
+ed25519 signature algorithm. how is the checksum actually calculated with diagrams
+equations, algorithms,
+
+## MCP Use Cases
+Examples of how it could be used
+demo purposes here too
+defense-in-depth with pysealer again reiterate
+
+---
+
+IDK if i need
+overall design of your study,
+Use technical diagrams, equations, algorithms, tables
+ethics?
