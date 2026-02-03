@@ -2,12 +2,23 @@
 
 ## System Architecture
 
-Overview & Core Concepts - What pysealer does and the sealing/unsealing model
-FIGURE: Architecture Diagram - High-level system components and data flow. diagram here
+Pysealer implements a cryptographic code integrity verification system through a "sealing" and "unsealing" model. The sealing process involves automatically injecting Ed25519 cryptographic signatures as Python decorators onto functions or classes. Unsealing refers to the verification of these signatures. From a technical standpoint, Pysealer operates as a hybrid Python-Rust application. The Python layer manages most of the application logic including the command-line interface (CLI), source code manipulation, git integration, GitHub secrets integration, dummy decorator generation, and basic environment variable handling. The Rust layer is responsible for the performance-critical cryptographic operations including generate keypair, generate signature, verify signature functions.
 
-Decorator Lifecycle - How decorators are added, checked, and removed.
+### Decorator Lifecycle 
 
-Defense-in-Depth Strategy - Security layers and threat model
+Decorators are the primary mechanism through which Pysealer implements code integrity verification. In Python, decorators are a syntactic feature that allows programmers to modify or enhance the behavior of functions and classes without altering their source code. A decorator is simply a callable (typically a function) that takes another function or class as input and returns a modified version [@python-decorator]. Syntactically, decorators are denoted by the @ symbol placed directly above a function or class definition. For example, `@decorator_name` in Python applies the decorator to the subsequent code block. When the Python interpreter encounters a decorated function, it basically runs `decorator_name(func)`, where func is the original function being decorated. Another important thing to note is that decorators can be stacked, meaning multiple decorators can be applied to a single function or class by placing them on consecutive lines above the definition.
+
+Pysealer utilizes decorators for the sole purpose of attaching cryptographic signatures to functions and classes. During the locking process, Pysealer generates a unique Ed25519 signature for each targeted code block and injects it as a decorator in the form `@pysealer._<signature>()`. Its important to note that this decorator does not modify the function's original behavior; instead, it serves as a cryptographic marker. Additionally, the reason the decorator is named with a leading underscore is because digits cannot be used as the first character in a Python function. Using an underscore also helps indicate that it is intended for internal use within the Pysealer system and not for direct invocation by developers.
+
+During the checking process, Pysealer scans the source code for these decorators, extracts the embedded signatures stored in them, and verifies them against the current state of the code. The verification process involves generating a new signature based on the current state of the code. Once this signature is generated, it is compared against the signature extracted from the decorator. If the signatures match, it indicates that the code has not been altered since it was locked. If they do not match, it suggests that the code may have been tampered with. If the code has been altered since the locking process, the system reports detailed information about which specific functions or classes have invalid signatures.
+
+Pysealer explores the unique approach of repurposing decorators as carriers for cryptographic signatures rather than their traditional role of modifying function behavior. This approach leverages decorators for several strategic reasons: they are non-invasive, attaching metadata without modifying internal function behavior; they are recognizable, serving as a syntactically valid and consistent way to grab signatures; and they eliminate the need for external metadata storage, where the decorator name itself contains the cryptographic signature. Additionally, many Agentic AI systems, like Model Context Protocol (MCP), rely on decorators to define Python functions as tools. This makes decorators also a familiar construct that can be used to secure these newly created tools. While decorators original purpose is not for signature storage, Pysealer effectively repurposes them to embed cryptographic signatures directly within the source code.
+
+figure here: high level systems diagram
+
+### Defense-in-Depth Strategy
+
+Security layers and threat model
 
 ## Technical Implementation
 
@@ -39,6 +50,7 @@ ethical considerations of secret management
 intro and Deployed to PyPI
 
 Initializing Pysealer
+In order to use Pysealer on an exhisting project, developers must first initialize Pysealer by running the initialization command. During this, a developer can optionally provide the path to an exhisting .env file where the Pysealer keys will be stored and a github personal acess token (pat) for optional remote github actions checks.
 
 Locking with Pysealer
 FIGURE: diagram of what actually is represented by the decorator
@@ -94,3 +106,5 @@ defense in depth strategy again here
 lead into the evaluation section somehow
 talk about how the main purpose of this tool is to provide defense in depth
 FIGURE: code block with original code from the first chapter. connect back to it
+
+figure out sources where they go
