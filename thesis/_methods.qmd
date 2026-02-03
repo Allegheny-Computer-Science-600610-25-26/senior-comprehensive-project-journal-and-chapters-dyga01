@@ -1,43 +1,88 @@
-# Method of approach
+# Method of Approach
 
 ## System Architecture
-High architectural detail systems diagram
-defense-in-depth with pysealer
+
+Overview & Core Concepts - What pysealer does and the sealing/unsealing model
+Architecture Diagram - High-level system components and data flow. diagram here
+
+Decorator Lifecycle - How decorators are added, checked, and removed. code blocks here
+
+Defense-in-Depth Strategy - Security layers and threat model
 
 ## Technical Implementation
-- maturin build system
-- python for ... subsections
-- rust for x
-- tests
-- released to pypi
-- Systems diagram
-environment variables
-git, ruff, ast, github secrets --> new section. what technical details go with what
-And code block fence that just has decorator copy and past
+
+Build System & Packaging
+Maturin configuration and hybrid Python/Rust compilation
+py03 and how i can use rust code inpython here
+PyPI distribution and versioning
+
+Python Layer
+AST manipulation for decorator injection/removal. how are decorators added/removed
+CLI implementation (cli.py, setup.py)
+what is everything that i used python for here
+Git integration for diff detection
+
+Rust Layer
+Cryptographic operations (crypto.rs)
+Performance-critical sealing/unsealing logic
+
+Secret Management
+Environment variable handling (.env)
+GitHub Secrets integration
+Key storage and retrieval with python dotenv
+what are the security concerns - ethics here? my system relies on env files?
 
 ## Command Line Interface (CLI) Functionality
-- Initializing Pysealer
-- Locking with Pysealer
-- Checking with Pysealer
-- removing
-deployed to pypi
+
+intro and Deployed to PyPI
+
+Initializing Pysealer
+
+Locking with Pysealer
+
+Checking with Pysealer
+
+Removing with Pysealer
 
 ## VS Code Extension Functionality
-pysealer vs code extension
-- in order to provide better visual medium
-- implemented vs code extension
-- Systems diagram
+
+overview and reasoning and pysealer vs code extension deployed
+in order to make the vurze cli more easy to use, provide better visual medium
+
+extension functionality
+same as the cli
+Systems diagram
 visual pictures of extension
-deployed on vs code extension marketplace
+
+bundling the cli for easy use
+bundled versions of vurze cli and why i chose to do this like ruff
 
 ## Cryptographic Utilities
-ed25519 signature algorithm. how is the checksum actually calculated with diagrams
-equations, algorithms,
+
+Overview of EdDSA and Ed25519
+Edwards-curve Digital Signature Algorithm (EdDSA) fundamentals
+
+Keypair Generation Process (signature generation)
+CSPRNG (Cryptographically Secure Pseudo-Random Number Generator) using OsRng
+Private key (signing key) and public key (verifying key) derivation
+Mathematical relationship: public key derived from private key on Curve25519
+Key format: 32-byte keys encoded in Base58
+
+Checksum Calculation Algorithm (signature verification)
+how is the checksum calculated
 
 ## MCP Use Cases
-Examples of how it could be used
-demo purposes here too
-defense-in-depth with pysealer again reiterate
+
+Protecting MCP Server Tools from Tampering
+how can this system protect mcp tools
+
+CI/CD Pipeline Integration for MCP Servers
+git pre commit and github actions summary here
+easy of use
+
+defense in depth strategy again here
+lead into the evaluation section somehow
+talk about how the main purpose of this tool is to provide defense in depth
 
 ---
 
@@ -45,3 +90,12 @@ IDK if i need
 overall design of your study,
 Use technical diagrams, equations, algorithms, tables
 ethics?
+Methods → This proposed vurze, This is what made of, This is how it works, What does defense in depth mean for this tool, Talk about technical strucutre,  Python rust and more, How is it deployed and used (should be the longest section) (more technical)
+Development Tooling
+Ruff linting integration
+Testing framework (pytest, cargo test)
+Decorator syntax reference (copy-paste code blocks)
+- tests
+git, ruff, ast, github secrets --> new section. what technical details go with what
+And code block fence that just has decorator copy and past
+WHERE CAN I TYE IN SECURITY. I NEED TO START TO WEAVE IN SECURITY AT END OF SECTOIN
