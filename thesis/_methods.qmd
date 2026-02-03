@@ -3,9 +3,9 @@
 ## System Architecture
 
 Overview & Core Concepts - What pysealer does and the sealing/unsealing model
-Architecture Diagram - High-level system components and data flow. diagram here
+FIGURE: Architecture Diagram - High-level system components and data flow. diagram here
 
-Decorator Lifecycle - How decorators are added, checked, and removed. code blocks here
+Decorator Lifecycle - How decorators are added, checked, and removed.
 
 Defense-in-Depth Strategy - Security layers and threat model
 
@@ -15,6 +15,7 @@ Build System & Packaging
 Maturin configuration and hybrid Python/Rust compilation
 py03 and how i can use rust code inpython here
 PyPI distribution and versioning
+FIGURE: technical diagram of how rust and python code is combined and interacts
 
 Python Layer
 AST manipulation for decorator injection/removal. how are decorators added/removed
@@ -31,6 +32,7 @@ Environment variable handling (.env)
 GitHub Secrets integration
 Key storage and retrieval with python dotenv
 what are the security concerns - ethics here? my system relies on env files?
+ethical considerations of secret management
 
 ## Command Line Interface (CLI) Functionality
 
@@ -39,6 +41,8 @@ intro and Deployed to PyPI
 Initializing Pysealer
 
 Locking with Pysealer
+FIGURE: diagram of what actually is represented by the decorator
+FIGURE: decorator code block diagram
 
 Checking with Pysealer
 
@@ -52,7 +56,7 @@ in order to make the vurze cli more easy to use, provide better visual medium
 extension functionality
 same as the cli
 Systems diagram
-visual pictures of extension
+FIGURE: visual picture of the extension
 
 bundling the cli for easy use
 bundled versions of vurze cli and why i chose to do this like ruff
@@ -61,15 +65,20 @@ bundled versions of vurze cli and why i chose to do this like ruff
 
 Overview of EdDSA and Ed25519
 Edwards-curve Digital Signature Algorithm (EdDSA) fundamentals
+FIGURE: Provide the ed actual algorithm diagram
 
 Keypair Generation Process (signature generation)
 CSPRNG (Cryptographically Secure Pseudo-Random Number Generator) using OsRng
+FIGURE?: os rng algorithm diagram? or base58 diagram algorithm?
 Private key (signing key) and public key (verifying key) derivation
 Mathematical relationship: public key derived from private key on Curve25519
 Key format: 32-byte keys encoded in Base58
 
 Checksum Calculation Algorithm (signature verification)
 how is the checksum calculated
+
+ethics section here? would it be good to talk about cyptography ethics here?
+security as well of cryptography
 
 ## MCP Use Cases
 
@@ -79,23 +88,9 @@ how can this system protect mcp tools
 CI/CD Pipeline Integration for MCP Servers
 git pre commit and github actions summary here
 easy of use
+how pysealer can pair with git section.
 
 defense in depth strategy again here
 lead into the evaluation section somehow
 talk about how the main purpose of this tool is to provide defense in depth
-
----
-
-IDK if i need
-overall design of your study,
-Use technical diagrams, equations, algorithms, tables
-ethics?
-Methods → This proposed vurze, This is what made of, This is how it works, What does defense in depth mean for this tool, Talk about technical strucutre,  Python rust and more, How is it deployed and used (should be the longest section) (more technical)
-Development Tooling
-Ruff linting integration
-Testing framework (pytest, cargo test)
-Decorator syntax reference (copy-paste code blocks)
-- tests
-git, ruff, ast, github secrets --> new section. what technical details go with what
-And code block fence that just has decorator copy and past
-WHERE CAN I TYE IN SECURITY. I NEED TO START TO WEAVE IN SECURITY AT END OF SECTOIN
+FIGURE: code block with original code from the first chapter. connect back to it
