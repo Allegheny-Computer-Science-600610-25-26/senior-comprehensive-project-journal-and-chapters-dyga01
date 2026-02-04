@@ -70,9 +70,9 @@ Lastly, Pysealer's GitHub secrets integration provides a streamlined mechanism f
 
 ### Rust Layer
 
-rust layer does not consiste of much code but code is run many times and is important.Cryptographic operations summarize here
+The Rust layer of Pysealer is deliberately minimal yet critical, focusing exclusively on performance heavy cryptographic operations. While the Rust codebase consists of only approximately 70 lines of actual implementation code, these functions are invoked repeatedly throughout Pysealer's lifecycle. During initialization, Rust code is utlized to create keypairs. During locking, Rust code is utilized to sign every function and class in a Python file. During checking, Rust code is used to verify each decorator's signature. Although the Rust layer of Pysealer is minimal code, its role is indispensable in the Pysealer application.
 
-another one just so there are 2 small paragraph
+Moreover, the architectural decision to isolate only cryptographic operations in Rust reflects a strategic separation of concerns based on performance characteristics. Cryptographic operations, like Ed25519, can involve computationally intensive mathematical operations on elliptic curves, which benefit significantly from Rust's overall computational performance. By keeping the Rust layer focused and minimal, Pysealer maintains a clear boundary between performance-critical cryptographic primitives and the higher-level application logic, making the codebase easier to audit, test, and maintain while maximizing the security and performance benefits that Rust's ecosystem provides.
 
 ### Secrets Management
 
