@@ -4,6 +4,15 @@
 
 Pysealer implements a cryptographic code integrity verification system through a "sealing" and "unsealing" model. The sealing process involves automatically injecting Ed25519 cryptographic signatures as Python decorators onto functions or classes. Unsealing refers to the verification of these signatures. From a technical standpoint, Pysealer operates as a hybrid Python-Rust application. The Python layer manages most of the application logic including the command-line interface (CLI), source code manipulation, git integration, GitHub secrets integration, dummy decorator generation, and basic environment variable handling. The Rust layer is responsible for the performance-critical cryptographic operations including generate keypair, generate signature, verify signature functions.
 
+### Pysealer Design
+
+The main Pysealer application was designed to be a command line interface (CLI) tool to allow for as much flexbility and ease of use as possible.
+
+
+that can be easily integrated into existing Python projects. The CLI provides three main commands: `initialize`, `lock`, and `check`. The `initialize` command sets up the necessary environment for Pysealer, including generating a new Ed25519 keypair and storing it securely. The `lock` command scans the source code for functions and classes, generates signatures for them, and injects the corresponding decorators. The `check` command verifies the integrity of the code by checking the signatures against the current state of the codebase.
+
+figure here: high level systems diagram
+
 ### Decorator Lifecycle 
 
 Decorators are the primary mechanism through which Pysealer implements code integrity verification. In Python, decorators are a syntactic feature that allows programmers to modify or enhance the behavior of functions and classes without altering their source code. A decorator is simply a callable (typically a function) that takes another function or class as input and returns a modified version [@python-decorator]. Syntactically, decorators are denoted by the @ symbol placed directly above a function or class definition. For example, `@decorator_name` in Python applies the decorator to the subsequent code block. When the Python interpreter encounters a decorated function, it basically runs `decorator_name(func)`, where func is the original function being decorated. Another important thing to note is that decorators can be stacked, meaning multiple decorators can be applied to a single function or class by placing them on consecutive lines above the definition.
@@ -14,61 +23,70 @@ During the checking process, Pysealer scans the source code for these decorators
 
 Pysealer explores the unique approach of repurposing decorators as carriers for cryptographic signatures rather than their traditional role of modifying function behavior. This approach leverages decorators for several strategic reasons: they are non-invasive, attaching metadata without modifying internal function behavior; they are recognizable, serving as a syntactically valid and consistent way to grab signatures; and they eliminate the need for external metadata storage, where the decorator name itself contains the cryptographic signature. Additionally, many Agentic AI systems, like Model Context Protocol (MCP), rely on decorators to define Python functions as tools. This makes decorators also a familiar construct that can be used to secure these newly created tools. While decorators original purpose is not for signature storage, Pysealer effectively repurposes them to embed cryptographic signatures directly within the source code.
 
-figure here: high level systems diagram
-
-### Defense-in-Depth Strategy
-
-Security layers and threat model
-
 ## Technical Implementation
 
-Build System & Packaging
+### Build System
+
 Maturin configuration and hybrid Python/Rust compilation
 py03 and how i can use rust code inpython here
 PyPI distribution and versioning
 FIGURE: technical diagram of how rust and python code is combined and interacts
 
-Python Layer
+### Python Layer
+
 AST manipulation for decorator injection/removal. how are decorators added/removed
 CLI implementation (cli.py, setup.py)
 what is everything that i used python for here
 Git integration for diff detection
 
-Rust Layer
+### Rust Layer
+
 Cryptographic operations (crypto.rs)
 Performance-critical sealing/unsealing logic
 
-Secret Management
+### Secrets Management
+
 Environment variable handling (.env)
 GitHub Secrets integration
 Key storage and retrieval with python dotenv
 what are the security concerns - ethics here? my system relies on env files?
 ethical considerations of secret management
 
-## Command Line Interface (CLI) Functionality
+## Command Line Interface (CLI)
 
 intro and Deployed to PyPI
 
-Initializing Pysealer
+### Initializing Pysealer
+
 In order to use Pysealer on an exhisting project, developers must first initialize Pysealer by running the initialization command. During this, a developer can optionally provide the path to an exhisting .env file where the Pysealer keys will be stored and a github personal acess token (pat) for optional remote github actions checks.
+
+### Lock Command
 
 Locking with Pysealer
 FIGURE: diagram of what actually is represented by the decorator
 FIGURE: decorator code block diagram
 
+### Check Command
+
 Checking with Pysealer
+
+### Remove Command
 
 Removing with Pysealer
 
-## VS Code Extension Functionality
+## VS Code Extension
 
 overview and reasoning and pysealer vs code extension deployed
 in order to make the vurze cli more easy to use, provide better visual medium
+
+### Functionality
 
 extension functionality
 same as the cli
 Systems diagram
 FIGURE: visual picture of the extension
+
+### Bundling
 
 bundling the cli for easy use
 bundled versions of vurze cli and why i chose to do this like ruff
@@ -79,6 +97,8 @@ Overview of EdDSA and Ed25519
 Edwards-curve Digital Signature Algorithm (EdDSA) fundamentals
 FIGURE: Provide the ed actual algorithm diagram
 
+### Signature Generation
+
 Keypair Generation Process (signature generation)
 CSPRNG (Cryptographically Secure Pseudo-Random Number Generator) using OsRng
 FIGURE?: os rng algorithm diagram? or base58 diagram algorithm?
@@ -86,8 +106,12 @@ Private key (signing key) and public key (verifying key) derivation
 Mathematical relationship: public key derived from private key on Curve25519
 Key format: 32-byte keys encoded in Base58
 
+### Signature Verfication
+
 Checksum Calculation Algorithm (signature verification)
 how is the checksum calculated
+
+### Ethics and Security Considerations
 
 ethics section here? would it be good to talk about cyptography ethics here?
 security as well of cryptography
@@ -97,14 +121,23 @@ security as well of cryptography
 Protecting MCP Server Tools from Tampering
 how can this system protect mcp tools
 
+### Git Pre-Commit Hooks
+
 CI/CD Pipeline Integration for MCP Servers
 git pre commit and github actions summary here
 easy of use
 how pysealer can pair with git section.
 
+explain how:
 defense in depth strategy again here
 lead into the evaluation section somehow
 talk about how the main purpose of this tool is to provide defense in depth
 FIGURE: code block with original code from the first chapter. connect back to it
+
+### GitHub Actions Integration
+
+add content here
+
+---
 
 figure out sources where they go
