@@ -60,15 +60,19 @@ While Rust provides excellent cryptographic capabilities, the decision to build 
 
 ### Python Layer
 
-AST manipulation for decorator injection/removal. how are decorators added/removed
-CLI implementation (cli.py, setup.py)
-what is everything that i used python for here
-Git integration for diff detection
+The Python layer of Pysealer is responsible for the majority of the application logic, including source code manipulation, command-line interface (CLI) management, git integration, GitHub secrets integration, and basic environment variable handling. Python was chosen for these components due to its extensive ecosystem of libraries, particularly its native capabilities for parsing and manipulating Python source code. The Python layer serves as the main logic coordinator for Pysealer, coordinating between different subsystems. This separation of concerns allows Pysealer to leverage Python's strengths in developer tooling and file system manipulation.
+
+One of the most important parts of the Python layer is the command-line interface (CLI). The CLI serves as the primary user interface for Pysealer by allowing developers to interact with the tool through terminal commands. More specifically, the Pysealer command-line interface is built using Typer, a modern Python library specifically designed for creating CLI applications [@typer]. Typer was chosen because of its automatic help text generation, handling of optional parameters, and rich terminal output capabilities. Unlike older CLI frameworks requiring large amounts of code, Typer leverages Python's type annotations to automatically generate command-line parsers, help documentation, and input validation.
+
+Pysealer also integrates with Git in the Python layer to provide developers with detailed context about code changes when signature checking fails. Specifically, this integration takes advantage of using Python's subprocess module to interact with Git's command-line interface [@git]. When a decorator check fails, developers need to know not just that code was modified, but specifically what changed and how the current version differs from the last locked version. The Git integration retrieves the file's content from the last committed version, and Pysealer generates a unified diff to highlight the differences and show what exactly changed. This is extremely useful for developers to quickly identify potential tampering or unintended modifications.
+
+Lastly, Pysealer's GitHub secrets integration provides a streamlined mechanism for securely storing public and private keys in a remote environment. Specifically, this functionality is implemented using the PyGithub library, a Python wrapper around GitHub's REST API [@pygithub]. With this integration, developers can automatically upload the pysealer public and private keys to their GitHub repository secrets during initialization. This is important because it allows for remote code integrity checks via GitHub Actions without requiring developers to manually copy or store keys insecurely.
 
 ### Rust Layer
 
-Cryptographic operations (crypto.rs)
-Performance-critical sealing/unsealing logic
+rust layer does not consiste of much code but code is run many times and is important.Cryptographic operations summarize here
+
+another one just so there are 2 small paragraph
 
 ### Secrets Management
 
