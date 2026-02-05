@@ -48,11 +48,11 @@ Pysealer explores the unique approach of repurposing decorators as carriers for 
 
 ### Maturin Build System
 
-The Pysealer project utilizes Maturin as its build system to seamlessly integrate Rust and Python components. Maturin primarily serves as a bridge between the Rust and Python ecosystems by handling the complex compilation and packaging processes required to produce Python wheels (the standard Python package format) from Rust source code [@maturin]. Maturin is specifically optimized for projects that use PyO3, a Rust library that provides bidirectional bindings between Rust and Python [@py03]. Language bindings are essentially a way to call Rust code in Python and vise versa. More specifically, PyO3 compiles Rust code into a shared library (`.so` on Linux/macOS, `.pyd` on Windows) that the Python interpreter can load as a native extension module. And when a Python program imports this module, it can directly invoke Rust functions as if they were regular Python functions.
+The Pysealer project utilizes Maturin as its build system to seamlessly integrate Rust and Python components. Maturin primarily serves as a bridge between the Rust and Python ecosystems by handling the complex compilation and packaging processes required to produce Python wheels (the standard Python package format) from Rust source code [@maturin]. Maturin is specifically optimized for projects that use PyO3, a Rust library that provides bidirectional bindings between Rust and Python [@py03]. Language bindings are essentially a way to call Rust code in Python and vise versa. More specifically, PyO3 compiles Rust code into a shared library (`.so` on Linux/macOS, `.pyd` on Windows) so that the Python interpreter can load the code as a native extension module. And when a Python program imports this module, it can directly invoke Rust functions as if they were regular Python functions.
 
-room to explain detailed techincal diagram here. Without going into unncessary depth and technical detail, x
+By looking at Figure 5, the high level process of transforming a Rust function into a Python callable is shown. First, a developer writes Rust code and annotates functions with PyO3 macros to indicate which functions should be exposed to Python. Next, PyO3 generates the necessary bindings code that acts as a bridge between Rust and Python. After these bindings are generated, PyO3 compiles the Rust code along with the bindings into a shared library. Finally, when the Python interpreter imports the compiled module, it can directly call the Rust functions as if they were native Python functions.
 
-FIGURE: technical diagram of how rust and python code is combined and interacts!!!!!!
+![Rust to Python Diagram](images/pyo3-diagram.png)
 
 The decision to use Maturin and PyO3 for Pysealer was driven by several factors. First and foremost, Rust is known to have extremely strong and reliable cryptographic libraries that are both secure and performant. Specifically, the Ed25519 signature algorithm used by Pysealer is implemented in the widely adopted Rust cryptography crates from RustCrypto compared to the available Python implementations [@rustcrypto-signatures]. Additionally, recent benchmarking research demonstrates that Rust implementations accessed through PyO3 bindings achieve great performance. In fact, the research found that PyO3 bindings achieve function call overhead of only 0.14 milliseconds, representing a 25-fold improvement over NumPy's 3.56 milliseconds [@rust-c-python-library-2025]. These performance advantages are particularly critical for cryptographic operations that can be computationally intensive, especially when processing signatures at scale. Because of the strong evidence of Rust's cryptographic libraries and the demonstrated performance benefits of using PyO3 bindings, Maturin was the natural choice to facilitate the integration of Rust's capabilities into the Python-based Pysealer application. 
 
@@ -76,11 +76,15 @@ Moreover, the architectural decision to isolate only cryptographic operations in
 
 ### Secrets Management
 
-Environment variable handling (.env)
-GitHub Secrets integration
+pysealer uses environment variables to store and retrieve necesssary cryptographic keys. what are environment variables. Because pysealer relies on environment variables, much of pysealer' security heavily depends on how well these environment variables are managed. raises the ethical concern of relying on environment variables for security. if there is a problem with an envionment variable mangement system. then pysealer could also be compromised.
+
 Key storage and retrieval with python dotenv
-what are the security concerns - ethics here? my system relies on env files?
-ethical considerations of secret management
+cite python dotenv here
+[@python-dotenv]
+
+GitHub Secrets integration quote here
+what are remote secrets and how does my tool deal with them
+[@something]
 
 ## Command Line Interface (CLI)
 
