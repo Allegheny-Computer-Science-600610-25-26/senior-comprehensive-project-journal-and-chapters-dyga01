@@ -76,15 +76,13 @@ Moreover, the architectural decision to isolate only cryptographic operations in
 
 ### Secrets Management
 
-pysealer uses environment variables to store and retrieve necesssary cryptographic keys. what are environment variables. Because pysealer relies on environment variables, much of pysealer' security heavily depends on how well these environment variables are managed. raises the ethical concern of relying on environment variables for security. if there is a problem with an envionment variable mangement system. then pysealer could also be compromised.
+Pysealer uses environment variables to store and retrieve the necessary cryptographic keys required for code locking and checking operations. Environment variables provide a standard mechanism for applications to access configuration data and sensitive information without hardcoding these values directly into source code. In Pysealer's case, two critical environment variables are used: `PYSEALER_PRIVATE_KEY` for signing code during the locking process and `PYSEALER_PUBLIC_KEY` for verifying signatures during the checking process. Both of these environment variables serve as the foundation of Pysealer's security model, making their proper management crucial to the system's overall integrity.
 
-Key storage and retrieval with python dotenv
-cite python dotenv here
-[@python-dotenv]
+Because Pysealer relies heavily on environment variables, much of Pysealer's security depends on how well these environment variables are managed. This raises an important ethical consideration about the risks of relying on environment variables for security-critical operations. If there is a vulnerability in an environment variable management system, then Pysealer's cryptographic protections could also be compromised. For instance, if a `.env` file containing the `PYSEALER_PRIVATE_KEY` is accidentally committed to a public repository, the entire integrity verification system becomes vulnerable.
 
-GitHub Secrets integration quote here
-what are remote secrets and how does my tool deal with them
-[@something]
+More specifically, Pysealer uses the python-dotenv library to manage environment variables in local development environments. The python-dotenv library provides functionality to read key-value pairs from .env files and load them as environment variables [@python-dotenv]. When Pysealer needs to access these keys for locking or checking operations, the python-dotenv library can be utilized. Overall, this approach keeps sensitive keys out of the source code and helps maintain easy key access for developers. 
+
+Pysealer also integrates with GitHub Secrets for remote code integrity verification in GitHub Actions environments. GitHub Secrets is a feature of GitHub Actions that provides encrypted storage for sensitive information needed in automated workflows [@github-actions-secrets]. Unlike local `.env` files, GitHub Secrets are encrypted using industry-standard encryption and are only decrypted when explicitly referenced in workflow files.
 
 ## Command Line Interface (CLI)
 
