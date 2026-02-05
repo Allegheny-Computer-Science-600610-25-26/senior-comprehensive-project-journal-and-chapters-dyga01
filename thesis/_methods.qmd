@@ -86,8 +86,9 @@ Pysealer also integrates with GitHub Secrets for remote code integrity verificat
 
 ## Command Line Interface (CLI)
 
-intro and Deployed to PyPI
-PyPI distribution and versioning. https://pypi.org/project/pysealer/
+Pysealer is primarily implemented as a command line interface (CLI) tool to provide maximum flexibility and ease of use. The CLI design means that developers can incorporate cryptographic verification into their existing terminal-based workflows, continuous integration pipelines, and automated testing systems without requiring any graphical interface. Because Pysealer is a CLI, it was also easily deployed to the Python Package Index (PyPI) and can be installed via pip and uv. Once published to PyPI, Pysealer became publicly available and easily installable [@pysealer-pypi]. Choosing to publish Pysealer to PyPI also makes it easier for developers familiar with Python's package management ecosystem to discover and use the tool in their projects.
+
+The Pysealer CLI provides four core commands that cover the complete lifecycle of cryptographic code verification: init, lock, check, and remove. The init command initializes Pysealer by generating and storing an Ed25519 keypair in a `.env` file. The lock command adds cryptographic signature decorators to all functions and classes in a specified Python file or directory containing Python files. Next, the check command verifies the integrity of all Pysealer decorators by comparing embedded signatures against newly computed signatures. Finally, the remove can be utilized if a developer no longer wants to use Pysealer and effectively strips all Pysealer decorators from Python files.
 
 ### Initializing Pysealer
 
@@ -105,7 +106,7 @@ Checking with Pysealer
 
 ### Remove Command
 
-Removing with Pysealer
+Removing with Pysealer. cut this if i dont need more fluff
 
 ## Visual Studio (VS) Code Extension
 
