@@ -100,9 +100,13 @@ After the PAT is provided, the init command uses the PyGithub library to interac
 
 ### Lock Command
 
-Locking with Pysealer
-FIGURE: diagram of what actually is represented by the decorator. show code block or highlighted pieces or something
-FIGURE: decorator code block diagram
+The lock command is PySealer's main command for cryptographically locking Python code to detect unauthorized tampering. When executed, it reads Python source files and adds Ed25519 signatures as decorators to top-level functions and classes. The process begins by parsing a Python file into an Abstract Syntax Tree (AST) using Python's built-in ast module [@python-ast]. In general, an AST generally represents the hierarchical structure of source code. Before adding new decorators, the function performs a cleanup pass using `ast.walk()` to traverse every node in the tree and identify any existing PySealer decorators. This is important because it prevents threat actors from potentially using the system to attack itself by stacking multiple Pysealer decorators on top of each other.
+
+After this step, the lock command walks through the cleaned version of the AST and selects only top-level functions and classes for decoration. For each function, the lock command extracts the complete source code from the first line to the last line. The extracted source code represents the exact text that will be cryptographically signed using Ed25519. 
+
+Figure 6 illustrates an example of a simple factorial Model Context Protocol tool that is defined by the `@mcp.tool` decorator. Whenver Pysealer encounters this function during the locking process, it extracts the entire source code block, including the `@mcp.tool` decorator, the function definition line, docstrings, all logic, indentation, and comments. This extracted source code represents the exact text that will be cryptographically signed using Ed25519. After the lock command extracts the function source code, it invokes the Rust layer to generate an Ed25519 signature that represents that same code. Finally, the decorator `@pysealer._<signature>()` is created using the generated signature and is injected directly above the function.
+
+![Pysealer Signature Representation Diagram](images/signature-diagram.png)
 
 ### Check Command
 
