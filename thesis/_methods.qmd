@@ -118,8 +118,9 @@ Once the signature is extracted, the signature and current source code are passe
 
 ## Visual Studio (VS) Code Extension
 
-overview and reasoning and pysealer vs code extension deployed
-in order to make the vurze cli more easy to use, provide better visual medium
+In order to make the Pysealer CLI easy to use and marketable to developers, it was important to provide a graphical interface by integrating Pysealer into a developer's integrated development environment (IDE). An IDE, like VS Code, is a software application that provides developers with the necessary tools for software development. With the VS Code IDE, developers can write code, execute terminal commands, prompt AI tools, and do so much more all within a single application [@vscode]. VS Code also integrates with git natively and allows developers to press buttons to upload code to remote repositories like GitHub.
+
+Thus, many developers may prefer to use a graphical interface within their IDE rather than switching to a terminal to run CLI commands. This is especially true for developers who are less comfortable using terminal commands or prefer visual interfaces. For this primary reason, it was important to develop a VS Code extension that integrates Pysealer's core functionality directly into the IDE. By doing so, developers can easily access Pysealer's features without needing to leave their coding environment.
 
 ### Functionality
 
