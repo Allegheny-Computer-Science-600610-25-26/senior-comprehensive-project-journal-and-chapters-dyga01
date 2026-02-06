@@ -110,11 +110,11 @@ Figure 6 illustrates an example of a simple factorial Model Context Protocol too
 
 ### Check Command
 
-Checking with Pysealer
+The check command is Pysealer's mechanism that validates whether locked Python code has been tampered with since it was originally signed. Anytime after the lock command creates cryptographic signatures, the check command can verify them by comparing the current state of the code against the Ed25519 signatures embedded in the decorators. When executed, the check command reads Python source code and verifies each function that has a Pysealer decorator.
 
-### Remove Command
+The checking process starts off similar to how the locking process works by parsing a Python file into an Abstract Syntax Tree representation using Python's ast module. The check command then walks through every node in the AST looking for functions and classes that contain Pysealer decorators. When it encounters a decorator matching the pattern @pysealer._<signature>(), it extracts the signature by removing the leading underscore from the decorator's name. One thing that is important to note about the check command is that it only needs the `PYSEALER_PUBLIC_KEY` to perform its verification process. This is because public keys are used for verifying signatures, while private keys are only needed for signing. 
 
-Removing with Pysealer. cut this if i dont need more fluff
+Once the signature is extracted, the signature and current source code are passed to the Rust layer for verification. The Ed25519 signature verification algorithm is then used to determine whether the signature is mathematically valid. If the verification succeeds, it proves that the code has not been altered since it was signed. If the verification fails, it indicates that the code has been modified. For failed verifications, the check command goes a step further by attempting to retrieve a git diff that shows exactly what changed between the original locked version and the current version. This is done by using Python's subprocess module to call git commands that retrieve the last committed version of the file [@git].
 
 ## Visual Studio (VS) Code Extension
 
