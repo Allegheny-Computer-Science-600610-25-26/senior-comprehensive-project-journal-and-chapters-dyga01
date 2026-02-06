@@ -92,12 +92,16 @@ The Pysealer CLI provides four core commands that cover the complete lifecycle o
 
 ### Initializing Pysealer
 
-In order to use Pysealer on an exhisting project, developers must first initialize Pysealer by running the initialization command. During this, a developer can optionally provide the path to an exhisting .env file where the Pysealer keys will be stored and a github personal acess token (pat) for optional remote github actions checks.
+The init command serves as the entry point for setting up Pysealer in a Python project. It generates a cryptographic keypair (private and public keys) and stores them securely in a `.env` file at a specified location (defaulting to `.env` in the current directory). This initialization command is a prerequisite for using Pysealer's other features, as the keys are used to cryptographically lock and check Python functions throughout a developer's project.
+
+The init command also provides the option to store the generated keys through GitHub repository secrets by using the optional --github-token flag. A developer only needs to provide a GitHub personal access token (PAT) with the appropriate permissions. It is recommeded that the PAT only have the bare minimum permissions necessary to upload secrets to the repository, which follows something known as the least privledge principle. The idea of least privledge is important because it minimizes the potential damage that could occur if the PAT were to be compromised. 
+
+After the PAT is provided, the init command uses the PyGithub library to interact with the GitHub REST API and upload the Pysealer keys to the repository's secrets [@pygithub]. Once this is done, the keys become accessible for GitHub Actions workflows which can be used to verify code integrity in a remote environment. If the GitHub secrets upload fails or the token isn't provided, the command continues and notifies users that they can manually add the keys to GitHub secrets later. The initialization process also includes important error handling to prevent accidental key overwrites. If keys already exist in the specified `.env` file, the command will raise an error and refuse to proceed.
 
 ### Lock Command
 
 Locking with Pysealer
-FIGURE: diagram of what actually is represented by the decorator
+FIGURE: diagram of what actually is represented by the decorator. show code block or highlighted pieces or something
 FIGURE: decorator code block diagram
 
 ### Check Command
