@@ -126,12 +126,15 @@ Thus, many developers may prefer to use a graphical interface within their IDE r
 
 extension functionality
 same as the cli
-Systems diagram
+
+explain a picture of the extension here. showcase the strongest visual aspects of the extension.
+
 FIGURE: visual picture of the extension?????????????? Not too sure. tossup
 
 ### Bundling
 
 bundling the cli for easy use
+cite ruff here this should be easy to write.
 bundled versions of vurze cli and why i chose to do this like ruff
 
 ## Cryptographic Utilities
@@ -180,7 +183,3 @@ FIGURE: code block with original code from the first chapter. connect back to it
 ### GitHub Actions Integration
 
 add content here
-
----
-
-figure out sources where they go
