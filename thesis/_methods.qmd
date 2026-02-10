@@ -146,8 +146,9 @@ The bundling approach provides several critical advantages. First, it dramatical
 
 ## Cryptographic Utilities
 
-Overview of EdDSA and Ed25519
-Edwards-curve Digital Signature Algorithm (EdDSA) fundamentals
+The main cryptographic algorithm that Pysealer relies on is the Edwards-curve Digital Signature Algorithm (EdDSA), specifically the Ed25519 variant. EdDSA is a modern digital signature scheme that offers several advantages over older algorithms like RSA or ECDSA. It is designed to be both very fast and secure. More specifically, EdDSA operates on twisted Edwards curves, a class of elliptic curves that enable efficient and secure cryptographic operations. The algorithm generates digital signatures that mathematically prove two critical properties: the signed data has not been altered since signing, and the signature could only have been created by someone possessing the corresponding private key. In Pysealer's implementation, each function or class is treated as data to be signed, with the resulting signature embedded as a decorator name.
+
+Ed25519 was selected for Pysealer due to its exceptional combination of performance, security, and practicality for developer tooling. The algorithm's microsecond-level signing and verification speeds ensure responsive performance even across large codebases with hundreds of functions and classes. Additionally, its compact 32-byte keys and 64-byte signatures keep decorator names relatively short. Also, the Ed25519 algorithm is popular within the Rust ecosystem and the `ed25519-dalek` crate can be easily utilized to perform signing and checking operations [@ed25519-dalek].
 
 ### Signature Generation
 
