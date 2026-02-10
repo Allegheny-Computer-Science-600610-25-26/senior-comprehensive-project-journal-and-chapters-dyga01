@@ -120,12 +120,15 @@ Once the signature is extracted, the signature and current source code are passe
 
 In order to make the Pysealer CLI easy to use and marketable to developers, it was important to provide a graphical interface by integrating Pysealer into a developer's integrated development environment (IDE). An IDE, like VS Code, is a software application that provides developers with the necessary tools for software development. With the VS Code IDE, developers can write code, execute terminal commands, prompt AI tools, and do so much more all within a single application [@vscode]. VS Code also integrates with git natively and allows developers to press buttons to upload code to remote repositories like GitHub.
 
-Thus, many developers may prefer to use a graphical interface within their IDE rather than switching to a terminal to run CLI commands. This is especially true for developers who are less comfortable using terminal commands or prefer visual interfaces. For this primary reason, it was important to develop a VS Code extension that integrates Pysealer's core functionality directly into the IDE. By doing so, developers can easily access Pysealer's features without needing to leave their coding environment.
+Thus, many developers may prefer to use a graphical interface within their IDE rather than switching to a terminal to run CLI commands. This is especially true for developers who are less comfortable using terminal commands or prefer visual interfaces. For this primary reason, it was important to develop a VS Code extension that integrates Pysealer's core functionality directly into the IDE. By doing so, developers can easily access Pysealer's features without needing to leave their coding environment or use a terminal window.
 
 ### Functionality
 
-extension functionality
-same as the cli
+The Pysealer VS Code extension replicates all core functionality of the Pysealer CLI while providing an enhanced user experience through a more developer friendly graphical interface. Similar to the Pysealer CLI, the extension allows developers to initialize Pysealer in their project, lock Python files with cryptographic signatures, check for code integrity, and remove Pysealer decorators when necessary. Essentially, the Pysealer VS Code shares all the same core functionality as the CLI, but it also provides a better developer experience.
+
+One of the most important features of the Pysealer VS Code extension is its auto save locking feature. When a developer modifies a Python file, the extension can automatically run the Pysealer lock command on the file every time it is saved. This means that developers can simply write code and save their files as they normally would, and the extension will handle the locking process in the background. By automatically locking files on save, the extension ensures that code integrity is maintained without requiring extra steps from developers.
+
+
 
 explain a picture of the extension here. showcase the strongest visual aspects of the extension.
 
@@ -133,9 +136,13 @@ FIGURE: visual picture of the extension?????????????? Not too sure. tossup
 
 ### Bundling
 
-bundling the cli for easy use
-cite ruff here this should be easy to write.
-bundled versions of vurze cli and why i chose to do this like ruff
+An important decision in the development of the Pysealer VS Code Extension was how to handle the distribution of the extension. Ensuring that the tool would work seamlessly across different operating systems, Python versions, and system configurations without requiring users to manually install dependencies was extremely important. To solve this problem, the extension bundles the CLI with it. This means that when a developer installs the extension from the VS Code Marketplace, they are also installing a specific version of the Pysealer CLI that is included within the extension itself. This approach makes the installation process much simpler for users, as they do not need to worry about installing the CLI separately or managing dependencies.
+
+This approach was inspired by successful Python tools like Ruff, which takes a similar approach by bundling its CLI within its VS Code extension to provide a better installation experience [@ruff-vscode]. By following what Ruff has done, the Pysealer extension hopes to encourages more adoption among developers who value convenience.
+
+The bundling process for Pysealer is particularly complex because, unlike pure Python packages, Pysealer contains compiled binaries written in Rust. This means that a single version of Pysealer cannot run on all platforms. For example, a Linux binary will not execute on macOS, and a Windows binary will not work on Linux. In order to address this constraint, the extension bundles pre-compiled Pysealer wheels for multiple platform and Python version combinations together. More specifically, the bundling system is automated through a Python script that executes during the extension's build process. This script downloads Pysealer wheels for five Python versions (3.10, 3.11, 3.12, 3.13, and 3.14) across four platform architectures: Linux x86_64 (manylinux2014_x86_64), macOS Intel (macosx_10_12_x86_64), macOS Apple Silicon (macosx_11_0_arm64), and Windows x86_64 (win_amd64). By downloading wheels for all possible combinations of Python versions and platforms, the extension ensures that it can support users regardless of their development environment.
+
+The bundling approach provides several critical advantages. First, it dramatically simplifies the installation process because users can install the extension from the VS Code Marketplace and immediately begin using Pysealer without running pip install commands. Second, it ensures version consistency, all developers using the extension will be using the same version of the Pysealer CLI, which is important for consistency. Finally, it prevents conflicts with other Python packages in a developer's environment, as the bundled libraries are completely isolated from the system Python installation.
 
 ## Cryptographic Utilities
 
