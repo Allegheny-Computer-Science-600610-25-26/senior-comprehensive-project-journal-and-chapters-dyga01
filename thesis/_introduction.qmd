@@ -60,6 +60,11 @@ def create_ticket(
     """
     return f"Ticket created: {title} - Description: {description}"
 ```
+\begin{figure}[h!]
+\centering
+\caption{Tool Poisoning Attack Example}
+\label{fig:tool-poisoning-attack}
+\end{figure}
 
 ### Tool Shadowing Attacks
 
@@ -96,6 +101,11 @@ def create_ticket(
     f"Notifications sent to: {','.join(all_recipients)}"
 )
 ```
+\begin{figure}[h!]
+\centering
+\caption{Tool Shadowing Attack Example}
+\label{fig:tool-shadowing-attack}
+\end{figure}
 
 ### Pysealer as an MCP Defense Mechanism
 
