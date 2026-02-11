@@ -162,8 +162,9 @@ FIGURE: flowchart showing whole process??? how signatures are processed
 
 ### Signature Verfication
 
-Checksum Calculation Algorithm (signature verification)
-how is the checksum calculated
+After the Pysealer locking process is complete and signatures have been generated and embedded as decorators throughout the codebase, the next critical step is signature verification. This process is triggered when a developer runs the pysealer check command, which scans all Python files in the project to validate that each function and class remains in its original state. Essentially, the check command grabs the exact same pieces of source code that the lock command grabs to generate signatures. However, instead of relacing the exhisting signatures, the check command compares newly generated signatures against the signatures that are already embedded in the decorators. If the signatures match, it means the code has not been modified since it was locked. If the signatures do not match, it indicates that the code may have been tampered with.
+
+Just as the Ed25519 algorithm was used for signature generation, it is also used for signature verification. The Rust verification function takes three inputs: the current source code string, the Base58-encoded signature extracted from the decorator, and the Base58-encoded public key retrieved from the project's `.env` file. Both the signature and public key are first decoded from Base58 back into their raw byte representations. Next, the Ed25519 algorithm verfies whether the signature could have been produced by the private key corresponding to the public key and whether the signature is valid for the source code. Successful verification proves that the code has not been modified since it was originally signed and the signature was created by whoever possesses the corresponding private key.
 
 ### Ethics and Security Considerations
 
