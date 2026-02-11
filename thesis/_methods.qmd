@@ -39,6 +39,11 @@ def greet(name):
 def greet(name):
     return f"Hola, {name}!"
 ```
+\begin{figure}[h!]
+\centering
+\caption{Pysealer Decorator Example}
+\label{fig:pysealer-decorator-example}
+\end{figure}
 
 During the checking process, Pysealer scans the source code for these decorators, extracts the embedded signatures stored in them, and verifies them against the current state of the code. The verification process involves generating a new signature based on the current state of the code. Once this signature is generated, it is compared against the signature extracted from the decorator. If the signatures match, it indicates that the code has not been altered since it was locked. If they do not match, it suggests that the code may have been tampered with. If the code has been altered since the locking process, the system reports detailed information about which specific functions or classes have invalid signatures.
 
