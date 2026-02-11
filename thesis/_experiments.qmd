@@ -1,14 +1,33 @@
 # Experiments
 
+overall outline of them
 This chapter describes your experimental set up and evaluation. It should also
 produce and describe the results of your study. The section titles below offer
-a typical structure used for this chapter.
+a typical structure used for this chapter
 
-## Experimental Design
+## experimental design
 
 Especially as it pertains to responisble computing, if conducting experiments or
 evaluations that involve particular ethical considerations, detail those issues here.
 
 ## Evaluation
 
-## Threats to Validity
+descrive how it is difficult to evaluate security related tools
+
+### Comparison to MCP Scan
+
+Grids of features and List what my tool does that other competitors dont do like Mcp scan and mcp guardian 
+
+### Comparison to MCP Guardian
+
+Grids of features and List what my tool does that other competitors dont do like Mcp scan and mcp guardian 
+
+## Internal Test Suite
+
+AND internal test suite measuring effectiveness of decorator insertion (can do multiple experiments just have them relate to security) pytest cite
+
+## Threats to validity
+
+(talk about the edge cases). 
+
+
