@@ -131,13 +131,7 @@ Thus, many developers may prefer to use a graphical interface within their IDE r
 
 The Pysealer VS Code extension replicates all core functionality of the Pysealer CLI while providing an enhanced user experience through a more developer friendly graphical interface. Similar to the Pysealer CLI, the extension allows developers to initialize Pysealer in their project, lock Python files with cryptographic signatures, check for code integrity, and remove Pysealer decorators when necessary. Essentially, the Pysealer VS Code shares all the same core functionality as the CLI, but it also provides a better developer experience.
 
-One of the most important features of the Pysealer VS Code extension is its auto save locking feature. When a developer modifies a Python file, the extension can automatically run the Pysealer lock command on the file every time it is saved. This means that developers can simply write code and save their files as they normally would, and the extension will handle the locking process in the background. By automatically locking files on save, the extension ensures that code integrity is maintained without requiring extra steps from developers.
-
-
-
-explain a picture of the extension here. showcase the strongest visual aspects of the extension.
-
-FIGURE: visual picture of the extension?????????????? Not too sure. tossup
+One of the most important features of the Pysealer VS Code extension is its auto save locking feature. When a developer modifies a Python file, the extension can automatically run the Pysealer lock command on the file every time it is saved. This means that developers can simply write code and save their files as they normally would, and the extension will handle the locking process in the background. This seamless integration eliminates the need for developers to manually run CLI commands or context-switch between their editor and terminal. The automatic locking mechanism also reduces cognitive overhead and potential human error, as developers no longer need to remember to lock their files after making changes. By automatically locking files on save, the extension ensures that code integrity is maintained without requiring extra steps from developers.
 
 ### Bundling
 
