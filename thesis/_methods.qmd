@@ -152,12 +152,12 @@ Ed25519 was selected for Pysealer due to its exceptional combination of performa
 
 ### Signature Generation
 
-Keypair Generation Process (signature generation)
-CSPRNG (Cryptographically Secure Pseudo-Random Number Generator) using OsRng
-FIGURE?: os rng algorithm diagram? or base58 diagram algorithm?
-Private key (signing key) and public key (verifying key) derivation
-Mathematical relationship: public key derived from private key on Curve25519
-Key format: 32-byte keys encoded in Base58
+Before generating a signature, the Pysealer tool must first establish a cryptographic keypair. This keypair generation process occurs during project initialization when a developer runs the pysealer initialization command. More specifically, the keypair generation process relies on a Cryptographically Secure Pseudo-Random Number Generator (CSPRNG) provided by the OsRng module from Rust's rand crate [@rand]. The OsRng generator is specifically designed to ensure that the randomness used for key generation is unpredictable and secure. This is very important because any weakness in the random number generation could compromise the entire cryptographic system.
+
+After this random number generation step, the Ed25519 keypair is created. The keypair consists of two mathematically related components: a 32-byte private key (also called the signing key) and a 32-byte public key (also called the verifying key). It's also important to note that the mathematical relationship is one-way, meaning that the public key can be efficiently computed from the private key but not the other way around. This one-way relationship is fundamental to the security of the Ed25519 algorithm, as it ensures that even if an threat actor obtains the public key, they cannot derive the private key and forge signatures.
+
+Once the keys have been generated, they are stored in a local `.env` file for later use during signature generation and checking. Both the private and public keys are then encoded using Base58 encoding [@bs58]. This encoding step is important because it produces relatively short signatures with values that can all be contained within a valid Python decorator name. It might be easy to assume that Base58 generates signatures that are 58 characters long. But in reality, the length of the encoded signature can vary depending on the specific values that signature represents. In practice, the Base58-encoded signatures for Pysealer Ed25519 keys are around 86-88 characters long.
+
 FIGURE: flowchart showing whole process??? how signatures are processed
 
 ### Signature Verfication
