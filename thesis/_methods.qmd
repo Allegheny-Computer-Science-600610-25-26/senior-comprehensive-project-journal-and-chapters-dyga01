@@ -18,7 +18,7 @@ Decorators are the primary mechanism through which Pysealer implements code inte
 
 Pysealer utilizes decorators for the sole purpose of attaching cryptographic signatures to functions and classes. During the locking process, Pysealer generates a unique signature for each targeted code block and injects it as a decorator in the form `@pysealer._<signature>()`. Its important to note that this decorator does not modify the function's original behavior; instead, it serves as a cryptographic marker. The decorator that gets added to the code does not contain any logic and is effectively blank. It is purely being used as a marker and servers no functional purpose other than to carry the signature. Additionally, the reason the decorator is named with a leading underscore is because digits cannot be used as the first character in a Python function. Using an underscore also helps indicate that it is intended for internal use within the Pysealer system and not for direct invocation by developers.
 
-To demonstrate the lifecycle of a decorator in Pysealer, consider the following example that illustrates a simple greet function. This example shows four distinct stages: the original code, the locked code with an embedded cryptographic signature, a modification to the function's code, and finally the newly locked code with a new signature reflecting the changes. By observing how the decorator's signature value changes when the underlying code is modified, we can see how Pysealer effectively checks if code has been altered.
+To demonstrate the lifecycle of a decorator in Pysealer, consider the following figure that illustrates a simple greet function. This example shows four distinct stages: the original code, the locked code with an embedded cryptographic signature, a modification to the function's code, and finally the newly locked code with a new signature reflecting the changes. By observing how the decorator's signature value changes when the underlying code is modified, we can see how Pysealer effectively checks if code has been altered.
 
 ```python
 # Original Code
@@ -26,7 +26,8 @@ def greet(name):
     return f"Hello, {name}!"
 
 # Locked Code
-@pysealer._4QBckp1rzZNoTUmfTC9xgKZmqJtv3dm8xr6kXy5TiDhWvWNmVrh8jqZuNMfUQQJAiGPW4W8nDzSYx5M2vQoXG8kG()
+@pysealer._4QBckp1rzZNoTUmfTC9xgKZmqJtv3dm8xr6kXy5TiDhWvWNmVr\
+h8jqZuNMfUQQJAiGPW4W8nDzSYx5M2vQoXG8kG()
 def greet(name):
     return f"Hello, {name}!"
 
@@ -35,7 +36,8 @@ def greet(name):
     return f"Hola, {name}!"
 
 # New Locked Code
-@pysealer._4crysJGYfjvDMDeaXgtjhs9u7Dvrw6hvCin5AE7jsdnFjqHh3KAW3LNgTwBP7QJCJbGMZF5hLdouMKuxGN91PJ35()
+@pysealer._4crysJGYfjvDMDeaXgtjhs9u7Dvrw6hvCin5AE7jsd\
+nFjqHh3KAW3LNgTwBP7QJCJbGMZF5hLdouMKuxGN91PJ35()
 def greet(name):
     return f"Hola, {name}!"
 ```
@@ -55,7 +57,7 @@ Pysealer explores the unique approach of repurposing decorators as carriers for 
 
 The Pysealer project utilizes Maturin as its build system to seamlessly integrate Rust and Python components. Maturin primarily serves as a bridge between the Rust and Python ecosystems by handling the complex compilation and packaging processes required to produce Python wheels (the standard Python package format) from Rust source code [@maturin]. Maturin is specifically optimized for projects that use PyO3, a Rust library that provides bidirectional bindings between Rust and Python [@py03]. Language bindings are essentially a way to call Rust code in Python and vise versa. More specifically, PyO3 compiles Rust code into a shared library (`.so` on Linux/macOS, `.pyd` on Windows) so that the Python interpreter can load the code as a native extension module. And when a Python program imports this module, it can directly invoke Rust functions as if they were regular Python functions.
 
-By looking at Figure 5, the high level process of transforming a Rust function into a Python callable is shown. First, a developer writes Rust code and annotates functions with PyO3 macros to indicate which functions should be exposed to Python. Next, PyO3 generates the necessary bindings code that acts as a bridge between Rust and Python. After these bindings are generated, PyO3 compiles the Rust code along with the bindings into a shared library. Finally, when the Python interpreter imports the compiled module, it can directly call the Rust functions as if they were native Python functions.
+By looking at Figure 8, the high level process of transforming a Rust function into a Python callable is shown. First, a developer writes Rust code and annotates functions with PyO3 macros to indicate which functions should be exposed to Python. Next, PyO3 generates the necessary bindings code that acts as a bridge between Rust and Python. After these bindings are generated, PyO3 compiles the Rust code along with the bindings into a shared library. Finally, when the Python interpreter imports the compiled module, it can directly call the Rust functions as if they were native Python functions.
 
 ![Rust to Python Diagram](images/pyo3-diagram.png)
 
