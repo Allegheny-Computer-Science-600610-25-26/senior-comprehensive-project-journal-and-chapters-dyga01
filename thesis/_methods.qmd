@@ -167,10 +167,9 @@ After the Pysealer locking process is complete and signatures have been generate
 
 Just as the Ed25519 algorithm was used for signature generation, it is also used for signature verification. The Rust verification function takes three inputs: the current source code string, the Base58-encoded signature extracted from the decorator, and the Base58-encoded public key retrieved from the project's `.env` file. Both the signature and public key are first decoded from Base58 back into their raw byte representations. Next, the Ed25519 algorithm verfies whether the signature could have been produced by the private key corresponding to the public key and whether the signature is valid for the source code. Successful verification proves that the code has not been modified since it was originally signed and the signature was created by whoever possesses the corresponding private key.
 
-### Ethics and Security Considerations
+### Security Risk Considerations
 
-ethics section here? would it be good to talk about cyptography ethics here?
-security as well of cryptography
+Pysealer’s security model involves several layers of risk. First-party risk refers to vulnerabilities or mistakes by the developer or organization using Pysealer. An example of this would be if a developer fails to properly secure the private key used for signing code. If the private key is compromised, then threat actors could forge signatures and make unauthorized changes to the code without detection. Second-party risk comes from the Pysealer tool itself. If there are bugs or flaws in Pysealer’s code, developers may be misled about the integrity of their code. Pysealer mitigates this by using well-tested libraries and providing clear warnings. Third-party risk is inherited from dependencies. Since Pysealer relies on external libraries like ed25519-dalek for cryptography, it inherits any vulnerabilities present in those libraries. If these libraries have vulnerabilities, all Pysealer users are exposed. If these libraries have vulnerabilities, all Pysealer users are exposed. Additionally, integration with GitHub and the use of personal access tokens introduces risk from external platforms—if GitHub is compromised or tokens are leaked, attackers could access secrets or manipulate workflows. By addressing these risks, Pysealer aims to prove itself as a valuable tool for providing defense-in-depth security.
 
 ## MCP Use Cases
 
