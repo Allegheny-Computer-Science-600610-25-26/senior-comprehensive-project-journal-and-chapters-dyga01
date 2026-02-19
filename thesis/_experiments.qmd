@@ -1,38 +1,43 @@
 # Experiments
 
-overall outline of them
 This chapter describes your experimental set up and evaluation. It should also
 produce and describe the results of your study. The section titles below offer
 a typical structure used for this chapter
 
-## experimental design
+## Experimental Design
 
 Especially as it pertains to responisble computing, if conducting experiments or
 evaluations that involve particular ethical considerations, detail those issues here.
+Experiments → system with tool or without tool.
 
 ## Evaluation
 
 descrive how it is difficult to evaluate security related tools
 
-### Comparison to MCP Scan
+### protecting against the tool poisoning and tool shadowing shown earlier.
 
-Grids of features and List what my tool does that other competitors dont do like Mcp scan and mcp guardian 
+show a walk through of how it would protect against these attacks
 
-### Comparison to MCP Guardian
+### Comparison to MCP Scan and mcp guardian
 
-Grids of features and List what my tool does that other competitors dont do like Mcp scan and mcp guardian 
+Grids of features and List what my tool does that other competitors dont do like Mcp scan and mcp guardian
+Table in the experiments section
+Feature Comparison Tables
 
 ## Internal Test Suite
 
 AND internal test suite measuring effectiveness of decorator insertion (can do multiple experiments just have them relate to security) pytest cite
+Decorator insertion accuracy: Percentage of functions/classes successfully decorated across diverse codebases
+Signature verification accuracy: False positive/negative rates when detecting unauthorized modifications
+Performance overhead: Time impact of lock/check operations on codebases of varying sizes (10, 100, 1000+ functions)
 
-## Threats to validity
+## real world dataset testing
+
+Apply pysealer to real mcp servers and see if it is successfull
+
+## Threats to Validity
 
 (talk about the edge cases). 
+Threats to validity → relying on any external sources that could invalide the results of the experiments.
 
-
-Experiments → system with tool or without tool.
-Table in the experiments section
 Look at what existing arxiv papers do for experiments
-Threats to validity → relying on any external sources
-
