@@ -26,8 +26,7 @@ def greet(name):
     return f"Hello, {name}!"
 
 # Locked Code
-@pysealer._4QBckp1rzZNoTUmfTC9xgKZmqJtv3dm8xr6kXy5TiDhWvWNmVr\
-h8jqZuNMfUQQJAiGPW4W8nDzSYx5M2vQoXG8kG()
+@pysealer._4QBckp1rzZNoTUmfTC9xgKZmqJtv3dm8xr6kXy5TiDhWvWNmVrh8jqZuNMfUQQJAiGPW4W8nDzSYx5M2vQoXG8kG()
 def greet(name):
     return f"Hello, {name}!"
 
@@ -36,8 +35,7 @@ def greet(name):
     return f"Hola, {name}!"
 
 # New Locked Code
-@pysealer._4crysJGYfjvDMDeaXgtjhs9u7Dvrw6hvCin5AE7jsd\
-nFjqHh3KAW3LNgTwBP7QJCJbGMZF5hLdouMKuxGN91PJ35()
+@pysealer._4crysJGYfjvDMDeaXgtjhs9u7Dvrw6hvCin5AE7jsdnFjqHh3KAW3LNgTwBP7QJCJbGMZF5hLdouMKuxGN91PJ35()
 def greet(name):
     return f"Hola, {name}!"
 ```
