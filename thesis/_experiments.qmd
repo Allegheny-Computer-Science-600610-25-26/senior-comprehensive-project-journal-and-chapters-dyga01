@@ -1,25 +1,30 @@
 # Experiments
 
-This chapter describes your experimental set up and evaluation. It should also
-produce and describe the results of your study. The section titles below offer
-a typical structure used for this chapter
+x
 
 ## Experimental Design
 
-Especially as it pertains to responisble computing, if conducting experiments or
-evaluations that involve particular ethical considerations, detail those issues here.
-Experiments → system with tool or without tool.
-
-## Evaluation
-
 descrive how it is difficult to evaluate security related tools
 
-### protecting against the tool poisoning and tool shadowing shown earlier.
+This chapter describes your experimental set up Especially as it pertains to responisble computing, if conducting experiments or evaluations that involve particular ethical considerations, detail those issues here.
+
+## Simulated Attacks
+
+REFERENCE EXPERIMENTS REPO HERE.
+
+### Tool Poisoning Attack
 
 show a walk through of how it would protect against these attacks
+It should also produce and describe the results of your study. The section titles below offer a typical structure used for this chapter
 
-### Comparison to MCP Scan and mcp guardian
+### Tool Shadowing Attack
 
+x
+
+## MCP Scan Comparison
+
+what features am i going to compare
+COMPARE AND CONTRAST WITH MCP SCAN. HOW COULD THEY BE USED TOGETHER.
 Grids of features and List what my tool does that other competitors dont do like Mcp scan and mcp guardian
 Table in the experiments section
 Feature Comparison Tables
@@ -31,13 +36,9 @@ Decorator insertion accuracy: Percentage of functions/classes successfully decor
 Signature verification accuracy: False positive/negative rates when detecting unauthorized modifications
 Performance overhead: Time impact of lock/check operations on codebases of varying sizes (10, 100, 1000+ functions)
 
-## real world dataset testing
-
-Apply pysealer to real mcp servers and see if it is successfull
-
 ## Threats to Validity
 
 (talk about the edge cases). 
 Threats to validity → relying on any external sources that could invalide the results of the experiments.
-
 Look at what existing arxiv papers do for experiments
+Real World Dataset testing.: Apply pysealer to real mcp servers and see if it is successfull
