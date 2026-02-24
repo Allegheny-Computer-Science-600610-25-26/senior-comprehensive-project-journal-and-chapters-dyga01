@@ -9,6 +9,8 @@ this chapter aims to evaluate the effectiveness of pysealer and its defense in d
 
 descrive how it is difficult to evaluate security related tools. should sound human. security tools are tough to evaluate because of the nature of security. you can't just run a test and see if it works, you have to simulate attacks and see if it can defend against them. for this reason, the experiments in this chapter are designed to simulate what a real-world mcp tool poisoning and tool shadowing attack could look like and evaluate pysealer's performance in defending against them. there is limited research evaluating the effectiveness of mcp security tools
 
+### Attack Simulation Methodology
+
 this chapter contains 4 primary experiments. 
 - pysealer tool poisoining
 - pysealer tool shadowing
@@ -17,8 +19,19 @@ this chapter contains 4 primary experiments.
 (reference experiments repo here)
 
 is fundamental to unsertsand that pysealer and mcp scan aim to protect mcp servers in different. ways. describe how they are different.
+Comparison to MCP Scan. some sort of place to say how the tools secure things differently. call to action for more work.
+what features am i going to compare
+COMPARE AND CONTRAST WITH MCP SCAN. HOW COULD THEY BE USED TOGETHER.
+Grids of features and List what my tool does that other competitors dont do like Mcp scan and mcp guardian
+Table in the experiments section
+Feature Comparison Tables
+Threat classes covered: prompt injection, tool poisoning, cross‑origin escalation, “rug pulls,” data exfiltration, etc.
+find a way to compare from a apaper
+SHOULD I ADD A TABLE HERE TO SHOW DIFFERENT FEATURES
 
 the experiments are all run within on script (run_experiments.py) that simulates the attacks and shows each tools output.this script does x.another important concept when performing computational experiments is reproduciblity. for these experiments. docker. python version. pysealer version. mcp scan version. all are important to control.
+
+### Ethical Considerations in Security Experimentation
 
 one last things that is important to note is the xethics of performing security related experiments. running these experiments on real mcp servers could cause harm to real systems and data. for this reason, all experiments in this chapter are conducted in a controlled environment using simulated attacks. its also important to note that 
 
@@ -174,22 +187,20 @@ https://explorer.invariantlabs.ai/docs/mcp-scan/issue-code-reference/#TF002
 \label{fig:mcpscan-detect-tool-shadowing-attack}
 \end{figure}
 
-## Comparison to MCP Scan. some sort of place to say how the tools secure things differently. call to action for more work.
-
-what features am i going to compare
-COMPARE AND CONTRAST WITH MCP SCAN. HOW COULD THEY BE USED TOGETHER.
-Grids of features and List what my tool does that other competitors dont do like Mcp scan and mcp guardian
-Table in the experiments section
-Feature Comparison Tables
-Threat classes covered: prompt injection, tool poisoning, cross‑origin escalation, “rug pulls,” data exfiltration, etc.
-find a way to compare from a apaper
-
 ## Internal Test Suite
 
-AND internal test suite measuring effectiveness of decorator insertion (can do multiple experiments just have them relate to security) pytest cite
+in addition to comparing pysealer to mcp scan, it is also important to view and evaluate pysealer on its own. ND internal test suite measuring effectiveness of decorator insertion (can do multiple experiments just have them relate to security) pytest cite
+
+pysealer utilizes pystest to test it basic behavior. cite pytest and basic explanation. explain test coverage. say pysealer achieves ____ coverage now_____
+
+its important to measure accuracy of decorator insertion.
+
+### x
+
 Decorator insertion accuracy: Percentage of functions/classes successfully decorated across diverse codebases
 Signature verification accuracy: False positive/negative rates when detecting unauthorized modifications
-Performance overhead: Time impact of lock/check operations on codebases of varying sizes (10, 100, 1000+ functions)
+
+this is where i have a table showing the results of the internal test suite. add to this later on.
 
 ## Threats to Validity
 
