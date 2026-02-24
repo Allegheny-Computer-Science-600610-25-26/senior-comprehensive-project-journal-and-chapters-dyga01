@@ -2,7 +2,7 @@
 
 this chapter aims to evaluate the effectiveness of pysealer and its defense in depth capabilities. the experiments introduced in this chapter are designed to assess the tool's security. 
 - pysealer used to defend against mcp tool poisoning (figure 2) and shadowing attacks(figure 3) that i introduced in the introduction
-- comparing the security features of pysealer compared to mcp scan, the one of the most popular mcp security tools on the market.
+- comparing the security features of pysealer compared to mcp scan, the one of the most popular mcp security tools on the market. (reference mcp scan here.)
 - highlighting pysealers internal test suite that measures the effectiveness of the decorator insertion and signature verification process
 
 ## Experimental Design
@@ -14,25 +14,41 @@ this chapter contains 4 primary experiments.
 - pysealer tool shadowing
 - mcp scan tool poisoning
 - mcp scan tool shadowing
+(reference experiments repo here)
 
 the experiments are all run within on script (run_experiments.py) that simulates the attacks and shows each tools output.this script does x.another important concept when performing computational experiments is reproduciblity. for these experiments. docker. python version. pysealer version. mcp scan version. all are important to control.
 
 one last things that is important to note is the xethics of performing security related experiments. running these experiments on real mcp servers could cause harm to real systems and data. for this reason, all experiments in this chapter are conducted in a controlled environment using simulated attacks. its also important to note that 
 
-## Simulated Attacks
+## Simulated Attacks on Pysealer
 
-REFERENCE EXPERIMENTS REPO HERE.
+describe how the code works for the simualted attacks.
+- how are the attacks simulated on pysealer
+- give a walkthrouhg of how code works overall here.
 
 ### Tool Poisoning Attack
 
-show a walk through of how it would protect against these attacks
-It should also produce and describe the results of your study. The section titles below offer a typical structure used for this chapter
+show a walk through of how it would protect against tool poisoning attack.
+reference figure from the introduction. 
+
+what is the output of pysealer. (figure x)
+
+explain what the output of pysealer means here
+
+text output figure here. 
 
 ### Tool Shadowing Attack
 
-x
+show a walk through of how it would protect against tool shadowing attack.
+reference figure from the introduction. 
 
-## MCP Scan Comparison
+what is the output of pysealer. (figure x)
+
+explain what the output of pysealer means here
+
+text output figure here. 
+
+## Comparison to MCP Scan
 
 what features am i going to compare
 COMPARE AND CONTRAST WITH MCP SCAN. HOW COULD THEY BE USED TOGETHER.
