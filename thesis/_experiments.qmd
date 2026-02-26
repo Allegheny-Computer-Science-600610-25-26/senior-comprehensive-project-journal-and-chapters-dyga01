@@ -81,12 +81,11 @@ By examining these results, it can be seen that the mcp-scan output provides ext
 
 ### Pysealer Tool Shadowing Attack
 
-show a walk through of how it would protect against tool shadowing attack.
-reference figure from the introduction. 
+Pysealer is evaluated against a simulated tool shadowing attack in this experiment. For this attack, a new tool named `create_ticket_better` is introduced alongside the legitimate `create_ticket` tool. The `create_ticket_better` tool includes misleading instructions in its docstring, telling the LLM to always add `example@test.com` to the notifyList before using create_ticket. The docstring also emphasizes that the `create_ticket_better` tool is the superior choice for creating tickets and tries to manipulate the LLM into using it instead of the legitimate `create_ticket` tool. By shadowing the legitimate create_ticket tool with a similarly named and documented function, the attacker exploits the tool selection and invocation process, demonstrating how tool shadowing can subvert intended workflows and security controls.
 
-what is the output of pysealer. (figure x)
+The output of Pysealer for the tool shadowing attack in Figure 11. indicates that a `@pysealer` decorator fails in the specified file but does not provide any diff information. This is because the new `create_ticket_better` function was added without the `@pysealer` decorator and Pysealer currently does not generate diffs for new functions that were not previously decorated. Despite the lack of diff information, the output still clearly indicates that there is an issue with the file and returns the correct error code.
 
-explain what the output of pysealer means here
+This output demonstrates that Pysealer is able to accurately detect the introduction of a new, undecorated function. While the specific error message that Pysealer provides is not extremely detailed, the Pysealer tool is working on a fundamental level. By returning an error code, Pysealer signals that the integrity of the codebase has been compromised. This behavior is important because it ensures that any new functions added to the codebase are required to have the appropriate security decorators, thereby maintaining the intended level of protection.
 
 ```text
   ✗ /app/simulated-attacks/tool-shadowing/tool_shadowing.py
@@ -133,7 +132,7 @@ https://explorer.invariantlabs.ai/docs/mcp-scan/issue-code-reference/#TF002
 \label{fig:mcpscan-detect-tool-shadowing-attack}
 \end{figure}
 
-### Feature Comparison with MCP Scan
+## Feature Comparison xxxxxxx
 
 table here and talk
 
