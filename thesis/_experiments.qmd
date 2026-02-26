@@ -111,29 +111,32 @@ The mcp-scan output provides a clear and actionable signal to developers. By fla
 
 ## MCP Scan Feature Comparison
 
-IN order to asses pysealer's effectiveness across multiple security threat classes, the table below compares them. 
+after analysing pysealer and mcp-scan documentation, figure 12 illustrates which of the OWASP LLM Top 10 security risks each tool should theoretically mitigate.
 
-by looking at figure 12, say what the results broadly show. 
-dont get into too much detail with specific attacks.
+This comparison is based on the documented features and capabilities of each tool, as well as the types of vulnerabilities they are designed to address. By mapping each tool's features to the OWASP LLM Top 10, it provides a clear visual representation of the security coverage provided by Pysealer and mcp-scan. This analysis helps to identify areas where each tool excels and where there may be gaps in protection, ultimately guiding users in choosing the right tool for their specific security needs.
 
-x
+dont get into too much detail about specific attacks
+analyze broad conclusions that can be drawn from the table
 
 ```
-Feature Comparison Table: pysealer vs. mcp-scan
-
 | Security Risk                                 | pysealer | mcp-scan |
 |:----------------------------------------------|:--------:|:--------:|
-| LLM01:2025 Prompt Injection                   |    $\times$    |    $\checkmark$    |
-| LLM02:2025 Sensitive Information Disclosure   |    $\times$    |    $\checkmark$    |
-| LLM03:2025 Supply Chain                       |    $\checkmark$    |    $\checkmark$    |
-| LLM04:2025 Data and Model Poisoning           |    $\checkmark$    |    $-$    |
-| LLM05:2025 Improper Output Handling           |    $\times$    |    $\checkmark$    |
-| LLM06:2025 Excessive Agency                   |    $\times$    |    $\checkmark$     |
-| LLM07:2025 System Prompt Leakage              |    $\times$    |    $\checkmark$     |
-| LLM08:2025 Vector and Embedding Weaknesses    |    $\times$    |    $\checkmark$     |
-| LLM09:2025 Misinformation                     |    $\times$    |     $\times$     |
-| LLM10:2025 Unbounded Consumption              |    $\times$    |     $\checkmark$     |
+| LLM01:2025 Prompt Injection                   | ✗        | ✓        |
+| LLM02:2025 Sensitive Information Disclosure   | ✗        | ✓        |
+| LLM03:2025 Supply Chain                       | ✓        | ✗        |
+| LLM04:2025 Data and Model Poisoning           | –        | –        |
+| LLM05:2025 Improper Output Handling           | ✗        | ✓        |
+| LLM06:2025 Excessive Agency                   | ✗        | ✓        |
+| LLM07:2025 System Prompt Leakage              | ✗        | ✓        |
+| LLM08:2025 Vector and Embedding Weaknesses    | ✗        | ✓        |
+| LLM09:2025 Misinformation                     | ✗        | ✗        |
+| LLM10:2025 Unbounded Consumption              | ✗        | ✓        |
 ```
+\begin{figure}[h!]
+\centering
+\caption{Feature Comparison Table}
+\label{fig:feature-comparison-table}
+\end{figure}
 
 ## Internal Test Suite
 
