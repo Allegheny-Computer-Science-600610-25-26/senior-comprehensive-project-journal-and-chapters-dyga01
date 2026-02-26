@@ -22,9 +22,9 @@ A critical aspect of computational experiments is reproducibility. To ensure the
 
 ### Ethical Considerations in Security Experimentation
 
-one last things that is important to note is the xethics of performing security related experiments. running these experiments on real mcp servers could cause harm to real systems and data. for this reason, all experiments in this chapter are conducted in a controlled environment using simulated attacks. its also important to note that 
+One last thing that is important to note is the ethics of performing security-related experiments. Security research, especially when it involves simulating attacks, carries a responsibility to avoid using the attacks to cause harm to real systems, data, or users. Attempting to use the simulated attacks from this research on real MCP servers could lead to unintended consequences, such as disrupting operations, exposing sensitive information, or introducing new vulnerabilities. 
 
-why is it so hard ethically????/
+For this reason, it was chosen to simulate attacks on example MCP Servers that are not connected to any production systems. This approach ensures that no production systems are affected and that the research can be conducted safely and responsibly. All attack simulation code used for the experiments is publicly available, ensuring that the research does not introduce new risks. By making the code and methodology open and transparent, other researchers can review, reproduce, and build upon this work without inadvertently enabling malicious activity. 
 
 ## Simulated Attacks
 
