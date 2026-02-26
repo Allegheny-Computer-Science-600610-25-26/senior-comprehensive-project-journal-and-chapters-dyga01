@@ -36,12 +36,11 @@ The mcp-scan attack simulation runs mcp-scan against both the pre-attack and pos
 
 ### Pysealer Tool Poisoning Attack
 
-show a walk through of how it would protect against tool poisoning attack.
-reference figure from the introduction. 
+In this experiment, Pysealer is evaluated against a simulated tool poisoning attack. The attack modifies the create_ticket function by adding a new parameter called sidenote and inserting malicious instructions into the docstring. More specifically, these instructions attempt to trick the LLM into invoking the same tool to read the contents of a sensitive file `~/.ssh/id_rsa`. The attack then passes the contents of this file as the sidenote parameter. This attack is designed to be subtle, as it does not directly alter the core functionality of the create_ticket function. Instead, it relies on the LLM's interpretation of the docstring to execute unintended actions. By embedding these instructions in the docstring, the threat actor aims to manipulate the LLM into performing actions that could lead to credential theft.
 
-what is the output of pysealer. (figure x)
+The output of Pysealer, shown in Figure 10, provides a clear and concise report of the detected modification. Pysealer flags the file as compromised, and specifically identifies that the create_ticket function was altered. The output also highlights the exact lines that were changed by showing a diff, including the addition of the sidenote parameter and the injected malicious docstring content. Pysealer also returns an error code and a summary indicating that the decorator verification failed for this file.
 
-explain what the output of pysealer means here
+This output demonstrates that Pysealer successfully detected the unauthorized modification introduced by the tool poisoning attack. Pysealer reports the exact file that was modified, the specific function that was altered, and the exact line-by-line changes that occurred. The detailed feedback provided by Pysealer is essential for maintaining the integrity of Python function source code. If this Pysealer check were part of a CI/CD pipeline, it could potentially prevent the compromised code from being merged into the main codebase, thereby protecting the MCP server from potential exploitation.
 
 ```text
 ✗ /app/simulated-attacks/tool-poisoning/tool_poisoning.py
@@ -181,6 +180,10 @@ https://explorer.invariantlabs.ai/docs/mcp-scan/issue-code-reference/#TF002
 \caption{MCP Scan Detection of Tool Shadowing Attack}
 \label{fig:mcpscan-detect-tool-shadowing-attack}
 \end{figure}
+
+### Feature Comparison with MCP Scan
+
+table here and talk
 
 ## Internal Test Suite
 
