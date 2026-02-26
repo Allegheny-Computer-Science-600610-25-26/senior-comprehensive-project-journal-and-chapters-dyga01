@@ -122,7 +122,7 @@ After a thorough analysis of the pysealer and mcp-scan documentation, Figure 12 
 | LLM05:2025 Improper Output Handling           | $\times$        | $\checkmark$        |
 | LLM06:2025 Excessive Agency                   | $\times$        | $\checkmark$        |
 | LLM07:2025 System Prompt Leakage              | $\times$        | $\times$            |
-| LLM08:2025 Vector and Embedding Weaknesses    | $\times$        | $\times$.           |
+| LLM08:2025 Vector and Embedding Weaknesses    | $\times$        | $\times$            |
 | LLM09:2025 Misinformation                     | $\times$        | $\times$            |
 | LLM10:2025 Unbounded Consumption              | $\times$        | $\checkmark$        |
 \begin{figure}[h!]
@@ -143,27 +143,16 @@ An internal test suite is an extremely important software engineering practice a
 
 ## Threats to Validity
 
-because this is a security related project, there are many threats that could invalidate the results of the attack simulations.
+Evaluating security tools through both attack simulations and feature comparison inherently involves a range of limitations and uncertainties that must be carefully considered. In any research, it is essential to acknowledge the factors that could impact the reliability, generalizability, or interpretation of experimental results. This section outlines the primary threats to validity encountered in this study. By transparently discussing these threats, this research aims to provide a balanced and open perspective for interpreting the results of the experiments and feature comparisons.
 
-Threats to validity → its a sandbox in running a test works in limited controlled environment. Hasnt been deployed on production scale system. fix
-FEATURES OF TOOLS CHANGE. THIS COMPARES PYSEALER 1.0.0 TO MCP SCAN 0.4.2
+One of the most significant threats to validity in this research arises from the simulated attacks. To begin with, because all experiments are conducted within a controlled docker environment, the environment may not be realistic compared to real-world MCP server deployments. This sandboxed approach ensures safety from real-world deployments, but may not capture the full complexity of how an upstream attack could be executed by a real-world threat actor. As a result, the effectiveness of Pysealer and mcp-scan observed in these simulations may not directly translate to real MCP servers facing live threats. 
 
-not really this as much
-Pysealer security threats
-if a threat actor has access to the private key in any which way. the pysealer tool could be compromised. get key from env file or other if private key is stored insecurely
-if the pysealer tool fails to add a deco to a function or class. that code may be unprotected.
-If Pysealer is compromised itself or if its dependencies are themselves compromised (e.g., via supply chain attacks), the tool could be subverted.
-if pysealer is not up to date. newley discovered vulnerabilities may not be protected against. this is a common problem with security tools in general
+Furthermore, the number of threat vectors that this research covers is limited to tool poisoning and tool shadowing. While these are important and relevant attack vectors, they represent only a subset of the potential threats that real MCP servers may face. This means that the results of the simulated attacks may not be generalizable to other types of attacks that MCP servers may face. Another important consideration is dependency risk. If any of Pysealer's dependencies are compromised, the tool’s security guarantees could be invalidated. This is extremely important to consider because Pysealer relies on various Python and Rust libraries for its functionality. Lastly, public and private key management represents a fundamental threat. If a threat actor gains access to Pysealer’s private key, the integrity checks provided by Pysealer can be subverted. This is a critical threat that could invalidate the entire Pysealer tool from a security perspective.
 
+x
 
-
-is fundamental to unsertsand that pysealer and mcp scan aim to protect mcp servers in different. ways. describe how they are different.
-Comparison to MCP Scan. some sort of place to say how the tools secure things differently. call to action for more work.
-what features am i going to compare
-COMPARE AND CONTRAST WITH MCP SCAN. HOW COULD THEY BE USED TOGETHER.
-Grids of features and List what my tool does that other competitors dont do like Mcp scan and mcp guardian
-Table in the experiments section
-Feature Comparison Tables
-Threat classes covered: prompt injection, tool poisoning, cross‑origin escalation, “rug pulls,” data exfiltration, etc.
-find a way to compare from a apaper
-SHOULD I ADD A TABLE HERE TO SHOW DIFFERENT FEATURES
+feature comparison
+EATURES OF TOOLS CHANGE. THIS COMPARES PYSEALER 1.0.0 TO MCP SCAN 0.4.2
+Documentation Bias: Feature mapping relies on available documentation, which may be incomplete, outdated, or not fully representative of real-world capabilities.
+Subjective Interpretation: The assessment of which OWASP LLM Top 10 risks are covered is based on interpretation, which may differ between evaluators
+Lack of Standardized Benchmarking: No widely accepted framework exists for benchmarking MCP security tools, so comparisons may lack rigor or consistency.
