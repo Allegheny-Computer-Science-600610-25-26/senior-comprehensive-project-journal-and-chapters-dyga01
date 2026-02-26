@@ -1,17 +1,36 @@
 # Conclusion
 
-Traditionally, this chapter addresses the areas proposed below as sections, although
-not necessarily in this order or organized as offered. However, the last section --
-"Ethical Implcations" is required for this chapter. See the heading below for more
-details.
+what are the qualified success. successs, failure>>>>>>
 
 ## Summary of Results
 
+broad level summary paragraph here
+
+### Simulated Attacks
+
+what do these experiments find and show
+
+### MCP Scan Feature Comparison
+
+what do these experiments find and show
+
+multipurpose security approach to mcp security is best. 
+
 ## Future Work
+
+talk about the limitations of the pysealer tool
+
+### Pysealer Limitations
+
+everythign in the contirbution doc
+
+### MCP Security Benchmarks
+
+Hasnt been much work to ensure and create mcp security benchmarks. mcp security benchamrks work
 
 ## Future Ethical Implications and Recommendations
 
 Especially as pertains to the public release or use of your software or methods, what
 unresolved or special issues remain? What recommendations might you make?
 
-Hasnt been much work to ensure and create mcp security benchmarks
+discuss ethics and try and find solid ending that gives overall message.
