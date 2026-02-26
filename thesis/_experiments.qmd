@@ -12,6 +12,8 @@ There is currently very limited research evaluating MCP security tools, which ma
 
 Unlike traditional software, where tests check if a feature works as expected, security tools must be tested against realistic threats and adversarial scenarios. This requires simulating attacks and observing whether a tool can effectively defend against them. For this reason, the experiments in this chapter are designed to replicate what a real-world MCP tool poisoning or tool shadowing attack might look like, and to assess Pysealer's performance in mitigating these threats.
 
+In addition to these attack simulations, an analysis of pysealer and mcp-scan's features is also included. This was chosen because there is currently no comprehensive mcp benchmarking framework that is reliable, widely accepcted, and reasonable to use. To address this gap, the OWASP Top 10 for LLM Applications is used as an objective threat model [@owasp-llm-top-10]. Based on each tools basic functionality, a mapping of which OWASP LLM Top 10 security risks each tool is designed to mitigate is created. The mapping indicates whether each tool covers, partially covers, and does not cover the specific security risk. This mapping is based on the documented features and capabilities of each tool, as well as the types of vulnerabilities they are designed to address. This mapping is based on the documented features and capabilities of each tool, as well as the types of vulnerabilities they are designed to address. By using the OWASP LLM Top 10 as a standardized framework for categorizing security risks, the comparison between Pysealer and mcp-scan can be conducted in a more transparent manner.
+
 ### Attack Simulation Methodology
 
 There are four primary experiments that are a part of the attack simulation: pysealer tool poisoning, pysealer tool shadowing, mcp-scan tool poisoning, and mcp-scan tool shadowing. All experiments are run through a unified script, which orchestrates the attack simulations and collects output from each tool for analysis. The pysealer-experiments repository provides the full codebase and configuration files, ensuring transparency and reproducibility [@pysealer-experiments].
@@ -19,6 +21,13 @@ There are four primary experiments that are a part of the attack simulation: pys
 Each attack simulation is designed to mimic realistic upstream tool poisoning and tool shadowing attacks. Tool poisoning can occur when threat actors embed malicious instructions within the docstrings of MCP tools, often aiming to alter the tools behavior or compromise its integrity. On the other hand, tool shadowing can occur when a threat actor adds a new tool that is contextually similar to an existing tool, with the intent of confusing the LLM and causing it to invoke the wrong tool. Both pysealer and mcp-scan are subjected to these attack vectors in these experiments.
 
 A critical aspect of computational experiments is reproducibility. To ensure the results of this study can be reliably replicated, the experiments are conducted within a controlled environment. Specifically, these experiments leverage Docker containers to create a consistent and isolated environment for each attack simulation [@docker]. Simply put, Docker is a tool that lets you package software and its dependencies into a container, so it runs the same way everywhere. By using Docker to run the experiments, it eliminates the different operating systems, library versions, and other environmental factors that could affect the results. In addition to Docker, specific versions of Python, Pysealer, and mcp-scan are used to further ensure consistency between experiments. Specific versions are important because security tools are often updated to address new vulnerabilities, and using different versions could lead to inconsistent results. By controlling these variables, the experiments can be reliably reproduced by other researchers or practitioners interested in evaluating Pysealer's effectiveness.
+
+### Feature Comparison Methodology
+
+The feature comparison does not involve code and purely involves analyzing each tools documentation and capabilites to determine which OWASP LLM Top 10 security risks each tool is designed to mitigate. 
+
+
+This analysis is based on the documented features and capabilities of each tool, as well as the types of vulnerabilities they are designed to address. By using the OWASP LLM Top 10 as a standardized framework for categorizing security risks, the comparison between Pysealer and mcp-scan can be conducted in a more transparent manner. The mapping of coverage for each security risk is determined by evaluating how well each tool's features align with the specific vulnerabilities outlined in the OWASP LLM Top 10. This involves assessing whether the tool provides comprehensive protection against the risk (covered), offers some level of mitigation but may not fully address all aspects of the risk (partially covered), or does not provide any relevant features to mitigate the risk (not covered). This systematic approach allows for a clear and objective comparison of the security capabilities of both tools across a range of common threats in the MCP ecosystem.
 
 ### Ethical Considerations in Security Experimentation
 
@@ -103,9 +112,24 @@ This experiment evaluates mcp-scan's ability to detect the same tool shadowing a
 
 The mcp-scan output provides a clear and actionable signal to developers. By flagging the destructive toxic flow, mcp-scan enables developers to quickly identify and address risky tool combinations before they can be exploited. This type of static analysis error is specifically valuable for preventing tool shadowing attacks from occuring. Overall, the [TF002] warning demonstrates mcp-scan's effectiveness in detecting multi-tool security risks that may not be immediately obvious from code inspection alone.
 
-## Feature Comparison xxxxxxx
+## MCP Scan Feature Comparison
 
-table here and talk
+IN order to asses pysealer's effectiveness across multiple security threat classes
+
+table here
+security risks:
+https://genai.owasp.org/llm-top-10/
+https://github.com/snyk/agent-scan
+LLM01:2025 Prompt Injection
+LLM02:2025 Sensitive Information Disclosure
+LLM03:2025 Supply Chain
+LLM04:2025 Data and Model Poisoning
+LLM05:2025 Improper Output Handling
+LLM06:2025 Excessive Agency
+LLM07:2025 System Prompt Leakage
+LLM08:2025 Vector and Embedding Weaknesses
+LLM09:2025 Misinformation
+LLM10:2025 Unbounded Consumption
 
 ## Internal Test Suite
 
@@ -130,6 +154,7 @@ this is where i have a table showing the results of the internal test suite. add
 because this is a security related project, there are many threats that could invalidate the results of the attack simulations.
 
 Threats to validity → its a sandbox in running a test works in limited controlled environment. Hasnt been deployed on production scale system. fix
+FEATURES OF TOOLS CHANGE. THIS COMPARES PYSEALER 1.0.0 TO MCP SCAN 0.4.2
 
 not really this as much
 Pysealer security threats
