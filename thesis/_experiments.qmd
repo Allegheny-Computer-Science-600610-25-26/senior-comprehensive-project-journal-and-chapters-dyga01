@@ -8,31 +8,17 @@ In addition to external benchmarking, this chapter also details Pysealer’s int
 
 ## Experimental Design
 
-There is currently very limited research evaluating MCP security tools, which makes it challenging to benchmark Pysealer against direct competitors or even existing MCP vulnerabilities. Choosing to compare Pysealer and MCP Scan, even though they operate fundamentally differently, is important because it highlights the diversity of security strategies available for MCP systems. By evaluating both approaches, this chapter demonstrates how combining different security strategies can lead to more comprehensive protection. The comparison is also valuable because it provides a broader perspective on MCP security, showing how static analysis and active defense can complement each other.
+There is currently very limited research evaluating MCP security tools, which makes it challenging to benchmark Pysealer against direct competitors or even existing MCP vulnerabilities. Choosing to compare Pysealer and `mcp-scan`, even though they operate fundamentally differently, is important because it highlights the diversity of security strategies available for MCP systems. By evaluating both approaches, this chapter demonstrates how combining different security strategies can lead to more comprehensive protection. The comparison is also valuable because it provides a broader perspective on MCP security, showing how static analysis and active defense can complement each other.
 
 Unlike traditional software, where tests check if a feature works as expected, security tools must be tested against realistic threats and adversarial scenarios. This requires simulating attacks and observing whether a tool can effectively defend against them. For this reason, the experiments in this chapter are designed to replicate what a real-world MCP tool poisoning or tool shadowing attack might look like, and to assess Pysealer's performance in mitigating these threats.
 
 ### Attack Simulation Methodology
 
-this chapter contains 4 primary experiments. 
-- pysealer tool poisoining
-- pysealer tool shadowing
-- mcp scan tool poisoning
-- mcp scan tool shadowing
-(reference experiments repo here)
+There are four primary experiments that are a part of the attack simulation: pysealer tool poisoning, pysealer tool shadowing, `mcp-scan` tool poisoning, and `mcp-scan` tool shadowing. All experiments are run through a unified script, which orchestrates the attack simulations and collects output from each tool for analysis. The `pysealer-experiments` repository provides the full codebase and configuration files, ensuring transparency and reproducibility [@pysealer-experiments].
 
-is fundamental to unsertsand that pysealer and mcp scan aim to protect mcp servers in different. ways. describe how they are different.
-Comparison to MCP Scan. some sort of place to say how the tools secure things differently. call to action for more work.
-what features am i going to compare
-COMPARE AND CONTRAST WITH MCP SCAN. HOW COULD THEY BE USED TOGETHER.
-Grids of features and List what my tool does that other competitors dont do like Mcp scan and mcp guardian
-Table in the experiments section
-Feature Comparison Tables
-Threat classes covered: prompt injection, tool poisoning, cross‑origin escalation, “rug pulls,” data exfiltration, etc.
-find a way to compare from a apaper
-SHOULD I ADD A TABLE HERE TO SHOW DIFFERENT FEATURES
+Each attack simulation is designed to mimic realistic upstream tool poisoning and tool shadowing attacks. Tool poisoning can occur when threat actors embed malicious instructions within the docstrings of MCP tools, often aiming to alter the tools behavior or compromise its integrity. On the other hand, tool shadowing can occur when a threat actor adds a new tool that is contextually similar to an existing tool, with the intent of confusing the LLM and causing it to invoke the wrong tool. Both pysealer and `mcp-scan` are subjected to these attack vectors in these experiments.
 
-the experiments are all run within on script (run_experiments.py) that simulates the attacks and shows each tools output.this script does x.another important concept when performing computational experiments is reproduciblity. for these experiments. docker. python version. pysealer version. mcp scan version. all are important to control.
+A critical aspect of computational experiments is reproducibility. To ensure the results of this study can be reliably replicated, the experiments are conducted within a controlled environment. Specifically, these experiments leverage Docker containers to create a consistent and isolated environment for each attack simulation [@docker]. Simply put, Docker is a tool that lets you package software and its dependencies into a container, so it runs the same way everywhere. By using Docker to run the experiments, it eliminates the different operating systems, library versions, and other environmental factors that could affect the results. In addition to Docker, specific versions of Python, Pysealer, and `mcp-scan` are used to further ensure consistency between experiments. Specific versions are important because security tools are often updated to address new vulnerabilities, and using different versions could lead to inconsistent results. By controlling these variables, the experiments can be reliably reproduced by other researchers or practitioners interested in evaluating Pysealer's effectiveness.
 
 ### Ethical Considerations in Security Experimentation
 
@@ -224,3 +210,16 @@ if a threat actor has access to the private key in any which way. the pysealer t
 if the pysealer tool fails to add a deco to a function or class. that code may be unprotected.
 If Pysealer is compromised itself or if its dependencies are themselves compromised (e.g., via supply chain attacks), the tool could be subverted.
 if pysealer is not up to date. newley discovered vulnerabilities may not be protected against. this is a common problem with security tools in general
+
+
+
+is fundamental to unsertsand that pysealer and mcp scan aim to protect mcp servers in different. ways. describe how they are different.
+Comparison to MCP Scan. some sort of place to say how the tools secure things differently. call to action for more work.
+what features am i going to compare
+COMPARE AND CONTRAST WITH MCP SCAN. HOW COULD THEY BE USED TOGETHER.
+Grids of features and List what my tool does that other competitors dont do like Mcp scan and mcp guardian
+Table in the experiments section
+Feature Comparison Tables
+Threat classes covered: prompt injection, tool poisoning, cross‑origin escalation, “rug pulls,” data exfiltration, etc.
+find a way to compare from a apaper
+SHOULD I ADD A TABLE HERE TO SHOW DIFFERENT FEATURES
