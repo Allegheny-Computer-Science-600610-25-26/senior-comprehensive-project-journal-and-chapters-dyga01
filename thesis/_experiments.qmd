@@ -111,7 +111,7 @@ The mcp-scan output provides a clear and actionable signal to developers. By fla
 
 ## MCP Scan Feature Comparison
 
-IN order to asses pysealer's effectiveness across multiple security threat classes
+IN order to asses pysealer's effectiveness across multiple security threat classes, the table below compares them. 
 
 table here
 security risks:
@@ -127,6 +127,23 @@ LLM07:2025 System Prompt Leakage
 LLM08:2025 Vector and Embedding Weaknesses
 LLM09:2025 Misinformation
 LLM10:2025 Unbounded Consumption
+
+```
+Table: A two-row table demonstrating tables
+
+| Security Risk                                 | pysealer | mcp-scan | Notes                                                                                   |
+|:----------------------------------------------|:--------:|:----------:|:---------------------------------------------------------------------------------------|
+| LLM01:2025 Prompt Injection                   |    ❌    |     ✔️     | mcp-scan detects prompt injection patterns; pysealer does not address prompts.        |
+| LLM02:2025 Sensitive Information Disclosure   |    ❌    |     ✔️     | mcp-scan scans for secrets/tokens; pysealer does not scan for info leaks.            |
+| LLM03:2025 Supply Chain                       |    ✔️    |     ✔️     | pysealer ensures code integrity; mcp-scan checks dependencies for vulnerabilities.    |
+| LLM04:2025 Data and Model Poisoning           |    ✔️    |     ➖     | pysealer detects unauthorized code changes; mcp-scan may catch some poisoning vectors.|
+| LLM05:2025 Improper Output Handling           |    ❌    |     ✔️     | mcp-scan can flag unsafe output patterns; pysealer does not analyze outputs.          |
+| LLM06:2025 Excessive Agency                   |    ❌    |     ✔️     | mcp-scan can detect risky agent behaviors; pysealer does not address this.           |
+| LLM07:2025 System Prompt Leakage              |    ❌    |     ✔️     | mcp-scan can detect prompt leaks; pysealer does not address prompts.                 |
+| LLM08:2025 Vector and Embedding Weaknesses    |    ❌    |     ✔️     | mcp-scan can flag unsafe embedding/vector usage; pysealer does not.                  |
+| LLM09:2025 Misinformation                     |    ❌    |     ❌     | Neither tool can detect or prevent misinformation.                                     |
+| LLM10:2025 Unbounded Consumption              |    ❌    |     ✔️     | mcp-scan can flag unbounded resource usage; pysealer does not.                       |
+```
 
 ## Internal Test Suite
 
