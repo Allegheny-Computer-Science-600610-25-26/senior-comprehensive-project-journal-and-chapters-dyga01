@@ -111,7 +111,7 @@ The mcp-scan output provides a clear and actionable signal to developers. By fla
 
 ## MCP Scan Feature Comparison
 
-After a thorough analysis of the pysealer and mcp-scan documentation, Figure 12 presents a high-level comparison of how each tool addresses the OWASP LLM Top 10 security risks. This table is constructed based on the documented features and intended capabilities of each tool, mapping them to the relevant threat classes. The goal is to provide a clear overview of the security coverage offered by pysealer and mcp-scan. The table below summarizes which security risks are theoretically mitigated by each tool. A checkmark (✓) indicates that the tool is designed to address the risk, a cross (✗) means it does not, and a dash (–) denotes partial coverage based on current documentation.
+After a thorough analysis of the pysealer and mcp-scan documentation, Figure 12 presents a high-level comparison of how each tool addresses the OWASP LLM Top 10 security risks [@owasp-llm-top-10]. This table is constructed based on the documented features and intended capabilities of each tool, mapping them to the relevant threat classes. The goal is to provide a clear overview of the security coverage offered by pysealer and mcp-scan. The table below summarizes which security risks are theoretically mitigated by each tool. A checkmark (✓) indicates that the tool is designed to address the risk, a cross (✗) means it does not, and a dash (–) denotes partial coverage based on current documentation.
 
 | Security Risk                                 | pysealer | mcp-scan |
 |:----------------------------------------------|:--------:|:--------:|
@@ -137,21 +137,9 @@ Overall, the table illustrates that pysealer and mcp-scan are complementary tool
 
 ## Internal Test Suite
 
-mention this section and briefly talk about **
-idk what todo for this section yet. depends on previous sections.
+Aside from all security evaluation and comparisons with tools like MCP Scan, it is essential to view and evaluate Pysealer through its own metrics. Pysealer includes a comprehensive internal test suite powered by pytest, a widely used Python testing framework [@pytest-doc]. The test suite is designed to validate the basic behavior and reliability of Pysealer’s core functionality, including decorator insertion, signature verification, and command-line operations. By including internal tests for Pysealer, it helps developers know if changes to the codebase have broken any of the core features. This is crucial for maintaining the Pysealer tool as future contributions are made.
 
---> or just say pysealer testing. subsection for internal and extermanl testing. internal ==pytest. external ==experiments
-in addition to comparing pysealer to mcp scan, it is also important to view and evaluate pysealer on its own. ND internal test suite measuring effectiveness of decorator insertion (can do multiple experiments just have them relate to security) pytest cite
-
-pysealer utilizes pystest to test it basic behavior. cite pytest and basic explanation. explain test coverage. say pysealer achieves ____ coverage now_____
-
-its important to measure accuracy of decorator insertion.
-
-Real World Dataset testing.: Apply pysealer to real mcp servers and see if it is successfull
-Decorator insertion accuracy: Percentage of functions/classes successfully decorated across diverse codebases
-Signature verification accuracy: False positive/negative rates when detecting unauthorized modifications
-
-this is where i have a table showing the results of the internal test suite. add to this later on.
+An internal test suite is an extremely important software engineering practice and metric. It not only provides confidence in the correctness of the tool, but also acts as a safety net for ongoing development. As Pysealer evolves, the test suite ensures that new features and bug fixes do not inadvertently compromise existing functionality. Pysealer’s current test suite consists of 75 tests that achieve 72% total coverage of the Python codebase. Coverage is important because it indicates how much of the code is being tested by the test suite. Its also important to mention that all of the 75 tests are currently passing, which helps ensure that the core functionality of Pysealer is working as intended. While the Python code is well-tested, the underlying Rust code responsible for cryptographic operations is not yet covered by automated tests.
 
 ## Threats to Validity
 
