@@ -2,6 +2,10 @@
 
 what are the qualified success. successs, failure>>>>>>
 
+what does it mean that it is this
+
+why would it be broadly categorizes as this
+
 ## Summary of Results
 
 broad level summary paragraph here
@@ -10,27 +14,45 @@ broad level summary paragraph here
 
 what do these experiments find and show
 
+show that pysealer is able to detect and prevent both upstream tool poison and shadow attack
+
+show that mcp scan can detect both as well but in a different way.
+
 ### MCP Scan Feature Comparison
 
 what do these experiments find and show
 
-multipurpose security approach to mcp security is best. 
+multipurpose security approach to mcp security is best. use the strengths of many security tools working together to provide the best security for mcp servers
 
 ## Future Work
 
 talk about the limitations of the pysealer tool
+there is much work to be done
 
 ### Pysealer Limitations
 
+broad statement
+
 everythign in the contirbution doc
+- Integrate the fnox secrets tool for secrets management. This will improve secret management, making it easier to share Pysealer private and public keys among multiple developers.
+- Fix `ruff` linting errors in the current project to ensure Python code adheres to the project's standards.
+- Add a Rust-based linter to enforce consistent coding standards for the Rust codebase.
+- Increase test coverage by adding more tests for the Python implementation of the tool.
+- Ensure compatibility with `ruff` by resolving any existing issues and maintaining compliance.
+- Explore using Maturin's Sphinx integration to generate comprehensive documentation for the project.
+- Automatically add a GitHub Actions check whenever the `init` command is run. Include an option to enable or disable this feature.
 
 ### MCP Security Benchmarks
 
 Hasnt been much work to ensure and create mcp security benchmarks. mcp security benchamrks work
+
+why did what i test not work. like why is mcpsecbench bad
+
+what specifically should be done.
 
 ## Future Ethical Implications and Recommendations
 
 Especially as pertains to the public release or use of your software or methods, what
 unresolved or special issues remain? What recommendations might you make?
 
-discuss ethics and try and find solid ending that gives overall message.
+x not too sure what to put here
