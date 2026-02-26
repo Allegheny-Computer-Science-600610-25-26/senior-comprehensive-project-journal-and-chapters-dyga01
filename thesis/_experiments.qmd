@@ -1,9 +1,12 @@
 # Experiments
 
-this chapter aims to evaluate the effectiveness of pysealer and its defense in depth capabilities. the experiments introduced in this chapter are designed to assess the tool's security. 
-- pysealer used to defend against mcp tool poisoning (figure 2) and shadowing attacks(figure 3) that i introduced in the introduction
-- comparing the security features of pysealer compared to mcp scan, the one of the most popular mcp security tools on the market. (reference mcp scan here.)
-- highlighting pysealers internal test suite that measures the effectiveness of the decorator insertion and signature verification process
+This chapter evaluates the effectiveness of Pysealer and its defense-in-depth capabilities. The primary goal of this chapter is to assess Pysealer’s ability to detect and mitigate security threats like tool poisoning and tool shadowing attacks. In order to achieve this, Pysealer experiments were set up to demonstrate and simulate the exact tool poisoning attack in Figure 2 and tool shadowing attack in Figure 3. By simulating these attacks, Pysealer's defense-in-depth mechanisms can be tested in a controlled environment, allowing for a clear demonstration of its protective capabilities.
+
+To provide a comprehensive evaluation, Pysealer’s approach is compared against `mcp-scan`, one of the most widely used security tools in the MCP ecosystem. More specifically, `mcp-scan` serves to scan MCP servers for common threats such as prompt injections, sensitive data handling, and malware payloads hidden in natural language [@mcp-scan]. Its important to note that `mcp-scan` provides a fundametally different approach to security than pysealer by focusing on static analysis of the codebase to identify potential vulnerabilities. In contrast, Pysealer actively protects the codebase through decorator insertion and signature verification. This comparison allows for identifying which aspects of security both approaches cover and where there may be gaps in coverage.
+
+There is currently very limited research evaluating MCP security tools, which makes it challenging to benchmark Pysealer against direct competitors or even existing MCP vulnerabilities. Choosing to compare Pysealer and MCP Scan, even though they operate fundamentally differently, is important because it highlights the diversity of security strategies available for MCP systems. By evaluating both approaches, this chapter demonstrates how combining different security strategies can lead to more comprehensive protection. The comparison is also valuable because it provides a broader perspective on MCP security, showing how static analysis and active defense can complement each other.
+
+In addition to external benchmarking, this chapter also details Pysealer’s internal test suite. This suite is critical for measuring the accuracy and reliability of Pysealer’s core mechanisms, such as decorator insertion and signature verification. By also testing the effectiveness of Pysealer itself, this aims to provide a more holistic view of its effectiveness. These internal tests are designed to ensure that Pysealer’s protective features are functioning as intended and that they can be reliably applied across different codebases. This is crucial for establishing confidence in Pysealer’s reliability and robustness. 
 
 ## Experimental Design
 
@@ -34,6 +37,8 @@ the experiments are all run within on script (run_experiments.py) that simulates
 ### Ethical Considerations in Security Experimentation
 
 one last things that is important to note is the xethics of performing security related experiments. running these experiments on real mcp servers could cause harm to real systems and data. for this reason, all experiments in this chapter are conducted in a controlled environment using simulated attacks. its also important to note that 
+
+why is it so hard ethically????/
 
 ## Simulated Attacks
 
@@ -88,6 +93,7 @@ what is the output of mcpscan. (figure x)
 
 explain what the output of mcpscan means here
 
+CUT THIS OUTPUT
 ```text
 Invariant MCP-scan v0.4.2
 
@@ -162,6 +168,7 @@ what is the output of mcpscan. (figure x)
 
 explain what the output of mcpscan means here
 
+CUT THIS OUTPUT
 ```text
 Invariant MCP-scan v0.4.2
 
@@ -189,6 +196,7 @@ https://explorer.invariantlabs.ai/docs/mcp-scan/issue-code-reference/#TF002
 
 ## Internal Test Suite
 
+mention this section and briefly talk about **
 idk what todo for this section yet. depends on previous sections.
 
 --> or just say pysealer testing. subsection for internal and extermanl testing. internal ==pytest. external ==experiments
@@ -208,6 +216,9 @@ this is where i have a table showing the results of the internal test suite. add
 
 because this is a security related project, there are many threats that could invalidate the results of the attack simulations.
 
+Threats to validity → its a sandbox in running a test works in limited controlled environment. Hasnt been deployed on production scale system. fix
+
+not really this as much
 Pysealer security threats
 if a threat actor has access to the private key in any which way. the pysealer tool could be compromised. get key from env file or other if private key is stored insecurely
 if the pysealer tool fails to add a deco to a function or class. that code may be unprotected.
