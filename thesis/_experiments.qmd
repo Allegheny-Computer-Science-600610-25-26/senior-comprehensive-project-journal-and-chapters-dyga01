@@ -99,38 +99,9 @@ This output demonstrates that Pysealer is able to accurately detect the introduc
 
 ### MCP-Scan Tool Shadowing Attack
 
-show a walk through of how it would protect against tool shadowing attack.
-reference figure from the introduction. 
+This experiment evaluates mcp-scan's ability to detect the same tool shadowing attack that was simulated for Pysealer. The attack introduces a new tool named `create_ticket_better` that is designed to shadow the legitimate `create_ticket` tool. The output of mcp-scan for the tool shadowing attack correctly identifies a significant security concern. Specifically, mcp-scan raises a [TF002] warning, indicating that a "Destructive toxic flow" has been detected [@invariantlabs-mcpscan-issues]. This warning means that the MCP Server has access to at least one tool that produces untrusted content and another tool that can behave destructively. The presence of both types of tools within a MCP Server increases the risk that untrusted or manipulated data could be passed to a destructive tool. In the context of this experiment, the introduction of the `create_ticket_better` tool alongside the legitimate `create_ticket` tool creates a scenario where the MCP Server's toolset is potentially dangerous.
 
-what is the output of mcpscan. (figure x)
-
-explain what the output of mcpscan means here
-
-CUT THIS OUTPUT
-```text
-Invariant MCP-scan v0.4.2
-
-● Scanning tool-shadowing/post_mcp_config.json found 1 mcp server
-│
-└── it-ticket-agent
-    ├── tool        create_ticket_better      ✅ 
-    └── tool        create_ticket             ✅ 
-
-⚠️ [TF002]: Destructive toxic flow detected. The same agent has access to at least one tool that produces untrusted
-content and one tool that can behave destructively. For more information, see 
-https://explorer.invariantlabs.ai/docs/mcp-scan/issue-code-reference/#TF002
-├── Untrusted Content Tool
-│   ├── it-ticket-agent/create_tick... High
-│   └── it-ticket-agent/create_ticket  High
-└── Destructive Tool
-    ├── it-ticket-agent/create_tick... Low
-    └── it-ticket-agent/create_ticket  Low
-```
-\begin{figure}[h!]
-\centering
-\caption{MCP Scan Detection of Tool Shadowing Attack}
-\label{fig:mcpscan-detect-tool-shadowing-attack}
-\end{figure}
+The mcp-scan output provides a clear and actionable signal to developers. By flagging the destructive toxic flow, mcp-scan enables developers to quickly identify and address risky tool combinations before they can be exploited. This type of static analysis error is specifically valuable for preventing tool shadowing attacks from occuring. Overall, the [TF002] warning demonstrates mcp-scan's effectiveness in detecting multi-tool security risks that may not be immediately obvious from code inspection alone.
 
 ## Feature Comparison xxxxxxx
 
