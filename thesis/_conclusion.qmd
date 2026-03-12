@@ -1,58 +1,31 @@
 # Conclusion
 
-what are the qualified success. successs, failure>>>>>>
+The experiments conducted reveal that Pysealer can be considered a qualified success. Pysealer was shown to succesfully detect and prevent both upstream tool poisoning and shadow attacks in a simulated environment. The experiments also demonstrated that mcp-scan was able to detect both of these attack vectors. Though Pysealer and MCP Scan are fundamentally different tools with different approaches to security, they both showed promise in mitigating tool poisoning and tool shadowing attack vectors. Additionally, Pysealer met its primary goals of detecting version control changes, preventing upstream attacks, and enabling defense in depth. During the experiments, Pysealer was able to detect whenever a MCP Server's tool changed, report exactly which lines changed, and prevent the attack from succeeding.
 
-what does it mean that it is this
-
-why would it be broadly categorizes as this
+However, the absence of established MCP security benchmarking frameworks and the lack of real-world MCP Server testing limit the strength of this conclusion. While Pysealer is effective in mitigating specific attack vectors, its effectiveness in production environments remains unproven. Because of this, this work is best categorized as a qualified success: it provides strong evidence of feasibility in simulation, but further validation and benchmarking are needed to fully establish its reliability in real-world contexts.
 
 ## Summary of Results
 
-broad level summary paragraph here
-
 ### Simulated Attacks
 
-what do these experiments find and show
-
-show that pysealer is able to detect and prevent both upstream tool poison and shadow attack
-
-show that mcp scan can detect both as well but in a different way.
+x
 
 ### MCP Scan Feature Comparison
 
-what do these experiments find and show
-
-multipurpose security approach to mcp security is best. use the strengths of many security tools working together to provide the best security for mcp servers
+x
 
 ## Future Work
 
-talk about the limitations of the pysealer tool
-there is much work to be done
+x
 
 ### Pysealer Limitations
 
-broad statement
-
-everythign in the contirbution doc
-- Integrate the fnox secrets tool for secrets management. This will improve secret management, making it easier to share Pysealer private and public keys among multiple developers.
-- Fix `ruff` linting errors in the current project to ensure Python code adheres to the project's standards.
-- Add a Rust-based linter to enforce consistent coding standards for the Rust codebase.
-- Increase test coverage by adding more tests for the Python implementation of the tool.
-- Ensure compatibility with `ruff` by resolving any existing issues and maintaining compliance.
-- Explore using Maturin's Sphinx integration to generate comprehensive documentation for the project.
-- Automatically add a GitHub Actions check whenever the `init` command is run. Include an option to enable or disable this feature.
+x
 
 ### MCP Security Benchmarks
 
-Hasnt been much work to ensure and create mcp security benchmarks. mcp security benchamrks work
-
-why did what i test not work. like why is mcpsecbench bad
-
-what specifically should be done.
+x
 
 ## Future Ethical Implications and Recommendations
 
-Especially as pertains to the public release or use of your software or methods, what
-unresolved or special issues remain? What recommendations might you make?
-
-x not too sure what to put here
+x
