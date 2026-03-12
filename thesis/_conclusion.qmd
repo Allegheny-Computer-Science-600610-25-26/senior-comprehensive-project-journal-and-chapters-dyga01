@@ -22,7 +22,17 @@ This distinction highlights how these tools can complement each other. While Pys
 
 ## Future Work
 
-x
+There are several avenues for future work to both enhance the capabilities of Pysealer and develop more comprehensive MCP security benchmarks that will ultimately help validate new MCP security tools. For Pysealer, it's recommended that future work focuses on integrating advanced secrets management tools. This could allow for more secure handling of cryptographic keys and better multi-developer collaboration. Additionally, conducting real-world testing on live MCP servers is essential to evaluate Pysealer's effectiveness in production environments. Such testing would provide more valuable insights into its performance, scalability, and ability to handle real-world threat vectors.
+
+Additionally, future work should explore integrating Pysealer with other security tools. This research suggests that there may be significant benefits to layering MCP security tools together to create a more robust security framework. By combining Pysealer's defense-in-depth approach with the detailed vulnerability analysis provided by tools like mcp-scan, it may be possible to address a broader range of threat vectors.
+
+One last important direction is the development of standardized MCP security benchmarks, as there is currently a lack of established frameworks for evaluating MCP security tools. These benchmarks would be able to simulate various threat vectors on MCP servers and provide automations to evaluate the effectiveness of different security tools in mitigating these threats. It would be ideal if these benchmarks could include a diverse set of attack scenarios as well. By creating a comprehensive benchmarking framework, both researchers and developers would have a stronger system to evaluate the security of the tools that they use to secure their MCP servers.
+
+There are several avenues for future work to both enhance the capabilities of Pysealer and develop more comprehensive MCP security benchmarks that will ultimately help validate new MCP security tools. For Pysealer, it's recommended that future work focuses on integrating advanced secrets management tools. This could allow for more secure handling of cryptographic keys and better multi-developer collaboration. Additionally, conducting real-world testing on live MCP servers is essential to evaluate Pysealer's effectiveness in production environments. Such testing would provide more valuable insights into its performance, scalability, and ability to handle real-world threat vectors.
+
+Additionally, future work should explore integrating Pysealer with other security tools. This research suggests that there may be significant benefits to layering MCP security tools together to create a more robust security framework. By combining Pysealer's defense-in-depth approach with the detailed vulnerability analysis provided by tools like mcp-scan, it may be possible to address a broader range of threat vectors.
+
+One last important direction is the development of standardized MCP security benchmarks, as there is currently a lack of established frameworks for evaluating MCP security tools. These benchmarks would be able to simulate various threat vectors on MCP servers and provide automations to evaluate the effectiveness of different security tools in mitigating these threats. It would be ideal if these benchmarks could include a diverse set of attack scenarios as well. By creating a comprehensive benchmarking framework, both researchers and developers would have a stronger system to evaluate the security of the tools that they use to secure their MCP servers.
 
 ### Pysealer Limitations
 
