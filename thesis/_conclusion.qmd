@@ -16,7 +16,9 @@ Overall, the results demonstrate that Pysealer and mcp-scan each provide valuabl
 
 ### MCP Scan Feature Comparison
 
-x
+In addition to demonstrating the effectiveness of Pysealer and mcp-scan against simulated attacks, it's important to cover the differences in the security capabilities of these tools. The results of the feature comparison table show that no single tool can address all possible threat vectors within the OWASP LLM Top 10 security risks. By looking at this table, it can be seen that Pysealer primarliy addresses supply chain and upstream attacks. Whereas mcp-scan addresses a wider range of LLM-specific security risks including prompt injection.
+
+This distinction highlights how these tools can complement each other. While Pysealer excels at mitigating supply chain risks by protecting the upstream, it does not address risks like prompt injection or improper output handling. Conversely, mcp-scan is designed to identify and mitigate these LLM-specific vulnerabilities, such as sensitive information disclosure. Together, these tools can provide a layered security approach that leverages each of their unique strengths to address various threat vectors.
 
 ## Future Work
 
