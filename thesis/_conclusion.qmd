@@ -44,6 +44,16 @@ One final limitation is Pysealer’s current lack of in-depth testing. Pysealer'
 
 x
 
+through conducting this reseach, it became clear that there is a significant gap in the availability of standardized MCP security benchmarks. this is not only important in order for mcp security tool developers to evaulate their tools but also for real-world developers to have a way to test the security of their mcp servers. 
+
+
+MCP SEC BENCH CHAPTER 1 SOURCE ERROR AND REWRITE.
+
+security benchmarks. This gap makes it difficult for researchers and developers to evaluate the effectiveness of new MCP security tools in a consistent and comprehensive manner. The lack of established frameworks for testing MCP security tools means that many tools are only evaluated against a limited set of attack vectors, which may not fully capture the range of threats that exist in real-world environments.
+mention the tools that i tryed out. say that they were difficult to use. not well doucmented more.
+One last important direction is the development of standardized MCP security benchmarks, as there is currently a lack of established frameworks for evaluating MCP security tools. These benchmarks would be able to simulate various threat vectors on MCP servers and provide automations to evaluate the effectiveness of different security tools in mitigating these threats. It would be ideal if these benchmarks could include a diverse set of attack scenarios as well, such as those outlined in the OWASP LLM Top 10 mentioned previously [@owasp-llm-top-10]. By creating a comprehensive benchmarking framework, both researchers and developers would have a stronger system to evaluate the security of the tools that they use to secure their MCP servers.
+
+
 ## Future Ethical Implications and Recommendations
 
-x
+add a few subsections. 2 is good
