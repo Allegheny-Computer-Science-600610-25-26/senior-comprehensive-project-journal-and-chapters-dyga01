@@ -48,4 +48,14 @@ The ideal MCP security benchmarking framework would provide automated testing ca
 
 ## Future Ethical Implications and Recommendations
 
-add a few subsections. 2 is good
+### Responsible Disclosure of MCP Threat Vectors
+
+Responsible disclosure is an integral ethical aspect of keeping up with MCP security trends. It's extremely important that researchers, developers, and users all publish exploit details whenver they come across a new attack vector. Without coordination and proper disclosure practices, developers, organizations, and end users could be exposed to immediate risk before defenses are available. An example of resposible disclosure could be a coordinated process where researchers privately notify maintainers of the vulnerable MCP server, provide reproducible evidence of the attack vector, and allow time for remediation before publicly disclosing the vulnerability. By communicating vulnerabilities in a way that prioritizes safety, responsible disclosure can help foster a more secure and resilient MCP ecosystem.
+
+Responsible disclosure is also essential for improving Pysealer against new and evolving attacks. Reporting new attack vectors specifically targeting Pysealer could help improve the tool's security. For example, private disclosure of a novel bypass technique that successfully evades Pysealer's defenses would allow for the tool's specific weakness to be mitigated before the attack vector is widely known. This is extremely important and would allow for the Pysealer tool to continue to evolve and adapt to new attack vectors.
+
+### Recommendations for Secure MCP Adoption
+
+practical recommendations include only using mcp servers from official registries like github, or the official mcp registry. 
+
+additionally using proper security tools like pysealer and agent-scan and more for sandboxing and more to secure.
