@@ -56,6 +56,6 @@ Responsible disclosure is also essential for improving Pysealer against new and 
 
 ### Recommendations for Secure MCP Adoption
 
-practical recommendations include only using mcp servers from official registries like github, or the official mcp registry. 
+There are several best practices that developers and organizations can follow to securely adopt MCP servers. One of the most important recommendations is to prioritize adopting MCP servers from trusted and official sources. Specifically, developers should use registries like the official GitHub MCP Registry [@github-mcp-registry] and avoid installing unvetted servers from unknown third-party links. This is critical because it significantly reduces the risk of installing a compromised MCP server. Additionally, developers should pin server versions to specific releases, review change histories before upgrading, and validate integrity in CI pipelines to ensure that malicious updates are detected early. All of these are general best practices for software supply chain security that are especially important in the context of MCP servers.
 
-additionally using proper security tools like pysealer and agent-scan and more for sandboxing and more to secure.
+Another important recommendation is to use layered defenses rather than relying on a single security tool. In production settings, MCP servers should be protected with multiple complementary safeguards, including both pre-deployment scanning with tools such as agent-scan and code-integrity enforcement with Pysealer. By combining security tools, organizations can detect a wider range of threat vectors, reduce the likelihood of a single point of failure, and build a stronger defense-in-depth strategy for secure MCP adoption.
