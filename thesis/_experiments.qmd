@@ -113,6 +113,8 @@ The agent-scan output provides a clear and actionable signal to developers. By f
 
 After a thorough analysis of the pysealer and agent-scan documentation, Figure 12 presents a high-level comparison of how each tool addresses the OWASP LLM Top 10 security risks [@owasp-llm-top-10]. This table is constructed based on the documented features and intended capabilities of each tool, mapping them to the relevant threat classes. The goal is to provide a clear overview of the security coverage offered by pysealer and agent-scan. The table below summarizes which security risks are theoretically mitigated by each tool. A checkmark (✓) indicates that the tool is designed to address the risk, a cross (✗) means it does not, and a dash (–) denotes partial coverage based on current documentation.
 
+Table: Feature Comparison Table
+
 | Security Risk                                 | pysealer | agent-scan |
 |:----------------------------------------------|:--------:|:----------:|
 | LLM01:2025 Prompt Injection                   | $\times$        | $\checkmark$        |
@@ -125,11 +127,6 @@ After a thorough analysis of the pysealer and agent-scan documentation, Figure 1
 | LLM08:2025 Vector and Embedding Weaknesses    | $\times$        | $\times$            |
 | LLM09:2025 Misinformation                     | $\times$        | $\times$            |
 | LLM10:2025 Unbounded Consumption              | $\times$        | $\checkmark$        |
-\begin{figure}[h!]
-\centering
-\caption{Feature Comparison Table}
-\label{fig:feature-comparison-table}
-\end{figure}
 
 From this comparison, several broad conclusions can be drawn. Pysealer, as a general-purpose Python function defense-in-depth tool, can be particularly well-suited to mitigate supply chain risks. More specifically, attacks where threat actors attempt to modify the codebase itself can be protected by Pysealer. However, Pysealer does not directly address many of the runtime or prompt-based risks that are unique to LLM-powered systems. In contrast, agent-scan is designed to scan for vulnerabilities specific to MCP servers. Its static and dynamic analysis capabilities allow it to detect a wide range of issues more related to specific attack vectors similar to prompt injection. While agent-scan excels at identifying these risks, it is not designed to protect against supply chain attacks that involve unauthorized modifications to the codebase. 
 
