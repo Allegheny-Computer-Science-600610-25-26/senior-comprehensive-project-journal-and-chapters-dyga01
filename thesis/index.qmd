@@ -30,7 +30,7 @@ author:
       postal-code: 16335
 
 abstract: |
-  A well-researched student project. Like very.
+  Model Context Protocol (MCP) enables large language models (LLMs) to connect to external data sources through tools. However, MCP's reliance on tool descriptions for LLM decision making introduces critical security vulnerabilities. One threat vector is tool poisoning, where malicious instructions are embedded in tool descriptions to manipulate LLM behavior. Another threat vector is tool shadowing, where a new tool with a similar name and misleading description is introduced to confuse the LLM into using the wrong tool. Threat actors can complete these attacks by modifying the source code of an MCP Server through an upstream attack. This research introduces Pysealer, a defense-in-depth tool that cryptographically protects Python functions against unauthorized modifications. Pysealer automatically injects digital signatures as Python decorators, creating immutable fingerprints of Python functions. Any tampering invalidates these signatures, enabling rapid detection of upstream attacks. Even if a threat actor gains upstream access to a repository, Pysealer's private key would also be needed to generate a new valid signature for any modified function. This creates defense-in-depth by adding an additional security layer on top of source-control protections. Experimental results show that Pysealer successfully detects both tool poisoning and tool shadowing in simulated environments. Overall, this work demonstrates Pysealer’s practical value for defense-in-depth and identifies the critical need for standardized MCP security benchmarking.
 ---
 
 {{< include _introduction.qmd >}}
