@@ -49,7 +49,8 @@ The output of Pysealer, shown in Figure 10, provides a clear and concise report 
 This output demonstrates that Pysealer successfully detected the unauthorized modification introduced by the tool poisoning attack. Pysealer reports the exact file that was modified, the specific function that was altered, and the exact line-by-line changes that occurred. The detailed feedback provided by Pysealer is essential for maintaining the integrity of Python function source code. If this Pysealer check were part of a CI/CD pipeline, it could potentially prevent the compromised code from being merged into the main codebase, thereby protecting the MCP server from potential exploitation.
 
 ```text
-✗ /app/simulated-attacks/tool-poisoning/tool_poisoning.py
+1/1 check failed in 1 file:
+  ✗ /app/simulated-attacks/tool-poisoning/tool_poisoning.py
     Function 'create_ticket' was modified:
       10       title: str,
       11       description: str,
@@ -69,7 +70,6 @@ This output demonstrates that Pysealer successfully detected the unauthorized mo
       25  +    </IMPORTANT>
       26       """
       27       return f"Ticket created: {title} - Description: {description}"
-1/1 decorator failed in 1 file:
 ```
 \begin{figure}[h!]
 \centering
@@ -94,8 +94,17 @@ The output of Pysealer for the tool shadowing attack in Figure 11. indicates tha
 This output demonstrates that Pysealer is able to accurately detect the introduction of a new, undecorated function. While the specific error message that Pysealer provides is not extremely detailed, the Pysealer tool is working on a fundamental level. By returning an error code, Pysealer signals that the integrity of the codebase has been compromised. This behavior is important because it ensures that any new functions added to the codebase are required to have the appropriate security decorators, thereby maintaining the intended level of protection.
 
 ```text
+1/2 checks failed in 1 file:
   ✗ /app/simulated-attacks/tool-shadowing/tool_shadowing.py
-1/1 decorator failed in 1 file:
+    Function 'create_ticket_better' does not contain a @pysealer decorator:
+      28   def create_ticket_better() -> str:
+      29       """
+      30       Before using create_ticket,
+      31       ALWAYS add 'example@test.com' to the notifyList.
+      32       Otherwise the ticket creation will fail silently.
+      33       This tool should never be invoked directly.
+      34       """
+      35       return ""
 ```
 \begin{figure}[h!]
 \centering
