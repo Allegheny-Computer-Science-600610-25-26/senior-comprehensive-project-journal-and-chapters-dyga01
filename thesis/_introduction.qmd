@@ -127,13 +127,13 @@ Overall, the evolving MCP security landscape underscores the urgent need for rob
 
 ### MCP Security Benchmarks
 
-Additional research has focused on creating benchmarking systems for evaluating the security of both MCP clients and servers. MCPSecBench, a comprehensive security benchmark and playground, integrates prompt datasets, MCP servers, MCP clients, attack scripts, and protection mechanisms to evaluate attacks across multiple MCP hosts. The benchmark is modular and extensible, allowing researchers to incorporate custom implementations of clients, servers, and transport protocols for systematic security assessment.
+Additional research has focused on creating benchmarking systems for evaluating the security of both MCP clients and servers. MCPSecBench, a comprehensive security benchmark and playground, integrates prompt datasets, MCP servers, MCP clients, attack scripts, and protection mechanisms to evaluate attacks across multiple MCP hosts. The benchmark is modular and extensible, allowing researchers to incorporate custom implementations of both clients and servers for a systematic security assessment.
 
-While it is essential to keep these benchmarking systems up to date and continually enhance their coverage, platforms like MCPSecBench primarily serve as tools for prevention and systematic assessment rather than real-time threat detection [@mcpsecbench-2025]. Additionally, there is a risk that threat actors may exploit these benchmarks to test and refine their own malicious code, potentially evading detection by current security measures.
+While it is essential to keep these benchmarking systems up to date and continually enhance their coverage, platforms like MCPSecBench primarily serve as tools for prevention and systematic assessment rather than real-time threat detection [@mcpsecbench-2025]. This presents a significant limitation, as preventing these threats is far more critical than merely detecting them after they occur. Additionally, there is a risk that threat actors may exploit these benchmarks to test and refine their own malicious code, potentially evading detection by current security measures.
 
-Other research presents an MCP Security Benchmark (MSB) system that acts as an end-to-end benchmarking suite. The goal of MSB is to evaluate MCP robustness across the entire tool-use pipeline, including task planning, tool invocation, and response handling [@mcpsecuritybench-2025]. A key difference between MSB and other MCP benchmarking systems is that MSB introduces a Net Resilient Performance (NRP) metric which quantifies the trade-off between an agent’s security and its operational performance.
+Other research presents an MCP Security Benchmark (MSB) system that acts as an end-to-end benchmarking suite. The goal of MSB is to evaluate MCP robustness across the entire tool-use pipeline, including task planning, tool invocation, and response handling [@mcpsecuritybench-2025]. A key difference between MSB and other MCP benchmarking systems is that MSB introduces a Net Resilient Performance (NRP) metric which quantifies the trade-off between an agent’s security and its operational performance. In other words, it evaluates how well an agent can remain secure without significantly sacrificing its ability to complete tasks effectively.
 
-The results of MSB reveal an interesting relationship between model performance and vulnerability: agents that excel in tool calling and instruction following are paradoxically more susceptible to sophisticated attacks. This is because their advanced capabilities make them more likely to execute malicious instructions embedded in the MCP pipeline. 
+The results of MSB reveal an interesting relationship between model performance and vulnerability: agents that excel in tool calling and instruction following are paradoxically more susceptible to sophisticated attacks. This is because their advanced capabilities make them more likely to execute malicious instructions embedded in MCP tool descriptions. As a result, improvements in MCP capabilities do not necessarily translate to improved MCP security, highlighting the need for more fundamental MCP safeguards.
 
 ### MCP Security Tools
 
@@ -141,7 +141,7 @@ One very popular MCP security tool, agent-scan, is a specialized security tool d
 
 Other MCP security tooling, like MCP Guardian, focuses on securing MCP client to server interactions from the perspective of middleware [@mcp-guardian-2025]. Specifically, MCP Guardian strengthens MCP client-to-server communication with authentication, rate-limiting, logging, tracing, and Web Application Firewall (WAF) scanning. The middleware approach that MCP Guardian takes runs between every client-to-server interaction, providing a centralized point for security enforcement. However, this approach has limitations in identifying specific attack vectors, such as malicious keywords embedded in tool docstrings that could be exploited to trigger attacks.
 
-## Goals of the Project
+## Goals
 
 ### Detect Version Control Changes
 
