@@ -157,7 +157,7 @@ A tool shadowing attack is another type of upstream attack where fake MCP tools 
 
 ### Allow for Defense In Depth
 
-In addition to detecting version control changes and preventing upstream attacks, another use case of Pysealer is to support defense-in-depth for source control. Defense in depth is a security strategy that uses multiple layers of protection to reduce the risk of a successful attack. This approach is important because no single security measure can address every possible vulnerability; if one layer fails, others can still provide protection. By integrating Pysealer alongside other MCP security tools and middleware, organizations can create a more resilient system and make it much harder for attackers to compromise critical code.
+In addition to detecting version control changes and preventing upstream attacks, another use case of Pysealer is to support defense-in-depth for source control. Defense in depth is a security strategy that uses multiple layers of protection to reduce the risk of a successful attack. This approach is important because no single security measure can address every possible vulnerability; if one layer fails, others can still provide protection. For example, Pysealer can help detect and block malicious changes to an MCP tool's source code before they are exploited. Even if a threat actor bypasses version control, Pysealer provides an additional layer of defense that can stop tampered code from being deployed. By integrating Pysealer, an additional layer of security is added, thus making it more challening for threat actors to compromise source code.
 
 ## Ethical Implications
 
