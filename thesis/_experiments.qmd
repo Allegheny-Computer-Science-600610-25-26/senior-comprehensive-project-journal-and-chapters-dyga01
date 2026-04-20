@@ -1,6 +1,6 @@
 # Experiments
 
-This chapter evaluates the effectiveness of Pysealer and its defense-in-depth capabilities. The primary goal of this chapter is to assess Pysealer’s ability to detect and mitigate security threats like tool poisoning and tool shadowing attacks. In order to achieve this, Pysealer experiments were set up to demonstrate and simulate the exact tool poisoning attack in Figure 2 and tool shadowing attack in Figure 3. By simulating these attacks, Pysealer's defense-in-depth mechanisms can be tested in a controlled environment, allowing for a clear demonstration of its protective capabilities.
+This chapter evaluates the effectiveness of Pysealer and its defense-in-depth capabilities. The primary goal of this chapter is to assess Pysealer’s ability to detect and mitigate security threats like tool poisoning and tool shadowing attacks. In order to achieve this, Pysealer experiments were set up to demonstrate and simulate the exact tool poisoning attack in Figure~\ref{fig:tool-poisoning-attack} and tool shadowing attack in Figure~\ref{fig:tool-shadowing-attack}. By simulating these attacks, Pysealer's defense-in-depth mechanisms can be tested in a controlled environment, allowing for a clear demonstration of its protective capabilities.
 
 ```python
 @mcp.tool()
