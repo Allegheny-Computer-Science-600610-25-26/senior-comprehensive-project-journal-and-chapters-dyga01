@@ -119,7 +119,7 @@ As acknowledged previously, many of MCP's attack surfaces have not been fully ex
 
 Other studies have further explored these risks by actually implementing different attack methods. In fact, a study that focused on the systematic analysis of MCP security actually categorized and implemented 31 distinct attack methods [@mcp-systematic-2025]. More specifically, the study introduces an MCP Attack Library (MCPLIB) which includes attacks that fall under four key classifications: direct tool injection, indirect tool injection, malicious user attacks, and LLM inherent attacks. Through quantitative experiments, the study demonstrates that MCP systems are highly susceptible to blind reliance on tool descriptions. In turn, these findings highlight the urgent need for robust defense strategies in the validation of MCP-based ecosystems.
 
-Overall, the evolving MCP security landscape underscores the urgent need for robust defense strategies accross common attack surfaces. Much of the current research focuses on identifying where MCP is most susceptible, developing benchmarking systems for systematic vulnerability assessment, and designing tools that can detect and mitigate attacks in real time.
+Overall, the evolving MCP security landscape underscores the urgent need for robust defense strategies across common attack surfaces. Much of the current research focuses on identifying where MCP is most susceptible, developing benchmarking systems for systematic vulnerability assessment, and designing tools that can detect and mitigate attacks in real time.
 
 ### MCP Security Benchmarks
 
