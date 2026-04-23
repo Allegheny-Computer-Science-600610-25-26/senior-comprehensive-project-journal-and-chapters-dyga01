@@ -171,9 +171,13 @@ Pysealer’s security model involves several layers of risk. First-party risk re
 
 ## Use Cases
 
-While Pysealer's cryptographic locking and checking capabilities can be applied to any Python codebase, its design was specifically motivated by the security challenges introduced by the Model Context Protocol (MCP). As discussed in Chapter 1, MCP allows developers to define tools as Python functions and classes that are then exposed to LLMs. This powerful system enables LLMs to interact with complex tools, but it also introduces new attack vectors such as tool poisoning and tool shadowing. With these new attack vectors, it becomes critical to have mechanisms in place to ensure the integrity of MCP tools.
+### Shielding Python Functions
 
-### Protecting MCP Server Tools from Tampering
+Pysealer has practical security value beyond MCP-specific workloads. Because the locking and checking workflow operates on standard Python functions and classes, it can be applied to general-purpose Python codebases where source code integrity is also important. This broader applicability is especially useful in projects that rely heavily on reusable Python functions. Instead of treating integrity as a file-level or repository-level concern, development teams can validate the specific executable functions that matter most to system behavior. For example, if a project has critical utility functions that are widely used across the codebase, Pysealer can be used to ensure that these functions remain unchanged and trustworthy.
+
+### Protecting MCP Server Tools
+
+While Pysealer's cryptographic locking and checking capabilities can be applied to any Python codebase, its design was specifically motivated by the security challenges introduced by the Model Context Protocol (MCP). As discussed in Chapter 1, MCP allows developers to define tools as Python functions that are then exposed to LLMs. This powerful system enables LLMs to interact with complex tools, but it also introduces new attack vectors such as tool poisoning and tool shadowing. With these new attack vectors, it becomes critical to have mechanisms in place to ensure the integrity of MCP tools.
 
 Pysealer directly addresses MCP's tool vulnerabilities by providing cryptographic verification at the function level. By looking back to Figure 2 which was the tool poisoning attack example from Chapter 1, it is clear that mechanisms should be in place to detect attacks like this. In the attack, a malicious actor embedded hidden instructions within the create_ticket tool's docstring that directed the LLM to silently exfiltrate SSH keys. 
 
