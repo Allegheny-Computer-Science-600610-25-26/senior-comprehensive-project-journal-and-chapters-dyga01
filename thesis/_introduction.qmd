@@ -32,8 +32,10 @@ Because MCP is an evolving field, there are many attack surfaces that have not b
 
 A realistic example of a supply chain attack can be seen through a recent LiteLLM compromise in March 2026 [@litellm-security-update-march-2026]. LiteLLM is a widely used open-source library that provides functionality for routing requests across dozens of large language model providers. In this incident, threat actors exploited a compromise in LiteLLM's Trivy dependency to obtain publishing credentials and upload tampered packages. Once installed, the malicious code contained in the Trivy dependency would silently gather secrets from the host system and later exfiltrate them to the threat actors. Because LiteLLM relied on Trivy as one of its dependencies, any software project that used versions `v1.82.7` and `v1.82.8` of LiteLLM inherited the compromise from Trivy. This is the defining danger of supply chain attacks: the vulnerability does not originate in the code an organization writes or controls, but in the web of trusted dependencies beneath it.
 
-in the context of building mcp applications, a supply chain attack could involve one of the many mcp servers that an applcation relies on being compromised.
-https://www.docker.com/blog/mcp-horror-stories-the-supply-chain-attack/
+In the context of building applications that rely on many third-party MCP servers, a supply chain attack could involve any one of the many MCP servers being compromised. Because a typical MCP-based application may use servers for several different capabilities, such as web search, database access, or code execution, each of those MCP servers represents a potential entry point for a threat actor. These attacks are particularly difficult to detect because the malicious behavior is often hidden beneath a layer of abstraction, where the host application simply sees a tool responding normally. As the MCP ecosystem matures and registries of third-party servers continue to grow, the supply chain attack surface will only expand.
+
+This highligths
+
 
 pysealer helps prevent supply chain attacks by focusing on the upstream source codes. explain what an upstream attack is
 both tool poisoning and tool shadowing attacks could be considered upstream supply chain attacks
