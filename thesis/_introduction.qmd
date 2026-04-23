@@ -26,6 +26,17 @@ In order to help the MCP client understand what capabilities are available, MCP 
 
 ![MCP Architecture Diagram [@mcp-architecture-diagram]](images/mcp-architecture-diagram.png)
 
+### Supply Chain Attacks
+
+Because MCP is an evolving field, there are many attack surfaces that have not been fully explored yet. One of the most critical attack surfaces in all of software security is the supply chain. A supply chain attack is a type of attack that targets third-party software that is integrated into a larger system [@cloudflare-supply-chain-attack]. For these kinds of attacks, threat actors typically compromise a trusted software provider or repository to introduce malicious code. When users download or update the compromised software, they inadvertently introduce the malicious code into their own systems. This can lead to data breaches, unauthorized access, and other security incidents.
+
+a realistic example of a supply chain attack is x
+
+in the context of mcp, a supply chain attack could look like ___.
+
+pysealer helps prevent supply chain attacks by focusing on the upstream source codes. explain what an upstream attack is
+both tool poisoning and tool shadowing attacks could be considered upstream supply chain attacks
+
 ### Tool Poisoning Attacks
 
 The Model Context Protocol architecture introduces a significant attack surface through its reliance on tool descriptions for interactions with LLMs. A Tool Poisoning Attack can occur when threat actors embed malicious instructions within the docstrings of MCP tools [@invariant-labs-tool-poisoning]. These instructions are crafted to be invisible to end users, who typically see only a simplified version of the tool description in their UI. However, LLMs always see the full docstring and can be manipulated into performing unauthorized or harmful actions.
@@ -107,7 +118,7 @@ def create_ticket(
 
 Pysealer addresses both the tool poisoning and tool shadowing vulnerabilities described above through cryptographic verification at the source code level. By automatically adding cryptographic decorators to each function, Pysealer creates an immutable fingerprint of each MCP tool's code and docstring. This approach makes unauthorized modifications detectable, as any change to a tool's code or description will cause signature verification to fail. 
 
-For tool poisoning attacks, Pysealer provides protection by ensuring that tool docstrings cannot be modified without breaking the cryptographic signature. When a developer signs their MCP tools with Pysealer, any attempt to inject malicious instructions would invalidate the signature. For example, adding the SSH key exfiltration commands shown earlier would cause signature verification to fail.
+For tool poisoning attacks, Pysealer provides protection by ensuring that tool docstrings cannot be modified without breaking the cryptographic signature. When a developer signs their MCP tools with Pysealer, any attempt to introduce malicious instructions would invalidate the signature. For example, adding the SSH key exfiltration commands shown earlier would cause signature verification to fail.
 
 For tool shadowing attacks, Pysealer makes it significantly harder for threat actors to create convincing shadow tools. Since legitimate tools carry valid cryptographic signatures from trusted developers, unauthorized tools will lack these signatures. Pysealer can detect these unsigned shadow tools and flag them as potentially malicious. By verifying signatures before tool registration, MCP servers can reject shadow tools and only invoke trusted tools.
 
