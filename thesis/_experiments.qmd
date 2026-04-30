@@ -116,7 +116,7 @@ The Agent Scan output provides a clear and actionable signal to developers. By f
 
 ## Agent Scan Feature Comparison
 
-After a thorough analysis of the Pysealer and Agent Scan documentation, Figure 12 presents a high-level comparison of how each tool addresses the OWASP LLM Top 10 security risks [@owasp-llm-top-10]. This table is constructed based on the documented features and intended capabilities of each tool, mapping them to the relevant threat classes. The goal is to provide a clear overview of the security coverage offered by Pysealer and Agent Scan. The table below summarizes which security risks are theoretically mitigated by each tool. A checkmark indicates that the tool is designed to address the risk, a cross means it does not, and a dash denotes partial coverage based on current documentation.
+After a thorough analysis of the Pysealer and Agent Scan documentation, Figure 12 presents a high-level comparison of how each tool addresses the OWASP LLM Top 10 security risks [@owasp-llm-top-10]. This table is constructed based on the documented features and intended capabilities of each tool, mapping them to the relevant threat classes. The goal is to provide a clear overview of the security coverage offered by Pysealer and Agent Scan. Table 1 summarizes which security risks are theoretically mitigated by each tool. A checkmark indicates that the tool is designed to address the risk, a cross means it does not, and a dash denotes partial coverage based on current documentation.
 
 Table: Feature Comparison Table
 
