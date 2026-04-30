@@ -1,0 +1,11 @@
+---
+title: "Setback Analysis"
+description: "Detailed analysis of both the setbacks you encountered and how you handled them"
+date: "2026-04-29"
+---
+
+During my senior comprehensive project, I encountered several significant setbacks that required me to adapt my approach. One of the most significant setbacks was the lack of existing research surrounding MCP security. Since MCP is a relatively new area of research, there were very few prior studies or established frameworks I could rely on for guidance. This meant I had to spend considerable time conducting background research to understand the MCP security landscape before I could even begin designing Pysealer.
+
+Another major challenge was attempting to shorten the Pysealer cryptographic decorator. It was important that this decorator be as concise as possible so that it would be compatible with the Python linter Ruff, which enforces line length limits and code style rules. I had to balance cryptographic security with practical usability, since overly long decorators would make code harder to read and could trigger linter warnings. After testing different encoding schemes, I settled on a Base58 encoding, which provided a good balance between security and conciseness. 
+
+Despite these obstacles, I made consistent progress throughout my research. Overall, I think that the setbacks I faced were valuable learning experiences that helped me grow as a researcher and problem solver. They forced me to think creatively, adapt my approach, and develop new skills that I might not have otherwise acquired. By reflecting on these challenges and how I overcame them, I gained a deeper understanding of the research process works.
