@@ -7,8 +7,8 @@ project:
 execute:
   freeze: auto
 author:
-  - name: A. Student
-    email: astudent@allegheny.edu
+  - name: Aidan Dyga
+    email: dyga01@allegheny.edu
 website:
   title: "ReadyResearchers Template"
   navbar:
@@ -17,7 +17,7 @@ website:
         href: thesis/index.qmd
       - about.qmd
       - icon: github
-        href: https://github.com/
+        href: https://github.com/dyga01
 format:
   html:
     theme: journal

@@ -1,0 +1,19 @@
+---
+title: "Feedback"
+description: "Offer feedback to both your classmates and your instructors on work in the 600-level course in Computer and Information Science"
+date: "2025-12-01"
+---
+
+Throughout this course, I have had the valuable opportunity to engage with my peers' work and provide constructive feedback during our weekly Friday class sessions. This collaborative process has not only helped my classmates refine their research but has also deepened my own understanding of effective technical writing.
+
+### Peer Review: Coltin Colucci
+
+In reviewing Coltin's work ([GitHub Issue #2](https://github.com/Allegheny-Computer-Science-600610-25-26/senior-comprehensive-project-journal-and-chapters-Coltin2121/issues/2)), I identified several areas where additional context and detail would strengthen the paper. I suggested that including more comprehensive background information about GitHub Actions would help readers who may not be familiar with his tool. Additionally, I recommended specifying which type of Raspberry Pi was being used in the project, as different models have varying capabilities that could be relevant to the research. Finally, I noted that his sources may need to be expanded.
+
+### Peer Review: Benedek Kaibas
+
+For Benedek's paper on type checking ([GitHub Issue #4](https://github.com/Allegheny-Computer-Science-600610-25-26/senior-comprehensive-project-journal-and-chapters-benedekaibas/issues/4)), I provided feedback focused on improving clarity for readers. I advised starting with a high-level overview before diving into technical details, as this would help readers who may not be experts in the field. I also suggested providing more detailed definitions related to type checking concepts to ensure the paper was understandable. Overall, I observed that the writing assumed readers already possessed a strong understanding of type checking principles. And to address this, I encouraged Benedek to start with an overview before getting into technical details.
+
+## Reflections on the Feedback Process
+
+I think that engaging in peer review has been a great experience that has taught me the importance of considering different audience perspectives when writing technical content. By evaluating my classmates' work, I think I have become more aware of common pitfalls in technical writing, such as assuming too much prior knowledge or failing to provide sufficient context.

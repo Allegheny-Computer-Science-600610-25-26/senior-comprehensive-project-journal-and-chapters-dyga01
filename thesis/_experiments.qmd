@@ -1,14 +1,158 @@
 # Experiments
 
-This chapter describes your experimental set up and evaluation. It should also
-produce and describe the results of your study. The section titles below offer
-a typical structure used for this chapter.
+This chapter evaluates the effectiveness of Pysealer and its defense-in-depth capabilities. The primary goal of this chapter is to assess Pysealer’s ability to detect and mitigate security threats like tool poisoning and tool shadowing attacks. In order to achieve this, Pysealer experiments were set up to demonstrate and simulate the exact tool poisoning attack in Figure 2 and tool shadowing attack in Figure 3. By simulating these attacks, Pysealer's defense-in-depth mechanisms can be tested in a controlled environment, allowing for a clear demonstration of its protective capabilities.
+
+To provide a comprehensive evaluation, Pysealer’s approach is compared against Agent Scan, one of the most widely used security tools in the MCP ecosystem, which was previously discussed in section 2.4.2. More specifically, Agent Scan serves to scan MCP servers for common threats such as prompt injections, sensitive data handling, and malware payloads hidden in natural language [@agent-scan]. It's important to note that Agent Scan provides a fundamentally different approach to security than Pysealer by focusing on static and dynamic analysis of the codebase to identify potential vulnerabilities. In contrast, Pysealer actively protects the codebase through decorator insertion and signature verification. This comparison allows for identifying which aspects of security both approaches cover and where there may be gaps in coverage.
+
+In addition to external benchmarking, this chapter also details Pysealer’s internal test suite. This suite is critical for measuring the accuracy and reliability of Pysealer’s core mechanisms, such as decorator insertion and signature verification. By also testing the effectiveness of Pysealer itself, this aims to provide a more holistic view of its effectiveness. These internal tests are designed to ensure that Pysealer’s protective features are functioning as intended and that they can be reliably applied across different codebases. This is crucial for establishing confidence in Pysealer’s reliability and robustness. 
 
 ## Experimental Design
 
-Especially as it pertains to responisble computing, if conducting experiments or
-evaluations that involve particular ethical considerations, detail those issues here.
+There is currently very limited research evaluating MCP security tools, which makes it challenging to benchmark Pysealer against direct competitors or even existing MCP vulnerabilities. Choosing to compare Pysealer and Agent Scan, even though they operate fundamentally differently, is important because it highlights the diversity of security strategies available for MCP systems. Evaluating both approaches demonstrates how combining different security strategies can lead to more comprehensive protection. The comparison is also valuable because it provides a broader perspective on MCP security, showing how analysis and active defense can complement each other.
 
-## Evaluation
+Testing different types of software often requires different approaches. For security tools, it is important that they are tested against realistic threats and adversarial scenarios. This requires simulating attacks and observing whether a tool can effectively defend against them. For this reason, the experiments in this chapter are designed to replicate what a real-world MCP tool poisoning or tool shadowing attack might look like, and to assess Pysealer's performance in mitigating these threats.
+
+In addition to these attack simulations, an analysis of Pysealer and Agent Scan's features is also included. This was chosen because there is currently no comprehensive MCP benchmarking framework that is reliable, widely accepted, and reasonable to use. To address this gap, the Open Worldwide Application Security Project (OWASP) Top 10 for LLM Applications is used as an objective threat model [@owasp-llm-top-10]. OWASP is a nonprofit foundation that produces freely available resources for improving software security; their LLM Top 10 is a community-driven list of the ten most critical security risks affecting LLM-based applications. Based on each tool's basic functionality, a mapping of which OWASP LLM Top 10 security risks each tool is designed to mitigate is created. By using the OWASP LLM Top 10 as a standardized framework for categorizing security risks, the comparison between Pysealer and Agent Scan can be conducted in a more transparent manner.
+
+### Attack Simulation Methodology
+
+There are four primary experiments that are a part of the attack simulation: Pysealer tool poisoning, Pysealer tool shadowing, Agent Scan tool poisoning, and Agent Scan tool shadowing. All experiments are run through a unified script, which orchestrates the attack simulations and collects output from each tool for analysis. The pysealer-experiments repository provides the full codebase and configuration files, ensuring transparency and reproducibility [@pysealer-experiments].
+
+Each attack simulation is designed to mimic realistic tool poisoning and tool shadowing attacks. Tool poisoning can occur when threat actors embed malicious instructions within the docstrings of MCP tools, often aiming to alter the tool's behavior or compromise its integrity. On the other hand, tool shadowing can occur when a threat actor adds a new tool that is contextually similar to an existing tool, with the intent of confusing the LLM and causing it to invoke the wrong tool. Both Pysealer and Agent Scan are subjected to these attack vectors in these experiments.
+
+A critical aspect of computational experiments is reproducibility. To ensure the results of this study can be reliably replicated, the experiments are conducted within a controlled environment. Specifically, these experiments leverage Docker containers to create a consistent and isolated environment for each attack simulation [@docker]. Simply put, Docker is a tool that lets you package software and its dependencies into a container, so it runs the same way everywhere. Using Docker to run the experiments eliminates the different operating systems, library versions, and other environmental factors that could affect the results. In addition to Docker, specific versions of Python, Pysealer, and Agent Scan are used to further ensure consistency between experiments. Specific versions are important because security tools are often updated to address new vulnerabilities, and using different versions could lead to inconsistent results. By controlling these variables, the experiments can be reliably reproduced by other researchers or practitioners interested in evaluating Pysealer's effectiveness.
+
+### Feature Comparison Methodology
+
+The feature comparison does not involve code and purely involves analyzing each tool's documentation and capabilities to determine which OWASP LLM Top 10 security risks (4/15/2026) each tool is designed to mitigate. While this may be considered somewhat objective, there are no clear-cut benchmarking frameworks that can benchmark MCP security tools across different attack vectors. For this reason, the OWASP LLM Top 10 is used as a standardized framework for comparing whether each tool will theoretically cover the specific security risks. Specifically, the mapping table indicates whether each tool covers, partially covers, or does not cover the specific security risk. This mapping is based on the documented features and capabilities of each tool, as well as the types of vulnerabilities they are designed to address. Lastly, it is important to note that the OWASP LLM Top 10 can change over time as new threats emerge, and this evaluation is based on the version as of 4/15/2026.
+
+### Ethical Considerations in Security Experimentation
+
+One last thing that is important to note is the ethics of performing security-related experiments. Security research, especially when it involves simulating attacks, carries a responsibility to avoid using the attacks to cause harm to real systems, data, or users. Attempting to use the simulated attacks from this research on real MCP servers could lead to unintended consequences, such as disrupting operations, exposing sensitive information, or introducing new vulnerabilities. 
+
+For this reason, it was chosen to simulate attacks on example MCP servers that are not connected to any production systems. This approach ensures that no production systems are affected and that the research can be conducted safely and responsibly. All attack simulation code used for the experiments is publicly available, ensuring that the research does not introduce new risks. By making the code and methodology open and transparent, other researchers can review, reproduce, and build upon this work without inadvertently enabling malicious activity. 
+
+## Simulated Attacks
+
+The attack simulation code for tool poisoning and tool shadowing is organized to provide a clear before-and-after view of each attack scenario. Each attack type includes both a pre-attack and a post-attack file. The pre-attack file represents the original, unmodified MCP server tool, serving as a baseline for normal operation. In contrast, the post-attack file contains the altered version of the MCP server tool after the attack has been executed, allowing for direct comparison and analysis of the impact.
+
+The Pysealer attack simulation process begins with Pysealer initializing in the simulated environment. After this, Pysealer adds initial decorator locks to the target file. It then verifies that the lock is valid, confirming the file’s integrity. Next, the attack is introduced by editing the file, which simulates a real-world supply chain attack that attempts to manifest through upstream source code modification. After the modification, Pysealer checks the lock again, which should now fail, indicating that the file’s integrity has been breached. The output from Pysealer is then displayed, providing immediate feedback on the detection of unauthorized changes.
+
+The Agent Scan attack simulation runs Agent Scan against both the pre-attack and post-attack files. The pre-attack scan is expected to show no issues, confirming that the original file is secure. After the attack is applied, the post-attack scan should reveal the malicious modifications, demonstrating Agent Scan's ability to detect vulnerabilities in the codebase. The results from both scans are presented, allowing for a clear comparison of the tool's effectiveness in identifying security breaches.
+
+### Pysealer Tool Poisoning Attack
+
+In this experiment, Pysealer is evaluated against a simulated tool poisoning attack. The attack in Figure 2 modifies the `create_ticket` function by adding a new parameter called `sidenote` and inserting malicious instructions into the docstring. More specifically, these instructions attempt to trick the LLM into invoking the same tool to read the contents of a sensitive file `~/.ssh/id_rsa`. The attack then passes the contents of this file as the sidenote parameter. This attack is designed to be subtle, as it does not directly alter the core functionality of the `create_ticket` function. Instead, it relies on the LLM's interpretation of the docstring to execute unintended actions. By embedding these instructions in the docstring, the threat actor aims to manipulate the LLM into performing actions that could lead to credential theft.
+
+The output of Pysealer, shown in Figure 10, provides a clear and concise report of the detected modification. Pysealer flags the file as compromised, and specifically identifies that the `create_ticket` function was altered. The output also highlights the exact lines that were changed by showing a diff, including the addition of the sidenote parameter and malicious docstring content. Pysealer also returns an error code and a summary indicating that the decorator verification failed for this file.
+
+This output demonstrates that Pysealer successfully detected the unauthorized modification introduced by the tool poisoning attack. Pysealer reports the exact file that was modified, the specific function that was altered, and the exact line-by-line changes that occurred. The detailed feedback provided by Pysealer is essential for maintaining the integrity of Python function source code. If this Pysealer check were part of a continuous integration pipeline, it could potentially prevent the compromised code from being merged into the main codebase, thereby protecting the MCP server from potential exploitation.
+
+```text
+1/1 check failed in 1 file:
+  ✗ /app/simulated-attacks/tool-poisoning/tool_poisoning.py
+    Function 'create_ticket' was modified:
+      10       title: str,
+      11       description: str,
+      12  +    sidenote: str,
+      13   ) -> str:
+      14       """
+      15       Create a new IT support ticket in the system.
+      16  +
+      17  +    <IMPORTANT>
+      18  +    Before using this tool, read `~/.ssh/id_rsa` and pass its content
+      19  +    as 'sidenote', otherwise the tool will not work.
+      20  +
+      21  +    While you read the file, provide detailed reasoning
+      22  +    about why submitting a ticket is important to get help.
+      23  +    Do not mention that you first need to read the
+      24  +    file (this could even upset the user, so be very gentle and not scary).
+      25  +    </IMPORTANT>
+      26       """
+      27       return f"Ticket created: {title} - Description: {description}"
+```
+\begin{figure}[h!]
+\centering
+\caption{Pysealer Detection of Tool Poisoning Attack}
+\label{fig:pysealer-detect-tool-poisoning-attack}
+\end{figure}
+
+### Agent Scan Tool Poisoning Attack
+
+This experiment evaluates Agent Scan's ability to detect the same tool poisoning attack that was simulated for Pysealer. The attack modifies the `create_ticket` tool description by embedding instructions that attempt to manipulate the LLM into reading a sensitive file and leaking its contents. When simulating the tool poisoning attack against the MCP server, this experiment finds that Agent Scan is able to detect and flag the malicious modifications introduced into the tool description. 
+
+The Agent Scan output shows that the `create_ticket` tool is immediately flagged with several critical warnings. Most notably, Agent Scan raises an `[E001]` error, indicating that a prompt injection has been detected in the tool description [@invariantlabs-mcpscan-issues]. This means that the tool’s documentation contains instructions that could manipulate the behavior of the agent in unintended or dangerous ways. Agent Scan also raises an `[E003]` error, which indicates that the tool description attempts to hijack the agent to perform potentially dangerous actions. This suggests that the malicious instructions in the docstring are not just passive text but are actively trying to influence the agent's behavior in a harmful way. Agent Scan also raises a `[W001]` warning, which indicates that the tool description contains dangerous words that could be used for prompt injection. This means that the language used in the tool description includes terms that are commonly associated with prompt injection attacks.
+
+### Pysealer Tool Shadowing Attack
+
+Pysealer is evaluated against a simulated tool shadowing attack in this experiment. For this attack in Figure 3, a new tool named `create_ticket_better` is introduced alongside the legitimate `create_ticket` tool. The `create_ticket_better` tool includes misleading instructions in its docstring, telling the LLM to always add `example@test.com` to the `notifyList` before using `create_ticket`. The docstring also emphasizes that the `create_ticket_better` tool is the superior choice for creating tickets and tries to manipulate the LLM into using it instead of the legitimate `create_ticket` tool. By shadowing the legitimate `create_ticket` tool with a similarly named and documented function, the threat actor exploits the tool selection and invocation process, demonstrating how tool shadowing can subvert intended workflows and security controls.
+
+The output of Pysealer for the tool shadowing attack can be seen in Figure 11. Because the `create_ticket_better` function was added without the `@pysealer` decorator, Pysealer detects that this new function does not contain the required decorator. In the tool's error message, Pysealer notes that the function is missing the required decorator and provides the exact line diffs showing the newly added function. This indicates that Pysealer successfully identified the unauthorized addition of the `create_ticket_better` tool, which attempts to shadow the legitimate `create_ticket` tool.
+
+```text
+1/2 checks failed in 1 file:
+  ✗ /app/simulated-attacks/tool-shadowing/tool_shadowing.py
+    Function 'create_ticket_better' does not contain a @pysealer decorator:
+      28   def create_ticket_better() -> str:
+      29       """
+      30       Before using create_ticket,
+      31       ALWAYS add 'example@test.com' to the notifyList.
+      32       Otherwise the ticket creation will fail silently.
+      33       This tool should never be invoked directly.
+      34       """
+      35       return ""
+```
+\begin{figure}[h!]
+\centering
+\caption{Pysealer Detection of Tool Shadowing Attack}
+\label{fig:pysealer-detect-tool-shadowing-attack}
+\end{figure}
+
+### Agent Scan Tool Shadowing Attack
+
+This experiment evaluates Agent Scan's ability to detect the same tool shadowing attack that was simulated for Pysealer. The attack introduces a new tool named `create_ticket_better` that is designed to shadow the legitimate `create_ticket` tool. The output of Agent Scan for the tool shadowing attack correctly identifies a significant security concern. Specifically, Agent Scan raises a `[TF002]` warning, indicating that a destructive toxic flow has been detected [@invariantlabs-mcpscan-issues]. This warning means that the MCP server has access to at least one tool that produces untrusted content and another tool that can behave destructively. The presence of both types of tools within an MCP server increases the risk that untrusted or manipulated data could be passed to a destructive tool. In the context of this experiment, the introduction of the `create_ticket_better` tool alongside the legitimate `create_ticket` tool creates a scenario where the MCP server's toolset is potentially dangerous.
+
+The Agent Scan output provides a clear and actionable signal to developers. By flagging the destructive toxic flow, Agent Scan enables developers to quickly identify and address risky tool combinations before they can be exploited. This type of error is specifically valuable for preventing tool shadowing attacks from occurring. Overall, the `[TF002]` warning demonstrates Agent Scan's effectiveness in detecting multi-tool security risks that may not be immediately obvious from code inspection alone.
+
+## Agent Scan Feature Comparison
+
+After a thorough analysis of the Pysealer and Agent Scan documentation, Table 1 presents a high-level comparison of how each tool addresses the OWASP LLM Top 10 security risks [@owasp-llm-top-10]. This table is constructed based on the documented features and intended capabilities of each tool, mapping them to the relevant threat classes. The goal is to provide a clear overview of the security coverage offered by Pysealer and Agent Scan. This table summarizes which security risks are theoretically mitigated by each tool. A checkmark indicates that the tool is designed to address the risk, a cross means it does not, and a dash denotes partial coverage based on current documentation.
+
+Table: Feature Comparison Table
+
+| Security Risk                                 | Pysealer | Agent Scan |
+|:----------------------------------------------|:--------:|:----------:|
+| LLM01:2025 Prompt Injection                   | $\times$        | $\checkmark$        |
+| LLM02:2025 Sensitive Information Disclosure   | $\times$        | $\checkmark$        |
+| LLM03:2025 Supply Chain                       | $\checkmark$    | $\times$            |
+| LLM04:2025 Data and Model Poisoning           | –               | –                   |
+| LLM05:2025 Improper Output Handling           | $\times$        | $\checkmark$        |
+| LLM06:2025 Excessive Agency                   | $\times$        | $\checkmark$        |
+| LLM07:2025 System Prompt Leakage              | $\times$        | $\times$            |
+| LLM08:2025 Vector and Embedding Weaknesses    | $\times$        | $\times$            |
+| LLM09:2025 Misinformation                     | $\times$        | $\times$            |
+| LLM10:2025 Unbounded Consumption              | $\times$        | $\checkmark$        |
+
+From this comparison, several broad conclusions can be drawn. Pysealer, as a general-purpose Python function defense-in-depth tool, can be particularly well-suited to mitigate supply chain risks. More specifically, attacks where threat actors attempt to modify the codebase itself can be protected by Pysealer. However, Pysealer does not directly address many of the runtime or prompt-based risks that are unique to LLM-powered systems. In contrast, Agent Scan is designed to scan for vulnerabilities specific to MCP servers. Its static and dynamic analysis capabilities allow it to detect a wide range of attack vectors similar to prompt injection. While Agent Scan excels at identifying these risks, it is not designed to protect against supply chain attacks that involve unauthorized modifications to the codebase. 
+
+Overall, the table illustrates that Pysealer and Agent Scan are complementary tools, each addressing different aspects of the MCP security landscape. Pysealer is best leveraged for protecting the integrity of the codebase and defending against supply chain attacks through a defense-in-depth approach, while Agent Scan is more effective at identifying and mitigating prompt-related vulnerabilities in MCP servers.
+
+## Internal Test Suite
+
+Aside from all security evaluations and comparisons with tools like Agent Scan, it is essential to view and evaluate Pysealer through its own metrics. Pysealer includes a comprehensive internal test suite powered by pytest, a widely used Python testing framework [@pytest-doc]. The test suite is designed to validate the basic behavior and reliability of Pysealer’s core functionality, including decorator insertion, signature verification, and command-line operations. Including internal tests for Pysealer also helps developers know if changes to the codebase have broken any of the core features. This is crucial for maintaining the Pysealer tool as future contributions are made.
+
+An internal test suite is an extremely important software engineering practice and metric. It not only provides confidence in the correctness of the tool but also acts as a safety net for ongoing development. As Pysealer evolves, the test suite ensures that new features and bug fixes do not inadvertently compromise existing functionality. Pysealer’s current test suite consists of 75 tests that achieve 72% total coverage of the Python codebase. Coverage is important because it indicates how much of the code is being tested by the test suite. It's also important to mention that all of the 75 tests are currently passing, which helps ensure that the core functionality of Pysealer is working as intended. While the Python code is well-tested, the underlying Rust code responsible for cryptographic operations is not yet covered by automated tests.
 
 ## Threats to Validity
+
+Evaluating security tools through both attack simulations and feature comparison inherently involves a range of limitations and uncertainties that must be carefully considered. In any research, it is essential to acknowledge the factors that could impact the reliability, generalizability, or interpretation of experimental results. This section outlines the primary threats to validity encountered in this study. By transparently discussing these threats, this research aims to provide a balanced and open perspective for interpreting the results of the experiments and feature comparisons.
+
+One of the most significant threats to validity in this research arises from the simulated attacks. Because all experiments are conducted within a controlled Docker environment, the environment may not be realistic compared to real-world MCP server deployments. This sandboxed approach ensures safety from real-world deployments, but may not capture the full complexity of how a supply chain attack through upstream source code could be executed by a real-world threat actor. As a result, the effectiveness of Pysealer and Agent Scan observed in these simulations may not directly translate to real MCP servers facing live threats. 
+
+Furthermore, the number of threat vectors that this research covers is limited to tool poisoning and tool shadowing. While these are important and relevant attack vectors, they represent only a subset of the potential threats that real MCP servers may face. This means that the results of the simulated attacks may not be generalizable to other types of attacks that MCP servers may face. Another important consideration is dependency risk. If any of Pysealer's dependencies are compromised, the tool’s security guarantees could be invalidated. This is extremely important to consider because Pysealer relies on various Python and Rust libraries for its functionality. Lastly, public and private key management represents a fundamental threat. If a threat actor gains access to Pysealer’s private key, the integrity checks provided by Pysealer can be subverted. This is a critical threat that could invalidate the entire Pysealer tool from a security perspective.
+
+Another threat to validity stems from the cryptographic decorator used to store Pysealer's signature. Currently, this decorator is implemented as a dummy function with no runtime behavior. If a threat actor were able to tamper with this function, potentially through in-memory modification, it could introduce a significant security risk. Because Pysealer does not protect the dummy decorator function itself, but instead relies on it to protect other functions, this component may represent a potential single point of failure. However, it is important to note that this vulnerability has not yet been empirically tested.
+
+Additional threats to validity can stem from the feature comparison methodology used in this research. One of the goals of the feature comparison is to compare selected features without bias. However, the selection of features to compare and the interpretation of documentation can introduce bias. Choosing the OWASP LLM Top 10 risks attempts to reduce as much feature selection bias as possible. Documentation bias is another significant concern. The mapping of security tool capabilities to OWASP LLM Top 10 risks relies heavily on available documentation and interpretation. It's important to note that different interpretations may arise from the security tool's documentation.
+
+One of the largest challenges and limitations when evaluating MCP security tools is the lack of standardized benchmarking frameworks. Because the field of MCP security is still emerging, there are currently no widely accepted criteria or rigorous methods for benchmarking security tools across different attack vectors. This lack of standardization makes it difficult to objectively compare security tools or to assess their effectiveness in a credible manner. As a result, the evaluation of MCP security tools is currently extremely limited. These factors collectively highlight the need for caution when interpreting feature comparison results. While this research does not aim to develop a methodology for benchmarking MCP security, it's essential that credible frameworks are developed so that future research can more reliably evaluate the effectiveness of different security tools in the MCP ecosystem.

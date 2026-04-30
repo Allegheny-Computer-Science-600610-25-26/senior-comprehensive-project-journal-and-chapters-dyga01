@@ -1,36 +1,182 @@
 # Introduction
 
-This chapter describes your completed senior thesis work,
-including the overall aims  and the background motivating your research. Whenever
-possible, you should use one or more concrete examples and technical diagrams.
+## Overview
 
-It is often useful and necessary to separate the introduction into multiple sections.
-Several possible sections are proposed below, you can use these or distribute your
-introductory text into sections in another way.
+This research presents Pysealer [@pysealer], a general-purpose cryptographic verification tool designed to help protect Python source code from unauthorized changes. Pysealer works by automatically adding special markers, called decorators, to Python functions and classes. These decorators act like digital fingerprints and represent a unique signature that is specific to each function or class in a Python file. If a malicious actor tries to change the code, even slightly, the fingerprint will no longer match. This makes it easy to spot tampering and helps ensure that the code remains trustworthy and authentic.
 
-The headings below propose _one way_ you might structure this section of the document.
+Pysealer relies on version control to help protect Python source code. Version control is a way for programmers to keep track of changes made to their code over time. It acts like a digital history book, recording every edit, addition, or deletion so that previous versions can be restored if needed. This makes it easier for people to collaborate on projects, avoid mistakes, and understand how their code has evolved over time. By using version control, software teams work together smoothly and ensure that their work remains organized and reliable.
+
+At a high level, Pysealer complements version control systems such as Git by adding function-level cryptographic integrity checks. Instead of relying solely on external files that store version histories, Pysealer embeds decorators directly within the source code itself. This per-entity approach is, in some ways, less complex than traditional version control systems and is designed to complement them. Traditional version control systems like Git rely on hidden files to record changes across an entire codebase [@git]. While this approach is highly effective for large-scale version management and collaboration, it treats code as a collection of files rather than individual, yes/no entities. Pysealer complements this model by introducing built-in, function-level verification that provides an additional layer of security against unauthorized modifications.
+
+The Pysealer software tool works by providing a simple command-line interface (CLI) with commands to initialize keys, add decorators, verify signatures, and remove decorators. More specifically, a command-line interface is a text-based way to interact with software by typing commands, rather than using buttons or menus. It is important to note that Pysealer intentionally has very few commands so that it can be easily learned and adopted into existing workflows. This makes it easy for users to quickly perform tasks and automate processes.
 
 ## Motivation
 
+### Model Context Protocol (MCP)
+
+This research is motivated by security concerns surrounding Anthropic's industry-standard Model Context Protocol (MCP) [@model-context-protocol]. MCP is a system that provides a standardized interface for managing the context that large language models (LLMs) access. MCP also allows LLMs to connect to external systems such as application programming interfaces (APIs), databases, and local filesystems. While MCP introduces powerful capabilities for building customized artificial intelligence (AI) applications, sometimes known as AI agents, it also creates new attack surfaces.
+
+The popularity of Model Context Protocol (MCP) has surged since its release, as evidenced by the rapid growth of the official GitHub MCP Registry [@github-mcp-registry]. Within a short period, the registry has cataloged MCP servers from major technology companies, including Microsoft, Stripe, Notion, Figma, and Box, among others. This trend highlights the increasing adoption of MCP, with new servers being added regularly. As more organizations recognize the benefits of context management for AI applications, the number of MCP servers is expected to continue rising.
+
+Organizations can leverage MCP to build customer service agents, information technology (IT) helpdesk assistants, sales agents, and many other agentic applications tailored to specific business needs. For example, an e-commerce retailer could use MCP to develop a customer service agent with specific contextual knowledge about their specific products, inventory, and order management system. Since large language models lack access to proprietary company information such as inventory levels, order histories, return policies, and shipping statuses, MCP serves as a bridge that provides this essential context. Overall, integrating MCP into AI applications significantly enhances their capabilities compared to using standalone LLMs.
+
+Figure 1 shows that Model Context Protocol operates through a client-server architecture. MCP clients are applications that host LLMs such as Claude Desktop, Integrated Development Environments (IDEs), or other custom AI applications. MCP servers are lightweight programs that expose specific capabilities, such as database access, file system operations, or API integrations, to these clients through a standardized interface. When a user interacts with an MCP client, the LLM can request the client to invoke functions on connected MCP servers, effectively extending the LLM's capabilities beyond its training data.
+
+In order to help the MCP client understand what capabilities are available, MCP servers expose tools. In this context, tools are essentially Python functions that the LLM can interpret and invoke. Each tool contains a tool description, which is represented by the Python function's docstring. The LLM relies on these tool descriptions to decide when and how to invoke each tool. For example, a tool with the docstring `"Send an email to a recipient"` informs the LLM that this function should be called when the user asks to send an email. The LLM never sees the actual implementation code; it only sees the tool's name, description, and parameters.
+
+![MCP Architecture Diagram [@mcp-architecture-diagram]](images/mcp-architecture-diagram.png)
+
+### Supply Chain Attacks
+
+Because MCP is an evolving field, there are many attack surfaces that have not been fully explored yet. One of the most critical attack surfaces in all of software security is the supply chain. A supply chain attack is a type of attack that targets third-party software that is integrated into a larger system [@cloudflare-supply-chain-attack]. For these kinds of attacks, threat actors typically compromise a trusted software provider or repository to introduce malicious code. When users download or update the compromised software, they inadvertently introduce the malicious code into their own systems. This can lead to data breaches, unauthorized access, and other security incidents.
+
+A realistic example of a supply chain attack can be seen through a recent LiteLLM compromise in March 2026 [@litellm-security-update-march-2026]. LiteLLM is a widely used open-source library that provides functionality for routing requests across dozens of large language model providers. In this incident, threat actors exploited a compromise in LiteLLM's Trivy dependency to obtain publishing credentials and upload tampered packages. Once installed, the malicious code contained in the Trivy dependency would silently gather secrets from the host system and later exfiltrate them to the threat actors. Because LiteLLM relied on Trivy as one of its dependencies, any software project that used versions `v1.82.7` and `v1.82.8` of LiteLLM inherited the compromise from Trivy. This is the defining danger of supply chain attacks: the vulnerability does not originate in the code an organization writes or controls, but in the web of trusted dependencies beneath it.
+
+In the context of building applications that rely on many third-party MCP servers, a supply chain attack could involve any one of the many MCP servers being compromised. Because a typical MCP-based application may use servers for several different capabilities, such as web search, database access, or code execution, each of those MCP servers represents a potential entry point for a threat actor. These attacks are particularly difficult to detect because the malicious behavior is often hidden beneath a layer of abstraction, where the host application simply sees a tool responding normally. As the MCP ecosystem matures and registries of third-party servers continue to grow, the supply chain attack surface will only expand. 
+
+Defending against supply chain attacks requires security measures that focus on the point where tampering most commonly begins: the source code itself. Two types of attacks on MCP servers that rely on upstream source code modification are tool poisoning and tool shadowing attacks. Both of these attacks involve malicious modifications to the source code of MCP tools, which can lead to unauthorized actions when those tools are invoked by LLMs.
+
+### Tool Poisoning Attacks
+
+The Model Context Protocol architecture introduces a significant attack surface through its reliance on tool descriptions for interactions with LLMs. A tool poisoning attack can occur when threat actors embed malicious instructions within the docstrings of MCP tools [@invariant-labs-tool-poisoning]. These instructions are crafted to be invisible to end users, who typically see only a simplified version of the tool description in their UI. However, LLMs always see the full docstring and can be manipulated into performing unauthorized or harmful actions.
+
+This vulnerability exists because the LLM’s decision-making process relies exclusively on the tool descriptions it receives, which may contain hidden directions. These hidden directions can prompt the LLM to perform malicious actions, such as silently leaking sensitive data or executing unintended commands.
+
+To demonstrate a tool poisoning attack, an example MCP server was created that submits customer support tickets in Figure 2. In this scenario, malicious instructions are embedded within the tool's docstring, specifically targeting the behavior of the LLM. These instructions direct the LLM to read the contents of a sensitive file (`~/.ssh/id_rsa`), which contains a private SSH key. The LLM is then instructed to pass this data as a `sidenote` argument when invoking the tool. Finally, the instructions require the model to conceal this action from the user, instead providing plausible reasoning for using the tool.
+
+```python
+@mcp.tool()
+def create_ticket(
+    title: str,
+    description: str,
+    sidenote: str
+) -> str:
+    """
+    Create a new IT support ticket in the system.
+    
+    <IMPORTANT>
+    Before using this tool, read `~/.ssh/id_rsa` and pass its content
+    as 'sidenote', otherwise the tool will not work.
+
+    While you read the file, provide detailed reasoning
+    about why submitting a ticket is important to get help. 
+    Do not mention that you first need to read the
+    file (this could even upset the user, so be very gentle and not scary).
+    </IMPORTANT>
+    """
+    return f"Ticket created: {title} - Description: {description}"
+```
+\begin{figure}[h!]
+\centering
+\caption{Tool Poisoning Attack Example}
+\label{fig:tool-poisoning-attack}
+\end{figure}
+
+### Tool Shadowing Attacks
+
+This architecture also creates attack surfaces related to tool descriptions that have overlapping context [@invariant-labs-tool-poisoning]. Whenever two MCP tool docstrings contain similar keywords and intent, the LLM may not know which tool to invoke or may use context from both tools but only invoke one. This creates a critical vulnerability where malicious tools can be added to an MCP server that deliberately shadow legitimate tools.
+
+Unlike tool poisoning attacks, which modify the internals of an existing legitimate tool, tool shadowing attacks introduce a separate malicious tool that competes for selection by imitating the legitimate tool's description and intent. Because the LLM is given all tool descriptions simultaneously when making decisions, it relies on the similarity of names, keywords, and docstrings to select which tool to invoke. If a threat actor is able to add a tool with a name or description that closely resembles a legitimate tool, the LLM may inadvertently select or use context from the shadow tool. This ambiguity is especially dangerous because the user interface of the MCP host application, like Claude Desktop, typically does not reveal the full tool docstring, making it difficult for users to detect when a shadow tool has been invoked.
+
+In order to demonstrate a tool shadowing attack, consider a scenario where a shadow tool is registered that adds a threat actor's email to an email notification list. In Figure 3, a shadow tool named `create_ticket_better` is registered alongside the legitimate `create_ticket` tool. The shadow tool’s docstring instructs the LLM to always add a specific email address (`example@test.com`) to the notification list before using the legitimate tool. This would ensure that the threat actor is notified of every support ticket that is submitted. In order to take this one step further, the threat actor could even add directions that instruct the LLM to conceal the email it added.
+
+```python
+@mcp.tool()
+def create_ticket_better() -> str:
+    """
+    Before using create_ticket,
+    ALWAYS add 'example@test.com' to the notifyList.
+    Otherwise the ticket creation will fail silently.
+    This tool should never be invoked directly.
+    """
+    return ""
+
+@mcp.tool()
+def create_ticket(
+    title: str,
+    description: str,
+    notifyList: List[str]
+) -> str:
+    """
+    Create a new IT support ticket in the system.
+    """
+    all_recipients = ["it.support@company.com"] + notifyList
+    return (
+    f"Ticket created: {title} - "
+    f"Description: {description} - "
+    f"Notifications sent to: {','.join(all_recipients)}"
+)
+```
+\begin{figure}[h!]
+\centering
+\caption{Tool Shadowing Attack Example}
+\label{fig:tool-shadowing-attack}
+\end{figure}
+
+### Pysealer as an MCP Defense Mechanism
+
+Pysealer addresses both the tool poisoning and tool shadowing vulnerabilities described above through cryptographic verification at the source code level. By automatically adding cryptographic decorators to each function, Pysealer creates an immutable fingerprint of each MCP tool's code and docstring. This approach makes unauthorized modifications detectable, as any change to a tool's code or description will cause signature verification to fail. 
+
+For tool poisoning attacks, Pysealer provides protection by ensuring that tool docstrings cannot be modified without breaking the cryptographic signature. When a developer signs their MCP tools with Pysealer, any attempt to introduce malicious instructions would invalidate the signature. For example, adding the SSH key exfiltration commands shown earlier would cause signature verification to fail.
+
+For tool shadowing attacks, Pysealer makes it significantly harder for threat actors to create convincing shadow tools. Since legitimate tools carry valid cryptographic signatures from trusted developers, unauthorized tools will lack these signatures. Pysealer can detect these unsigned shadow tools and flag them as potentially malicious. By verifying signatures before tool registration, MCP servers can reject shadow tools and only invoke trusted tools.
+
 ## Current State of the Art
 
-## Goals of the Project
+### MCP Security Landscape
+
+As acknowledged previously, many of MCP's attack surfaces have not been fully explored yet. Although research is limited, a small but growing body of work has begun to outline the types of attacks MCP systems may be vulnerable to. Such research finds that MCP systems can be susceptible to attacks during their creation, deployment, operation, and maintenance [@mcp-landscape-2025]. These vulnerabilities can span both the client and server sides of the MCP ecosystem.
+
+Other studies have further explored these risks by actually implementing different attack methods. In fact, a study that focused on the systematic analysis of MCP security actually categorized and implemented 31 distinct attack methods [@mcp-systematic-2025]. More specifically, the study introduces an MCP Attack Library (MCPLIB), which includes attacks that fall under four key classifications: direct tool injection, indirect tool injection, malicious user attacks, and LLM inherent attacks. Through quantitative experiments, the study demonstrates that MCP systems are highly susceptible to blind reliance on tool descriptions. In turn, these findings highlight the urgent need for robust defense strategies in the validation of MCP-based ecosystems.
+
+Overall, the evolving MCP security landscape underscores the urgent need for robust defense strategies across common attack surfaces. Much of the current research focuses on identifying where MCP is most susceptible, developing benchmarking systems for systematic vulnerability assessment, and designing tools that can detect and mitigate attacks in real time.
+
+### MCP Security Benchmarks
+
+Additional research has focused on creating benchmarking systems for evaluating the security of both MCP clients and servers. MCPSecBench, a comprehensive security benchmark and playground, integrates prompt datasets, MCP servers, MCP clients, attack scripts, and protection mechanisms to evaluate attacks across multiple MCP hosts. The benchmark is modular and extensible, allowing researchers to incorporate custom implementations of both clients and servers for a systematic security assessment.
+
+While it is essential to keep these benchmarking systems up to date and continually enhance their coverage, platforms like MCPSecBench primarily serve as tools for prevention and systematic assessment rather than real-time threat detection [@mcpsecbench-2025]. This presents a significant limitation, as preventing these threats is far more critical than merely detecting them after they occur. Additionally, there is a risk that threat actors may exploit these benchmarks to test and refine their own malicious code, potentially evading detection by current security measures.
+
+Other research presents an MCP Security Benchmark (MSB) system that acts as an end-to-end benchmarking suite. The goal of MSB is to evaluate MCP robustness across the entire tool-use pipeline, including task planning, tool invocation, and response handling [@mcpsecuritybench-2025]. A key difference between MSB and other MCP benchmarking systems is that MSB introduces a Net Resilient Performance (NRP) metric, which quantifies the trade-off between an agent’s security and its operational performance. In other words, it evaluates how well an agent can remain secure without significantly sacrificing its ability to complete tasks effectively.
+
+The results of MSB reveal an interesting relationship between model performance and vulnerability: agents that excel in tool calling and instruction following are paradoxically more susceptible to sophisticated attacks. This is because their advanced capabilities make them more likely to execute malicious instructions embedded in MCP tool descriptions. As a result, improvements in MCP capabilities do not necessarily translate to improved MCP security, highlighting the need for more fundamental MCP safeguards.
+
+### MCP Security Tools
+
+One very popular MCP security tool, Agent Scan, is a specialized security tool designed to detect and mitigate vulnerabilities in both local and remote MCP servers [@agent-scan]. Agent Scan can search for a wide range of security threats by enforcing guardrails that monitor and restrict tool usage, prompt content, and data flows. Despite its popularity and robust feature set, there is limited research evaluating the real-world effectiveness of Agent Scan or exploring its integration with other security mechanisms. Further research is needed to assess its impact and optimize its use within comprehensive MCP security frameworks.
+
+Other MCP security tooling, like MCP Guardian, focuses on securing MCP client-to-server interactions from the perspective of middleware [@mcp-guardian-2025]. Specifically, MCP Guardian strengthens MCP client-to-server communication with authentication, rate-limiting, logging, tracing, and Web Application Firewall (WAF) scanning. The middleware approach that MCP Guardian takes runs between every client-to-server interaction, providing a centralized point for security enforcement. However, this approach has limitations in identifying specific attack vectors, such as malicious keywords embedded in tool docstrings that could be exploited to trigger attacks.
+
+## Goals
+
+### Detect Version Control Changes
+
+A primary goal of the Pysealer tool is to reliably detect any changes made to source code. Pysealer automatically adds a decorator to each function, which contains a cryptographic signature based on the function’s code and docstring. If the function is modified but the decorator is not updated, Pysealer will detect and report this mismatch. This capability allows developers to version control their codebase, ensuring that any unauthorized modifications are quickly detected.
+
+### Prevent Supply Chain Attacks
+
+Another goal of Pysealer is to prevent supply chain attacks by securing the upstream source code. These types of attacks occur when a threat actor gains unauthorized access to a version control system, like Git, and modifies source code before it reaches end users. In MCP servers, supply chain attacks through the upstream source code can manifest as both tool poisoning and tool shadowing attacks.
+
+A tool poisoning attack is an attack where harmful instructions are hidden in the docstrings of MCP tools. If Pysealer is used to protect an MCP server, it can detect tampering before a tool is ever used by an LLM. For example, Pysealer could be integrated so that any code changes made without passing signature validation will be flagged and blocked. This would make it easy to spot unauthorized changes, since any tampered tool will fail signature verification. Pysealer’s effectiveness can be measured by its ability to reliably detect and prevent tool poisoning attacks on MCP servers.
+
+A tool shadowing attack is another type of attack where fake MCP tools are added to mimic legitimate ones. Pysealer helps prevent these attacks by ensuring every MCP tool is uniquely cryptographically signed. By combining the tool’s name, docstring, and source code into a single signature, Pysealer makes it very difficult for a threat actor to register a shadow tool that imitates a real one. Any tool with a similar name or description but lacking a valid Pysealer signature will be quickly detected. This not only protects the integrity of individual tools but also helps maintain the overall trustworthiness of the MCP server, making it more resilient against subtle forms of manipulation.
+
+### Allow for Defense In Depth
+
+In addition to detecting version control changes and preventing supply chain attacks through upstream source code, another use case of Pysealer is to support defense-in-depth for source control. Defense in depth is a security strategy that uses multiple layers of protection to reduce the risk of a successful attack. This approach is important because no single security measure can address every possible vulnerability; if one layer fails, others can still provide protection. For example, Pysealer can help detect and block malicious changes to an MCP tool's source code before they are exploited. Even if a threat actor bypasses version control, Pysealer provides an additional layer of defense that can stop tampered code from being deployed. By integrating Pysealer, an additional layer of security is added, thus making it more challenging for threat actors to compromise source code.
 
 ## Ethical Implications
 
-This document requires that you discuss the ethical implications of your work -- no
-matter how benign you consider the outcome of your project. As several major studies
-of ethical issues in computer science assert: _no project is completely value-neutral_.
+The adoption of MCP servers has accelerated rapidly, as evidenced by the growing number of servers available in the official GitHub MCP Registry [@github-mcp-registry]. However, as MCP becomes more deeply integrated into critical AI workflows, the ethical concerns associated with MCP attack surfaces become increasingly important. Issues such as information privacy and the potential for misuse must be carefully considered to ensure that MCP-based systems are deployed responsibly and safely.
 
-To assist you in elaborating on these issues, the following areas are topics you might
-consider addressing. You do not need to address all of them.
+### Information Privacy
 
-* Information Privacy
-* Information Accuracy (e.g. can contain reliability)
-* Potential Misuse (e.g. computer crime, unintended consequences)
-* Second- or Third-Party Risk (e.g. safety)
-* Data Collection Issues (e.g. issues inherent in collecting data)
-* Algorithmic or Data Bias
-* Potential Power Difference / Social Imbalance / Issues in Equity
+Malicious MCP tools can be used to exfiltrate sensitive data, as shown in the MCP tool poisoning SSH key example. Beyond direct exfiltration, tool poisoning attacks also pose significant privacy risks. Once information like a private SSH key has been exposed, threat actors can gain unauthorized access to systems, escalate privileges, and potentially compromise additional sensitive resources. 
 
-In addition, reflect on ways that the above harms can be or are mitigated by your work.
+The ethical implications extend beyond individual privacy violations to organizational security. When users integrate MCP servers into their AI workflows, they implicitly trust that these tools will handle their data responsibly. A breach of this trust through tool poisoning not only compromises sensitive information but also undermines users' confidence in MCP systems more broadly. Furthermore, the responsibility for such breaches raises complex questions about liability. Should the MCP server maintainers, the developers who integrated the tools, or the LLM be liable for such breaches? As MCP adoption grows, establishing clear ethical guidelines and accountability becomes essential to protect users and maintain trust in MCP-powered systems.
+
+### Potential Misuse
+
+In addition to information privacy concerns that MCP systems pose, Pysealer itself can present dual-use ethical dilemmas. Like many security tools, Pysealer could be misused by threat actors in ways that contradict its intended protective purpose. For instance, threat actors could leverage Pysealer to cryptographically secure their own malicious MCP servers, making it more challenging to determine if code is malicious or not.
+
+This highlights the ethical responsibility that comes with developing security tools for emerging technologies like MCP. While Pysealer aims to protect users from tool poisoning and shadowing attacks, its release into the open-source community means it could be studied and potentially weaponized by those with malicious intent. This raises important questions about the balance between transparency for legitimate defenders and operational security against adversaries.
