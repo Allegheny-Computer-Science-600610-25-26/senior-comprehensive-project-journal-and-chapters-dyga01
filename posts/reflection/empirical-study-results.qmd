@@ -1,0 +1,11 @@
+---
+title: "Reflection on Empirical Study Results"
+description: "Critical reflection on the results from your project's empirical study"
+date: "2026-04-29"
+---
+
+Evaluating my project proved to be a complex and challenging task because of the lack of MCP research and the absence of established benchmarks. Because of this, I had to design my own experiments from scratch, which required a lot of creativity and careful thought. I also had to make trade-offs between realism and simulation. For example, I chose to run experiments in a simulated environment where I could precisely manipulate source code and observe outcomes, but that meant the results might not fully capture the complexities of real-world MCP deployments. 
+
+My empirical study showed me that Pysealer is a strong proof of concept, but it is not yet a complete solution for every real-world scenario. In the controlled experiments I ran, Pysealer successfully detected and prevented both tool poisoning and tool shadowing attacks. It also identified when a tool had been modified, reported the exact lines that changed, and blocked the tampered version from passing verification. These results give me confidence that the core idea behind Pysealer works as intended.
+
+At the same time, I learned that successful simulation does not automatically mean production-ready security. My experiments were limited to a controlled environment, and I did not have access to an established MCP benchmarking framework that could provide a more standardized comparison. Because of that, I would describe the results of my study as a highly qualified success rather than a complete success. Overall, I think the study convinced me that Pysealer has real value, but it also reminded me that stronger benchmarking and real-world testing are necessary before I can fully claim broad effectiveness.
