@@ -1,0 +1,9 @@
+---
+title: "Problem Solving and Decision Making Process"
+description: "Iterative problem-solving and decision-making process you followed to design, develop, and assess your computational artifact"
+date: "2026-04-29"
+---
+
+Throughout working on my computational artifact, Pysealer, I focused on documenting issues and keeping track of work items as I moved through each stage of development. Early in the project, I used a personal `DEVELOPMENT.md` document to record ideas, note problems, and track decisions I made while implementing features. That approach helped me stay organized, but as the project grew, I realized the documentation should also be useful to other people. I later converted that file into `CONTRIBUTING.md`, which now serves as a general-purpose guide for anyone who wants to understand the project or contribute to it in the future.
+
+I also relied heavily on breaking problems into smaller pieces before trying to solve them. When I ran into a difficult issue, like determining how to setup experiments for evaluating Pysealer, I would always slow down and try to understand the problem more deeply. I also discussed issues I faced during my weekly comp meetings, where I could explain what I had tried, compare possible solutions, and get feedback on the best direction forward. That process helped me avoid getting stuck on focusing on one problem for too long. Over time, I think my decision-making became more iterative. I would test an idea, evaluate whether it solved the problem cleanly, and then revise my approach if needed. By reflecting on each step, I was able to make more deliberate decisions and improve the final quality of the computational artifact.
